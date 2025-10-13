@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | AshaJyothi | Handicapped Welfare | Special Needs | Hanuman Junction</title>
+    <meta name="description" content="AshaJyothi Handicapped Welfare Society - Supporting abandoned special needs children since 1998">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .hero-slider {
+            display: flex;
+            height: 100%;
+            animation: slide 30s infinite;
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 3rem;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slide {
+            0%, 11% { transform: translateX(0); }
+            12%, 23% { transform: translateX(-100%); }
+            24%, 35% { transform: translateX(-200%); }
+            36%, 47% { transform: translateX(-300%); }
+            48%, 59% { transform: translateX(-400%); }
+            60%, 71% { transform: translateX(-500%); }
+            72%, 83% { transform: translateX(-600%); }
+            84%, 95% { transform: translateX(-700%); }
+            96%, 100% { transform: translateX(-800%); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5aa0;
+        }
+
+        /* Focus Areas Grid */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .focus-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .focus-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .focus-card img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+        }
+
+        .focus-card-content {
+            padding: 2rem;
+        }
+
+        .focus-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .focus-card ul {
+            list-style-position: inside;
+            margin: 1rem 0;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background: #2c5aa0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            background: #1e3a6f;
+        }
+
+        /* Medical Camps Section */
+        .medical-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+        }
+
+        .medical-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .medical-text h2 {
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .medical-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .medical-images img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Vocational Training */
+        .vocational-section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .vocational-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .vocational-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Get Involved Section */
+        .get-involved {
+            background: #2c5aa0;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .get-involved h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .get-involved-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .get-involved-list {
+            text-align: left;
+            display: inline-block;
+            margin: 2rem 0;
+        }
+
+        .get-involved-list li {
+            margin: 0.5rem 0;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .partner-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .partner-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3a6f;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #2c5aa0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .medical-content {
+                grid-template-columns: 1fr;
+            }
+
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Page-specific content (hidden by default) */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">AshaJyothi</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                <li><a href="#about" onclick="showPage('about')">AshaJyothi</a></li>
+                <li><a href="#vision" onclick="showPage('vision')">Vision & Mission</a></li>
+                <li><a href="#services" onclick="showPage('services')">Services & Treatments</a></li>
+                <li><a href="#partners" onclick="showPage('partners')">Partners</a></li>
+                <li><a href="#get-involved" onclick="showPage('get-involved')">Get Involved</a></li>
+                <li><a href="#donate" onclick="showPage('donate')">Donate</a></li>
+                <li><a href="#contact" onclick="showPage('contact')">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-slider">
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_93ed7426718d45a5a809c4b0e0cec16b~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.44_0.38,q_90,enc_avif,quality_auto/437f08_93ed7426718d45a5a809c4b0e0cec16b~mv2.jpg')">
+                    <div class="hero-content">
+                        <h1>Let's do our bit to change lives of these abandoned special needs children</h1>
+                    </div>
+                </div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_0255b8eeb5294460967e53b27865e9b6~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.5_0.33,q_90,enc_avif,quality_auto/437f08_0255b8eeb5294460967e53b27865e9b6~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_b6d2cd7f991840d3b705cc5e0a2f51c3~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.49_0.33,q_90,enc_avif,quality_auto/437f08_b6d2cd7f991840d3b705cc5e0a2f51c3~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_bada77b636ba4b3b957ce1262601e6ce~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.61_0.36,q_90,enc_avif,quality_auto/437f08_bada77b636ba4b3b957ce1262601e6ce~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_c37445126bf04049b3ad72d60d449baa~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.73_0.38,q_90,enc_avif,quality_auto/437f08_c37445126bf04049b3ad72d60d449baa~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_3a82c2ccd4104b4fad59c6dcaea5f355~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.51_0.33,q_90,enc_avif,quality_auto/437f08_3a82c2ccd4104b4fad59c6dcaea5f355~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_cca4d2bd73ba4f3dbc4f5c6a795b5629~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.59_0.2,q_90,enc_avif,quality_auto/437f08_cca4d2bd73ba4f3dbc4f5c6a795b5629~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_f6201514395d4e54bbb614d9701f4358~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.63_0.44,q_90,enc_avif,quality_auto/437f08_f6201514395d4e54bbb614d9701f4358~mv2.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('https://static.wixstatic.com/media/437f08_ce03385e829c410a8cde772644c4138f~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.6_0.31,q_90,enc_avif,quality_auto/437f08_ce03385e829c410a8cde772644c4138f~mv2.jpg')"></div>
+            </div>
+        </section>
+
+        <!-- Focus Areas -->
+        <section class="section">
+            <h2 class="section-title">Our Focus</h2>
+            <div class="focus-grid">
+                <div class="focus-card">
+                    <img src="https://static.wixstatic.com/media/437f08_0fb69566f899453ea5ca54dacdf00004~mv2.jpg/v1/fill/w_800,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Kids%20(23)_JPG.jpg" alt="Adoption">
+                    <div class="focus-card-content">
+                        <h3>Adoption</h3>
+                        <p>AshaJyothi was born with the core philosophy of saving abandoned children. AshaJyothi offers food, shelter, medical care and other necessities of life to support their special needs and survival. Since its inception in 1998, AshaJyothi has adopted many such children with special needs.</p>
+                        <a href="#about" onclick="showPage('about')" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <img src="https://static.wixstatic.com/media/437f08_cc922aa2384645728a5cb7a2ec9f1a2a~mv2.jpg/v1/fill/w_800,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Rehab%201.jpg" alt="Rehabilitation">
+                    <div class="focus-card-content">
+                        <h3>Rehabilitation</h3>
+                        <ul>
+                            <li>Regular Medical Camps</li>
+                            <li>Neurogen Treatments</li>
+                            <li>Yoga</li>
+                            <li>Schooling</li>
+                            <li>Vocational Training</li>
+                        </ul>
+                        <a href="#services" onclick="showPage('services')" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <img src="https://static.wixstatic.com/media/437f08_1544c6daab0a4be4a9d18d08e9c27cb1~mv2.jpg/v1/fill/w_800,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Girls.jpg" alt="Projects & Activities">
+                    <div class="focus-card-content">
+                        <h3>Projects & Activities</h3>
+                        <ul>
+                            <li>PARI Menstrual Hygiene</li>
+                            <li>PARI Pads Distribution</li>
+                            <li>Toilets & Water</li>
+                            <li>Accommodation by gender</li>
+                            <li>Relief Works</li>
+                        </ul>
+                        <a href="#about" onclick="showPage('about')" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Camps -->
+        <section class="medical-section">
+            <div class="medical-content">
+                <div class="medical-text">
+                    <h2>Medical Camps</h2>
+                    <p>Every child has a basic right for proper health care. As parents we do everything possible to give the best to our children. These are the children who are physically challenged, speech and hearing impaired, Autistic, Downs Syndrome and Blind. So just imagine to what lengths we have to go, to provide proper medical care for these abandoned and special needs children. AshaJyothi does exactly that by organizing regular medical camps for these children and specialized Neurogen treatments for children with extreme disabilities.</p>
+                    <a href="#services" onclick="showPage('services')" class="learn-more-btn">Learn More</a>
+                </div>
+                <div class="medical-images">
+                    <img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt="Medical Camp 1">
+                    <img src="https://static.wixstatic.com/media/437f08_f9f87865d74f46ef928fdebe023d6ac4~mv2.jpg/v1/fill/w_450,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20150817_102351.jpg" alt="Medical Camp 2">
+                </div>
+            </div>
+        </section>
+
+        <!-- Vocational Training -->
+        <section class="vocational-section">
+            <h2 class="section-title">Vocational Trainings</h2>
+            <div class="vocational-gallery">
+                <img src="https://static.wixstatic.com/media/437f08_c53be712e4c24d26b2758508b66742cff003.jpg/v1/fit/w_500,h_300,q_90,enc_avif,quality_auto/437f08_c53be712e4c24d26b2758508b66742cff003.jpg" alt="Vocational Training 1">
+                <img src="https://static.wixstatic.com/media/437f08_16b284f37ab74aaeb4f251fd7997e493f003.jpg/v1/fit/w_500,h_300,q_90,enc_avif,quality_auto/437f08_16b284f37ab74aaeb4f251fd7997e493f003.jpg" alt="Vocational Training 2">
+                <img src="https://static.wixstatic.com/media/437f08_5d6411c95f43419b9d0464f15dec97f0f003.jpg/v1/fit/w_500,h_300,q_90,enc_avif,quality_auto/437f08_5d6411c95f43419b9d0464f15dec97f0f003.jpg" alt="Vocational Training 3">
+                <img src="https://static.wixstatic.com/media/437f08_d66fcc1ce25642a7b577a2824ebe9b1ef003.jpg/v1/fit/w_500,h_300,q_90,enc_avif,quality_auto/437f08_d66fcc1ce25642a7b577a2824ebe9b1ef003.jpg" alt="Vocational Training 4">
+            </div>
+        </section>
+
+        <!-- Get Involved CTA -->
+        <section class="get-involved">
+            <h2>Get Involved</h2>
+            <div class="get-involved-content">
+                <p>AshaJyothi campus now helps more than 80 special needs children.</p>
+                <p>15+ children share an old rusty wheelchair which costs about $100. For $100 we can sponsor a wheelchair and put a smile on a face.</p>
+                <p>We can change the lives of these beautiful kids by donating just $70 a month which will cover all the basic necessities like shelter, food, hygiene, medical care, education, etc.</p>
+                <p>Thanks for doing your bit to make our world a better place. Just imagine how satisfying it will be knowing that you saved a life and helped transform a child with special needs.</p>
+                <h3 style="margin-top: 2rem;">Make a difference by</h3>
+                <ul class="get-involved-list">
+                    <li>Donating</li>
+                    <li>Sponsoring a Child</li>
+                    <li>Donating necessities like clothing, food, wheelchair, beds</li>
+                    <li>Sponsoring food for all children for a day</li>
+                </ul>
+                <a href="#get-involved" onclick="showPage('get-involved')" class="learn-more-btn" style="background: white; color: #2c5aa0; margin-top: 2rem;">Learn More</a>
+            </div>
+        </section>
+
+        <!-- Partners -->
+        <section class="partners-section">
+            <h2 class="section-title">Our Partners</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <img src="https://static.wixstatic.com/media/437f08_63a9e850b3a44bb982e9b7b1960d62da~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chicago%20Andhra%20(8).jpg" alt="Chicago Andhra Association">
+                    <h3>Chicago Andhra Association</h3>
+                    <p>Chicago Andhra Association supports AshaJyothi in multiple ways. They conduct Annadanam scheme regularly through generous donations to provide nutrition and daily food supply. They also provide financial support for Women empowerment, School renovations, Student scholarships.</p>
+                </div>
+
+                <div class="partner-card">
+                    <img src="https://static.wixstatic.com/media/437f08_d0e29eedf367472bbf7207d4edf8e0ae~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/collage.jpg" alt="Save the Child">
+                    <h3>Save the Child</h3>
+                    <p>Save the Child foundation has been supporting on multiple projects and AshaJyothi kids are forever indebted to them. Major projects include PARI, Aids & Appliances for the handicapped, Child Sponsorship Program, Half Saree celebrations for Girls, Covid Relief support, Vocational trainings for women, Medical Camps, etc.</p>
+                </div>
+
+                <div class="partner-card">
+                    <img src="https://static.wixstatic.com/media/437f08_17507bf4c86745b6a7ff4b26abf9d78d~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/PHOTO-2021-04-19-13-39-17.jpg" alt="Empower And Excel">
+                    <h3>Empower And Excel</h3>
+                    <p>Empower and Excel have been backing AshaJyothi since 2019 with various project initiatives with their generous donor's support. Empower and Excel is a California, USA based non-profit organization with a mission to "empower and equip our future generations with the power to change the world and to make it a better place to live".</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">AshaJyothi Handicapped Welfare Society</h2>
+            
+            <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                <h3 style="color: #2c5aa0; margin-bottom: 1.5rem; font-size: 1.8rem;">Our Story</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                    <div style="text-align: center;">
+                        <img src="https://static.wixstatic.com/media/437f08_5f89a9c5a662457da9676f385244ae6f~mv2.jpg/v1/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1999.jpg" alt="1998" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                        <h4 style="color: #2c5aa0;">Humble beginnings 1998</h4>
+                        <p>AshaJyothi began its journey with a small home to protect mentally disabled and abandoned children at Hanuman Junction, West Godavari District, India in 1998 with 10 children</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://static.wixstatic.com/media/437f08_b197c26d83e145629f386f42aec6718e~mv2.jpg/v1/crop/x_281,y_0,w_3402,h_2304/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2005%202.jpg" alt="2005" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                        <h4 style="color: #2c5aa0;">AshaJyothi Shifted to own premises, 2005</h4>
+                        <p>In the year 2005 AshaJyothi shifted to its own premises. Thanks a ton, to our sponsors "Care n Share", and others who provided relentless support in realizing our dreams.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://static.wixstatic.com/media/437f08_652fea278d1641188a434a3381b348fa~mv2.png/v1/fill/w_400,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2016%20PARI.png" alt="2016" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                        <h4 style="color: #2c5aa0;">PARI Unit Started 2016</h4>
+                        <p>AshaJyothi PARI unit commenced to provide access to Sanitation and Menstrual Hygiene Management for every girl</p>
+                    </div>
+                </div>
+
+                <h3 style="color: #2c5aa0; margin: 3rem 0 1.5rem; font-size: 1.5rem;">Warm greetings from AshaJyothi</h3>
+                
+                <p style="margin-bottom: 1.5rem;">AshaJyothi Handicapped Welfare Society was born from difficulties and agony faced by our own family in the year 1998. This is a story of how one man turned his life's tragedy into a blessing for many. The story of a father who lost his daughter "BalaJyothi" at a young age who suffered from mental illness. He honored her memory by starting AshaJyothi to save children with special needs, orphan, abandoned and underprivileged.</p>
+
+                <p style="margin-bottom: 1.5rem;">Children who are physically challenged, speech and hearing impaired, Autistic, Downs Syndrome and Blind. Children who cannot walk, eat, bathe. Children who cannot accomplish basic tasks in life that we often take for granted. Children who need love, security, medical care, and necessities of life. All of them were either abandoned or orphaned at an incredibly young age. It is disheartening to see such children being left out and pathetic to see parents leaving such children at orphanages or abandoning treating them as a liability. This is the exact reason why AshaJyothi was founded with the objective to rescue and rehabilitate such children.</p>
+
+                <p style="margin-bottom: 1.5rem;">AshaJyothi began its journey with a small home to protect mentally disabled and abandoned children at Hanuman Junction, West Godavari District, India in 1998 with 10 children.</p>
+
+                <p style="margin-bottom: 1.5rem;">In the year 2005 AshaJyothi shifted to its own premises. Thanks a ton, to our sponsors "Care n Share", and others who provided relentless support in realizing our dreams. They helped us in the process to build our own home and comfortable premises with all basic amenities like beds, toilets, health care, kitchen, school and para medical support. AshaJyothi campus now helps more than 80 special needs children.</p>
+
+                <p style="margin-bottom: 1.5rem;">With the support of Neurogen, Mumbai we were able to provide the latest medical treatment for our children. We have well-equipped in-house facility for physiotherapy and 24/7 nursing support. Our children need continuous medical evaluation, physiotherapy, aids and appliances for the physically challenged like wheelchairs, hearing-aids, etc. and special education & training for survival.</p>
+
+                <p style="margin-bottom: 1.5rem;">We, at AshaJyothi not only work to make the children normal, but also teach them the required skills to empower them to live on their own in future. Thanks to the volunteers from Ireland, Germany etc., who visit us every year and provide various therapies to our children.</p>
+
+                <p style="margin-bottom: 1.5rem;">We sincerely acknowledge the support from various other organizations like Save the Child Foundation, Excel n Empower for their continued support to AshaJyothi.</p>
+
+                <p style="margin-bottom: 1.5rem;">Our mission is only to see Smiles on the faces of special needs children and that such smiles should sustain for lifetime. We appeal to individuals, Organizations and Philanthropists to support us to accomplish this mission. This will only enable AshaJyothi to extend all its services to protect these children.</p>
+
+                <p style="margin-bottom: 1.5rem; font-weight: 600;">Sincerely<br>Madhavi Latha<br>Director</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Vision & Mission Page -->
+    <div id="vision" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1200,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ashajyothi.jpg" alt="AshaJyothi" style="width: 100%; border-radius: 10px; margin-bottom: 3rem;">
+                
+                <h2 style="color: #2c5aa0; margin-bottom: 1.5rem; font-size: 2.5rem;">Mission</h2>
+                <p style="line-height: 1.8; font-size: 1.1rem;">AshaJyothi Handicapped Welfare Society is a registered Voluntary Organization started in 1998 in Hanuman Junction, Andhra Pradesh, India. The Mission of AshaJyothi is to provide diverse services for development, education and rehabilitation for children with physical and mental disabilities. AshaJyothi strongly believes that these abandoned children with disabilities and special needs have the natural right to live in a home the gives them love and affection, healthy food, decent shelter, access to medical and health care facilities, not the least appropriate education to sustain.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services & Treatments Page -->
+    <div id="services" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">Treatments at AshaJyothi</h2>
+            <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 1rem; font-size: 1.8rem;">Cerebral Palsy</h3>
+                    <p>Cerebral Palsy is a non progressive neurodevelopmental disorder, which is caused by any event leading to damage to the brain around the time of birth. The causes can range from to nutritional factors, physical trauma, hypoxia / lack of Oxygen flow due to factors such as cord around the neck, to birth asphyxia etc. The impact ranges from mild physical disability to very severe disability along with comorbid mental retardation. Some Children also have accompanied fits/ Seizures / Convulsions, that complicate the Prognosis.</p>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 1rem; font-size: 1.8rem;">Autism</h3>
+                    <p>Autism is a neurodevelopmental disorder characterized by impaired by impaired social interaction, verbal, and non verbal communication and restricted and repetitive behavior.</p>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 1rem; font-size: 1.8rem;">Mental Retardation/ Intellectual Disability</h3>
+                    <p>Mental Retardation is a developmental disorder. Children with ID generally exhibit sub average functioning. These kids have difficulties in self adaptive areas such as communication, self care, home living, social skills, community use, self direction, health and safety, academics, leisure and work. Mental Retardation can be classified into the following grades according to its severity, viz. Mild, moderate, sever, and profound.</p>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 1rem; font-size: 1.8rem;">Down Syndrome</h3>
+                    <p>Down Syndrome is a genetic condition also known as 'Trisomy21' as it is caused due to the presence of an extra copy of chromosome 21. It leads to delayed physical growth, facial dysmorphism, and affected cognitive and intellectual functions.</p>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 1rem; font-size: 1.8rem;">Physically Challenged</h3>
+                    <p>Someone who is physically challenged has a problem with their body that makes it difficult for them to do things that other people can do easily. Children who are physically challenged because of Polio, accidents and other neurological problems.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Partners Page -->
+    <div id="partners" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">Our Partners in this good deed all along...</h2>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h3 style="text-align: center; color: #2c5aa0; font-size: 2rem; margin-bottom: 3rem;">Chicago Andhra Association</h3>
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <img src="https://static.wixstatic.com/media/437f08_63a9e850b3a44bb982e9b7b1960d62da~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Chicago%20Andhra%20(8).jpg" alt="Chicago Andhra Association">
+                        <h3>Chicago Andhra Association</h3>
+                        <p>Chicago Andhra Association supports AshaJyothi in multiple ways. They conduct Annadanam scheme regularly through generous donations to provide nutrition and daily food supply. They also provide financial support for Women empowerment, School renovations, Student scholarships.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="https://static.wixstatic.com/media/437f08_d0e29eedf367472bbf7207d4edf8e0ae~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/collage.jpg" alt="Save the Child">
+                        <h3>Save the Child</h3>
+                        <p>Save the Child foundation has been supporting on multiple projects and AshaJyothi kids are forever indebted to them. Major projects include PARI, Aids & Appliances for the handicapped, Child Sponsorship Program, Half Saree celebrations for Girls, Covid Relief support, Vocational trainings for women, Medical Camps, etc.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="https://static.wixstatic.com/media/437f08_17507bf4c86745b6a7ff4b26abf9d78d~mv2.jpg/v1/fill/w_800,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/PHOTO-2021-04-19-13-39-17.jpg" alt="Empower And Excel">
+                        <h3>Empower And Excel</h3>
+                        <p>Empower and Excel have been backing AshaJyothi since 2019 with various project initiatives with their generous donor's support. Empower and Excel is a California, USA based non-profit organization with a mission to "empower and equip our future generations with the power to change the world and to make it a better place to live".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Get Involved Page -->
+    <div id="get-involved" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">Get Involved</h2>
+            <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                <h3 style="color: #2c5aa0; font-size: 1.8rem; margin-bottom: 1rem;">Your support could save a life</h3>
+                <p style="margin-bottom: 2rem;">AshaJyothi has saved many children with special needs and improved their lives. Throughout this journey many organizations and individuals have volunteered to support AshaJyothi. None of this would have been possible without the help of supporters like you.</p>
+
+                <div style="background: #f9f9f9; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h4 style="color: #2c5aa0; font-size: 1.5rem; margin-bottom: 1rem;">Sponsor a Child</h4>
+                    <p>Sponsor a AshaJyothi Child today. Your monthly contribution will give your sponsored child access to life-changing benefits like food, medical care, education, life skills.</p>
+                </div>
+
+                <div style="background: #f9f9f9; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h4 style="color: #2c5aa0; font-size: 1.5rem; margin-bottom: 1rem;">Make a Donation</h4>
+                    <p>Small or Large, make a donation to help AshaJyothi children fight against the odds and exercise their right for quality life.</p>
+                    <p style="margin-top: 1rem;">You can also send your cheque payments to AshaJyothi at the following address:</p>
+                    <p style="margin-top: 1rem; font-weight: 600;">In favour of - AshaJyothi Handicapped Welfare Society<br>
+                    Hanuman Junction, Andhra Pradesh, India – 521105</p>
+                    <p style="margin-top: 1rem; font-style: italic;">All donations except cash are eligible for tax deductions under Section 80G of the Income Tax Act, 1961</p>
+                </div>
+
+                <h4 style="color: #2c5aa0; font-size: 1.5rem; margin: 2rem 0 1rem;">Other ways to Help</h4>
+                <p style="margin-bottom: 1rem;">There are more ways to make difference at AshaJyothi. This is your chance to make the world a better place. Help us fund one of our many programs that will transform the lives of the special needs children</p>
+                <ul style="list-style-position: inside; margin: 1rem 0;">
+                    <li>Sponsor food for all children at AshaJyothi for a day</li>
+                    <li>Sponsor a wheelchair or other aids for physical challenged</li>
+                    <li>Sponsor sanitary pads for AshaJyothi children</li>
+                    <li>Sponsor a child who needs urgent Medical Care</li>
+                </ul>
+                <p style="margin-top: 2rem; font-weight: 600;">Contact us today to learn more about how you can make a difference through your contributions</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 3rem;">
+                    <img src="https://static.wixstatic.com/media/437f08_12a5c5b207ac4f7e86afdd1ef01d9a88~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Kids%20(12)_JPG.jpg" alt="AshaJyothi Kids" style="width: 100%; border-radius: 10px;">
+                    <img src="https://static.wixstatic.com/media/437f08_c37445126bf04049b3ad72d60d449baa~mv2.jpg/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Kids%20(22)_JPG.jpg" alt="AshaJyothi Kids" style="width: 100%; border-radius: 10px;">
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <img src="https://static.wixstatic.com/media/437f08_d8de5227de6f4a6a81f8642180e4ed5a~mv2.jpg/v1/fill/w_400,h_300,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Local%20Sponsors%20(16).jpg" alt="Local Sponsors" style="width: 100%; border-radius: 10px;">
+                    <img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_400,h_300,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt="AshaJyothi Activities" style="width: 100%; border-radius: 10px;">
+                    <img src="https://static.wixstatic.com/media/437f08_ce03385e829c410a8cde772644c4138f~mv2.jpg/v1/fill/w_400,h_300,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AshaJyothi%20Kids%20(19)_JPG.jpg" alt="AshaJyothi Kids" style="width: 100%; border-radius: 10px;">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Donate Page -->
+    <div id="donate" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">Donations</h2>
+            <div style="max-width: 700px; margin: 0 auto; background: #f9f9f9; padding: 3rem; border-radius: 10px;">
+                <h3 style="color: #2c5aa0; margin-bottom: 2rem; font-size: 1.8rem;">Please send you donations via bank transfer to:</h3>
+                
+                <div style="background: white; padding: 2rem; border-radius: 10px; border-left: 4px solid #2c5aa0;">
+                    <h4 style="color: #2c5aa0; margin-bottom: 1.5rem;">Bank Transfer:</h4>
+                    <p style="margin: 0.5rem 0;"><strong>Name of the Account:</strong> Asha Jyothi Handicapped Welfare Society</p>
+                    <p style="margin: 0.5rem 0;"><strong>Account Number:</strong> 34215204307</p>
+                    <p style="margin: 0.5rem 0;"><strong>IFSC Code:</strong> SBIN0004700</p>
+                    <p style="margin: 0.5rem 0;"><strong>Bank & Branch:</strong> State Bank of India, Hanuman Junction Branch</p>
+                </div>
+
+                <p style="margin-top: 2rem; font-style: italic; text-align: center; color: #666;">Note: All donations are tax exempted under section 80G & 12A (Income Tax Exemption)</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-content">
+        <section class="section" style="padding-top: 6rem;">
+            <h2 class="section-title">Contact Us</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                    <div style="background: #f9f9f9; padding: 2rem; border-radius: 10px;">
+                        <h3 style="color: #2c5aa0; margin-bottom: 1.5rem; font-size: 1.8rem;">Visit Us</h3>
+                        <p style="line-height: 1.8;"><strong>AshaJyothi Handicapped Welfare Society</strong><br>
+                        Hanuman Junction<br>
+                        Andhra Pradesh, India - 521105</p>
+                    </div>
+                    
+                    <div style="background: #f9f9f9; padding: 2rem; border-radius: 10px;">
+                        <h3 style="color: #2c5aa0; margin-bottom: 1.5rem; font-size: 1.8rem;">Tell Us</h3>
+                        <p style="line-height: 1.8;">For inquiries, donations, or to learn more about how you can help, please reach out to us.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3830.8!2d80.4!3d16.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDMwJzAwLjAiTiA4MMKwMjQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AshaJyothi</h3>
+                <p>Handicapped Welfare Society</p>
+                <p>Hanuman Junction<br>Andhra Pradesh, India - 521105</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home" onclick="showPage('home')">Home</a>
+                <a href="#about" onclick="showPage('about')">About Us</a>
+                <a href="#vision" onclick="showPage('vision')">Vision & Mission</a>
+                <a href="#services" onclick="showPage('services')">Services</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <a href="#partners" onclick="showPage('partners')">Partners</a>
+                <a href="#get-involved" onclick="showPage('get-involved')">Get Involved</a>
+                <a href="#donate" onclick="showPage('donate')">Donate</a>
+                <a href="#contact" onclick="showPage('contact')">Contact Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">t</a>
+                    <a href="#" aria-label="Instagram">i</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 AshaJyothi Handicapped Welfare Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            const navLinks = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Handle hash navigation on load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showPage(hash);
+            }
+        });
+
+        // Update URL hash when navigating
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
