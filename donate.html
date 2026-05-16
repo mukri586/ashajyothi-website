@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Donate · AshaJyothi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── PAGE HERO ─────────────────────────────────────────── */
+  .ph{padding:60px 0 90px}
+  .ph .crumbs{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:28px;display:flex;gap:10px;align-items:center}
+  .ph .crumbs a:hover{color:var(--ink)}
+  .ph .crumbs .sep{color:var(--accent)}
+  .ph h1{font-weight:600;font-size:clamp(64px,9.5vw,160px);line-height:.85;letter-spacing:-.045em;margin:0 0 36px;max-width:14ch;color:var(--heading)}
+  .ph h1 em{font-style:normal;color:var(--accent)}
+  .ph .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:end}
+  .ph .lead{font-size:21px;line-height:1.5;max-width:40ch;color:var(--ink-soft);margin:0}
+  .ph .trust{padding:24px;background:var(--paper-2);border-radius:14px;display:flex;flex-direction:column;gap:12px}
+  .ph .trust .line{display:flex;justify-content:space-between;align-items:center;font-size:14px;gap:14px}
+  .ph .trust .line .l{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ph .trust .line .v{font-weight:600;text-align:right}
+  .ph .trust .line .v.accent{color:var(--accent)}
+
+  /* ─── DONATE FORM (mocked) ──────────────────────────────── */
+  .donate-form{padding:50px 0 130px}
+  .df-grid{display:grid;grid-template-columns:1.5fr .9fr;gap:50px;align-items:start}
+  .df-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:32px}
+  .df-card h2{font-weight:600;font-size:36px;letter-spacing:-.025em;line-height:1.05;margin:0;color:var(--heading)}
+  .df-card h2 em{font-style:normal;color:var(--accent)}
+
+  /* segmented control */
+  .seg{display:grid;grid-template-columns:1fr 1fr;background:var(--paper-2);padding:5px;border-radius:14px;position:relative}
+  .seg button{padding:14px 16px;border:0;background:transparent;font-family:inherit;font-weight:600;font-size:15px;border-radius:10px;cursor:pointer;color:var(--ink-soft);position:relative;z-index:2;transition:color .25s}
+  .seg button.active{color:var(--ink)}
+  .seg .pill{position:absolute;top:5px;left:5px;width:calc(50% - 5px);height:calc(100% - 10px);background:var(--paper);border-radius:10px;box-shadow:0 4px 14px rgba(14,16,20,.06);transition:transform .35s cubic-bezier(.2,.7,.2,1);z-index:1}
+  .seg.right .pill{transform:translateX(100%)}
+
+  /* amount group */
+  .amount-pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .amount-pre .right{color:var(--accent)}
+  .amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .amounts button{padding:18px 12px;border:1.5px solid var(--line);background:transparent;border-radius:12px;cursor:pointer;font-family:inherit;font-weight:600;font-size:18px;letter-spacing:-.02em;color:var(--ink);transition:all .2s}
+  .amounts button:hover{border-color:var(--ink)}
+  .amounts button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .amounts button .sub{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-top:4px}
+  .amounts button.active .sub{color:rgba(251,250,246,.7)}
+  .amount-custom{margin-top:10px;display:flex;align-items:center;gap:10px;background:var(--paper-2);padding:6px 6px 6px 16px;border-radius:12px;border:1.5px solid transparent;transition:border-color .25s}
+  .amount-custom:focus-within{border-color:var(--ink);background:var(--paper)}
+  .amount-custom .cur{font-weight:600;font-size:18px;color:var(--muted)}
+  .amount-custom input{flex:1;border:0;background:transparent;font-family:inherit;font-weight:600;font-size:18px;outline:none;color:var(--ink);width:100%}
+  .amount-custom .inr{font-family:var(--mono);font-size:11px;color:var(--muted);padding:0 14px;letter-spacing:.04em}
+
+  /* impact tally */
+  .tally{background:var(--accent-soft);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;border:1px dashed var(--accent)}
+  .tally .l{font-size:14.5px;line-height:1.4}
+  .tally .l strong{color:var(--accent-deep);font-weight:700}
+  .tally .l span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+  /* form rows */
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .field input,.field select{padding:14px 16px;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;font-family:inherit;font-size:15.5px;color:var(--ink);outline:none;transition:border-color .25s}
+  .field input:focus,.field select:focus{border-color:var(--ink)}
+  .field.full{grid-column:1 / -1}
+  .check{display:flex;gap:10px;align-items:start;font-size:13.5px;color:var(--ink-soft);line-height:1.45;cursor:pointer}
+  .check input{margin-top:3px;accent-color:var(--accent)}
+  .check a{text-decoration:underline;text-underline-offset:2px;color:var(--ink)}
+
+  /* submit */
+  .gobtn{background:var(--ink);color:var(--paper);padding:20px 24px;border-radius:14px;border:0;font-family:inherit;font-weight:700;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:background .25s}
+  .gobtn:hover{background:var(--accent)}
+  .gobtn .amt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:var(--paper);color:var(--ink);padding:5px 10px;border-radius:999px}
+  .gobtn:hover .amt{background:var(--ink);color:var(--paper)}
+  .processors{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:-8px}
+  .processors .proc{padding:5px 10px;border:1px solid var(--line);border-radius:999px;font-weight:500;color:var(--ink-soft)}
+
+  /* aside / preview */
+  .preview{position:sticky;top:100px;display:flex;flex-direction:column;gap:18px}
+  .preview .pcard{background:var(--ink);color:var(--paper);border-radius:24px;padding:32px;position:relative;overflow:hidden}
+  .preview .pcard::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,var(--accent-hi) 0%,transparent 70%);right:-80px;top:-80px;opacity:.45;pointer-events:none}
+  .preview .pcard .h{display:flex;justify-content:space-between;align-items:start;margin-bottom:36px;position:relative;z-index:2}
+  .preview .pcard .h .pill{background:var(--accent);color:#fff;padding:6px 11px;border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  .preview .pcard .h .mono{color:rgba(255,255,255,.5)}
+  .preview .pcard h3{position:relative;z-index:2;font-weight:600;font-size:34px;line-height:1;letter-spacing:-.03em;margin:0 0 18px}
+  .preview .pcard .row2{position:relative;z-index:2;display:flex;align-items:baseline;gap:10px;border-top:1px solid rgba(255,255,255,.12);padding-top:24px;margin-top:24px}
+  .preview .pcard .big{font-weight:600;font-size:74px;line-height:.85;letter-spacing:-.045em;color:var(--accent-hi)}
+  .preview .pcard .row2 .small{color:rgba(251,250,246,.6);font-size:13px}
+  .preview .pcard .delivers{position:relative;z-index:2;margin-top:24px}
+  .preview .pcard .delivers li{display:flex;gap:10px;align-items:start;font-size:14px;line-height:1.5;color:rgba(251,250,246,.85);margin-bottom:8px}
+  .preview .pcard .delivers li::before{content:"✓";color:var(--accent-hi);font-weight:700;flex-shrink:0}
+
+  /* ─── ITEMS (specific giving) ──────────────────────────── */
+  .items{background:var(--paper-2);padding:130px 0}
+  .item-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}
+  .item{background:var(--paper);border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:18px;cursor:pointer;transition:transform .35s,background .35s,color .35s;border:1px solid var(--line)}
+  .item:hover{transform:translateY(-4px);background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .item .top{display:flex;justify-content:space-between;align-items:start}
+  .item .top .pre{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .item .top .amt{font-weight:600;font-size:32px;letter-spacing:-.03em;line-height:1}
+  .item .top .amt em{font-style:normal;color:var(--accent)}
+  .item h4{font-weight:600;font-size:22px;line-height:1.15;letter-spacing:-.02em;margin:0;max-width:14ch;color:var(--heading)}
+  .item p{margin:0;font-size:14px;color:var(--ink-soft);line-height:1.5;flex:1}
+  .item:hover p{color:rgba(251,250,246,.7)}
+  .item .pick{margin-top:auto;font-size:13px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:6px}
+  .item:hover .pick{color:var(--accent-hi)}
+
+  /* ─── TRUST / TRANSPARENCY ─────────────────────────────── */
+  .trust-sec{background:var(--ink);color:var(--paper)}
+  .trust-sec .seclabel .t,.trust-sec h2.big{color:var(--paper)}
+  .trust-sec .sec-intro p{color:rgba(251,250,246,.7)}
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .tg-cell{padding:30px;border:1px solid rgba(255,255,255,.1);border-radius:16px;transition:background .25s}
+  .tg-cell:hover{background:rgba(255,255,255,.04)}
+  .tg-cell .ico{font-family:var(--mono);font-weight:700;font-size:16px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .tg-cell h4{font-weight:600;font-size:22px;letter-spacing:-.015em;margin:0 0 10px}
+  .tg-cell p{margin:0;font-size:15px;color:rgba(251,250,246,.7);line-height:1.55}
+
+  /* ─── BANK ──────────────────────────────────────────────── */
+  .bank-sec{padding:130px 0;background:var(--paper-2)}
+  .bank-card{background:var(--paper);border-radius:24px;padding:50px;display:grid;grid-template-columns:1fr 1.5fr;gap:50px;align-items:center}
+  .bank-card .left h3{font-weight:600;font-size:40px;letter-spacing:-.03em;line-height:1.05;margin:0 0 18px;color:var(--heading)}
+  .bank-card .left h3 em{font-style:normal;color:var(--accent)}
+  .bank-card .left p{margin:0;color:var(--ink-soft);max-width:34ch}
+  .bank-card .left .tax{margin-top:24px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:var(--accent-soft);color:var(--accent-deep);border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .bank-card dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .bank-card dl div{padding:18px 20px;background:var(--paper-2);border-radius:12px}
+  .bank-card dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .bank-card dl dd{margin:0;font-weight:600;font-size:16px;letter-spacing:-.005em;color:var(--ink);font-family:var(--mono)}
+  .bank-card dl dd.name{font-family:var(--sans);letter-spacing:-.01em}
+
+  @media (max-width:1000px){
+    .ph .grid,.df-grid,.bank-card{grid-template-columns:1fr;gap:30px}
+    .item-grid,.trust-grid{grid-template-columns:1fr}
+    .amounts{grid-template-columns:1fr 1fr}
+    .preview{position:static}
+    .bank-card dl{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <a class="brand" href="index.html">
+      <img class="logo" src="logo-mark.png" alt="AshaJyothi" width="46" height="46"/>
+      <span class="word"><b>AshaJyothi</b><small>Light of hope · since 1998</small></span>
+    </a>
+    <div class="navline">
+      <span class="beacon"></span>
+      <a class="nl" href="index.html"><span class="n">01</span><span class="l">Home</span></a>
+      <a class="nl" href="about.html"><span class="n">02</span><span class="l">About</span></a>
+      <a class="nl" href="programs.html"><span class="n">03</span><span class="l">Programs</span></a>
+      <a class="nl is-active" href="donate.html"><span class="n">04</span><span class="l">Donate</span></a>
+      <a class="nl" href="contact.html"><span class="n">05</span><span class="l">Contact</span></a>
+    </div>
+    <div class="nav-right">
+      <a class="pill-cta solid" href="#form">Donate →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+<header class="ph">
+  <div class="container">
+    <div class="crumbs reveal"><a href="index.html">Home</a><span class="sep">/</span><span>Donate</span></div>
+    <div class="grid">
+      <div>
+        <h1 class="reveal" data-delay="1">Pick something <em>specific.</em></h1>
+        <p class="lead reveal" data-delay="2">Every gift lands on a real child, on a real day. There's no general fund &mdash; each amount below covers a particular cost, and we'll tell you exactly what your money did.</p>
+      </div>
+      <div class="trust reveal" data-delay="3">
+        <div class="line"><span class="l">/ Tax exemption</span><span class="v accent">80G &amp; 12A</span></div>
+        <div class="line"><span class="l">/ Children served</span><span class="v">83 today</span></div>
+        <div class="line"><span class="l">/ Years running</span><span class="v">since 1998</span></div>
+        <div class="line"><span class="l">/ Overhead</span><span class="v">&lt; 10%</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── DONATE FORM ───────────────────────────────────────── -->
+<section class="donate-form" id="form">
+  <div class="container df-grid">
+
+    <form class="df-card reveal" onsubmit="event.preventDefault();alert('Mocked submit — wire to your payment processor.');">
+      <h2>Sponsor a child <em>or give once.</em></h2>
+
+      <!-- Monthly / one-time -->
+      <div>
+        <div class="amount-pre"><span>/ Choose frequency</span></div>
+        <div class="seg" id="seg">
+          <span class="pill"></span>
+          <button type="button" class="active" data-freq="monthly">Monthly · sponsor a child</button>
+          <button type="button" data-freq="once">One-time gift</button>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div>
+        <div class="amount-pre"><span>/ Choose amount (USD)</span><span class="right" id="approxInr">~ ₹5,800 INR</span></div>
+        <div class="amounts" id="amts">
+          <button type="button" data-amt="35">$35<span class="sub">half-sponsor</span></button>
+          <button type="button" data-amt="70" class="active">$70<span class="sub">★ full child / mo</span></button>
+          <button type="button" data-amt="100">$100<span class="sub">wheelchair</span></button>
+          <button type="button" data-amt="200">$200<span class="sub">hearing aid</span></button>
+        </div>
+        <div class="amount-custom">
+          <span class="cur">$</span>
+          <input type="number" min="1" placeholder="Custom amount" id="customAmt"/>
+          <span class="inr" id="inrLabel">≈ ₹5,800</span>
+        </div>
+      </div>
+
+      <!-- Live impact -->
+      <div class="tally" id="tally">
+        <div class="l">
+          <strong id="tallyText">$70 covers one child for a full month</strong>
+          <span>Food · school · medical · hygiene · life skills</span>
+        </div>
+      </div>
+
+      <!-- Donor info -->
+      <div class="row">
+        <div class="field"><label>/ First name</label><input type="text" placeholder="Madhavi" required/></div>
+        <div class="field"><label>/ Last name</label><input type="text" placeholder="Latha"/></div>
+        <div class="field full"><label>/ Email</label><input type="email" placeholder="you@email.com" required/></div>
+        <div class="field full"><label>/ Country</label>
+          <select>
+            <option>India</option><option>United States</option><option>United Kingdom</option><option>Australia</option><option>Canada</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="check"><input type="checkbox" checked/> <span>I'd like to receive a tax receipt (Section 80G) and AshaJyothi's <a href="index.html#newsletter">quarterly newsletter</a>.</span></label>
+      <label class="check"><input type="checkbox"/> <span>Make this gift in memory or in honour of someone &mdash; we'll include a note.</span></label>
+
+      <button type="submit" class="gobtn">
+        <span>Donate <span id="goAmt">$70</span> <span id="goFreq">monthly</span></span>
+        <span class="amt">→ Secure</span>
+      </button>
+
+      <div class="processors">
+        <span>Will route via</span>
+        <span class="proc">Razorpay</span>
+        <span class="proc">Stripe</span>
+        <span class="proc">PayPal</span>
+        <span class="proc">Bank transfer</span>
+      </div>
+    </form>
+
+    <aside class="preview reveal" data-delay="1">
+      <div class="pcard">
+        <div class="h">
+          <span class="pill">★ Most needed</span>
+          <span class="mono">/ Live preview</span>
+        </div>
+        <h3 id="previewTitle">Sponsor a child</h3>
+        <div class="row2">
+          <span class="big" id="previewAmt">$70</span>
+          <span class="small" id="previewSub">per month · approximately ₹5,800 INR</span>
+        </div>
+        <ul class="delivers" id="delivers">
+          <li>Three nutritious meals a day</li>
+          <li>School supplies &amp; on-site classes</li>
+          <li>Medical evaluation, physio, medicine</li>
+          <li>Hygiene supplies &amp; PARI pads where needed</li>
+          <li>A warm bed &amp; 24/7 carer support</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ─── SPECIFIC ITEMS ───────────────────────────────────── -->
+<section class="items" id="items">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Buy one specific thing</span><span class="n">/ 02</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">A gift that becomes <em>one thing.</em></h2>
+      <p>Each amount maps to a real, single purchase. We'll send a photograph when it arrives on campus.</p>
+    </div>
+    <div class="item-grid">
+      <a class="item reveal" href="#form" data-pick="100">
+        <div class="top"><span class="pre">Mobility</span><span class="amt">$<em>100</em></span></div>
+        <h4>One new wheelchair.</h4>
+        <p>Fifteen-plus children currently share one rusty wheelchair. This buys a sturdy, sized chair for one child.</p>
+        <span class="pick">Sponsor this →</span>
+      </a>
+      <a class="item reveal" data-delay="1" href="#form" data-pick="45">
+        <div class="top"><span class="pre">Annadanam · daily food</span><span class="amt">$<em>45</em></span></div>
+        <h4>A day of meals for all 80+ children.</h4>
+        <p>Breakfast, lunch, dinner. Hot, balanced, prepared on campus. Often sponsored by Chicago Andhra Association &mdash; you can take a day.</p>
+        <span class="pick">Sponsor this →</span>
+      </a>
+      <a class="item reveal" data-delay="2" href="#form" data-pick="25">
+        <div class="top"><span class="pre">PARI · dignity</span><span class="amt">$<em>25</em></span></div>
+        <h4>One month of sanitary pads.</h4>
+        <p>For all girls on campus, through the PARI unit. Quiet, ongoing, and one of the most-asked-for sponsorships we have.</p>
+        <span class="pick">Sponsor this →</span>
+      </a>
+      <a class="item reveal" href="#form" data-pick="200">
+        <div class="top"><span class="pre">Aids &amp; appliances</span><span class="amt">$<em>200</em></span></div>
+        <h4>A hearing aid, fitted.</h4>
+        <p>Hearing-impaired children receive a fitted aid through our partnership with local audiologists, with follow-up care.</p>
+        <span class="pick">Sponsor this →</span>
+      </a>
+      <a class="item reveal" data-delay="1" href="#form" data-pick="350">
+        <div class="top"><span class="pre">Urgent medical</span><span class="amt">$<em>350</em></span></div>
+        <h4>One Neurogen treatment cycle.</h4>
+        <p>For a child with severe cerebral palsy or intellectual disability, in partnership with Neurogen Mumbai.</p>
+        <span class="pick">Sponsor this →</span>
+      </a>
+      <a class="item reveal" data-delay="2" href="#form" data-pick="">
+        <div class="top"><span class="pre">General fund</span><span class="amt">Any</span></div>
+        <h4>A gift, used where needed.</h4>
+        <p>Sometimes a roof needs fixing. Sometimes a child needs a specialist. A flexible gift lets us respond fast.</p>
+        <span class="pick">Give any amount →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST / TRANSPARENCY ─────────────────────────────── -->
+<section class="trust-sec">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Where the money goes</span><span class="n">/ 03</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">No marketing budget. <em>No middlemen.</em></h2>
+      <p>AshaJyothi is run by the same family that started it. Our overhead stays under 10%. Every donation is acknowledged with a real human reply.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="tg-cell reveal">
+        <div class="ico">80G</div>
+        <h4>Tax-deductible in India.</h4>
+        <p>All non-cash donations are exempt under Sections 80G &amp; 12A of the Income Tax Act, 1961. We send a digital 80G receipt within 48 hours.</p>
+      </div>
+      <div class="tg-cell reveal" data-delay="1">
+        <div class="ico">$</div>
+        <h4>You'll know what it bought.</h4>
+        <p>When your gift is spent, we tell you what on. Wheelchair fitted, medical camp held, school supplies arrived &mdash; with a photograph.</p>
+      </div>
+      <div class="tg-cell reveal" data-delay="2">
+        <div class="ico">★</div>
+        <h4>Twenty-seven years, audited.</h4>
+        <p>Registered Voluntary Organisation since 1998. Annual reports available on request. Partnered with Save the Child Foundation &amp; Empower &amp; Excel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BANK ──────────────────────────────────────────────── -->
+<section class="bank-sec" id="bank">
+  <div class="container">
+    <div class="bank-card reveal">
+      <div class="left">
+        <h3>Or send a <em>direct transfer.</em></h3>
+        <p>Cheque or bank transfer is the cleanest route for larger gifts &mdash; no card processing fees, all of it lands at AshaJyothi.</p>
+        <span class="tax">80G &amp; 12A tax exempt</span>
+      </div>
+      <dl>
+        <div><dt>Account name</dt><dd class="name">Asha Jyothi Handicapped Welfare Society</dd></div>
+        <div><dt>Account number</dt><dd>34215204307</dd></div>
+        <div><dt>IFSC code</dt><dd>SBIN0004700</dd></div>
+        <div><dt>Bank &amp; branch</dt><dd class="name">SBI · Hanuman Junction</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-top">
+      <div>
+        <p class="biggie">Come and see for yourself. Or call &mdash; we pick up.</p>
+        <p>AshaJyothi Handicapped Welfare Society<br/>Hanuman Junction, West Godavari Dt<br/>Andhra Pradesh, India &mdash; 521105</p>
+        <p style="margin-top:14px;color:var(--accent-hi);font-weight:500">+91 96030 21871</p>
+      </div>
+      <div>
+        <h5>Site</h5>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="donate.html">Donate</a><a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h5>Give</h5>
+        <a href="donate.html">Sponsor monthly</a><a href="donate.html">One-time</a><a href="donate.html#items">Wheelchair</a><a href="donate.html#items">Food day</a><a href="donate.html#items">PARI pads</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="index.html#newsletter">Newsletter</a>
+      </div>
+    </div>
+
+    <h2 class="foot-mega">Asha<em>Jyothi</em></h2>
+
+    <div class="foot-base">
+      <span>© 2025 · Reg. Voluntary Org · 80G &amp; 12A tax exempt</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2h-3c-3 0-5 1.8-5 5v3H6v4h3v8z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }
+  },{threshold:.1, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Nav beacon (deferred load)
+  const ns = document.createElement('script'); ns.src='nav.js'; document.body.appendChild(ns);
+
+  // ── DONATE FORM STATE ──────────────────────────────
+  const state = { freq:'monthly', amt:70 };
+  const seg = document.getElementById('seg');
+  const segBtns = seg.querySelectorAll('button');
+  const amtsEl = document.getElementById('amts');
+  const amtBtns = amtsEl.querySelectorAll('button');
+  const customAmt = document.getElementById('customAmt');
+  const tallyText = document.getElementById('tallyText');
+  const previewTitle = document.getElementById('previewTitle');
+  const previewAmt = document.getElementById('previewAmt');
+  const previewSub = document.getElementById('previewSub');
+  const goAmt = document.getElementById('goAmt');
+  const goFreq = document.getElementById('goFreq');
+  const inrLabel = document.getElementById('inrLabel');
+  const approxInr = document.getElementById('approxInr');
+  const delivers = document.getElementById('delivers');
+
+  const usdToInr = 83;
+
+  const impactCopy = (amt, freq) => {
+    if(freq==='monthly'){
+      if(amt >= 70) return [`$${amt} covers one full child for a month`,'Food · school · medical · hygiene · life skills',['Three nutritious meals a day','School supplies & on-site classes','Medical evaluation, physio, medicine','Hygiene supplies & PARI pads where needed','A warm bed & 24/7 carer support']];
+      if(amt >= 35) return [`$${amt}/mo half-sponsors one child`,'Pairs with another donor to cover one child',["Half a child's monthly costs",'Pairs with another sponsor','We assign you a child & send updates','Full transparency on monthly spend']];
+      return [`$${amt}/mo contributes to a child's care`,'Pools with other monthly donors',["Pools to cover children's monthly needs",'Quarterly impact updates','80G receipts each financial year']];
+    } else {
+      if(amt >= 350) return [`$${amt} funds one Neurogen treatment cycle`,'For a child with severe cerebral palsy',['One full Neurogen treatment cycle','Travel & accommodation if needed','Follow-up at our in-house physio','Quarterly progress photographs']];
+      if(amt >= 200) return [`$${amt} buys a hearing aid, fitted`,'For one hearing-impaired child',['One hearing aid, sized & fitted','Audiologist follow-up','Adjustments for first year','Photograph & note from the child']];
+      if(amt >= 100) return [`$${amt} buys one new wheelchair`,'A child off the shared rusty chair',['Sturdy, sized wheelchair','Carer training on use','Photo of the child receiving it','80G receipt within 48 hours']];
+      if(amt >= 45)  return [`$${amt} feeds 80+ children for a day`,'Breakfast, lunch, dinner — annadanam',['All meals for all children for 24h','Your day named on our dining-hall board','Photograph from the day','80G receipt']];
+      if(amt >= 25)  return [`$${amt} buys a month of sanitary pads`,'PARI unit · dignity for girls',['Full month of pads for all girls','PARI unit operating costs','Update from the PARI team','80G receipt']];
+      return [`$${amt} contributes to AshaJyothi`,'Used where most needed',['Pools with other one-time gifts','Spent within 30 days',"You'll be told what it bought",'80G receipt']];
+    }
+  };
+
+  const render = () => {
+    const a = state.amt;
+    const f = state.freq;
+    const [tally, sub, items] = impactCopy(a, f);
+    tallyText.textContent = tally;
+    previewAmt.textContent = '$' + a;
+    previewTitle.textContent = f==='monthly' ? 'Sponsor a child' : 'One-time gift';
+    previewSub.innerHTML = (f==='monthly'?'per month · ':'') + 'approximately ₹' + Math.round(a*usdToInr).toLocaleString() + ' INR';
+    goAmt.textContent = '$' + a;
+    goFreq.textContent = f==='monthly' ? 'monthly' : 'now';
+    inrLabel.textContent = '≈ ₹' + Math.round(a*usdToInr).toLocaleString();
+    approxInr.textContent = '~ ₹' + Math.round(a*usdToInr).toLocaleString() + ' INR';
+    delivers.innerHTML = items.map(t => '<li>'+t+'</li>').join('');
+  };
+
+  segBtns.forEach(b => b.addEventListener('click', () => {
+    segBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.freq = b.dataset.freq;
+    seg.classList.toggle('right', state.freq === 'once');
+    render();
+  }));
+
+  amtBtns.forEach(b => b.addEventListener('click', () => {
+    amtBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.amt = parseInt(b.dataset.amt,10);
+    customAmt.value = '';
+    render();
+  }));
+
+  customAmt.addEventListener('input', (e) => {
+    const v = parseInt(e.target.value, 10);
+    if(!isNaN(v) && v > 0){
+      amtBtns.forEach(x => x.classList.remove('active'));
+      state.amt = v;
+      render();
+    }
+  });
+
+  // ── PICK FROM ITEMS ──────────────────────────────
+  document.querySelectorAll('.item[data-pick]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const pick = el.dataset.pick;
+      // Switch to one-time for items
+      seg.classList.add('right');
+      segBtns.forEach(x => x.classList.remove('active'));
+      seg.querySelector('[data-freq="once"]').classList.add('active');
+      state.freq = 'once';
+
+      if(pick){
+        const amt = parseInt(pick, 10);
+        amtBtns.forEach(x => x.classList.remove('active'));
+        // Try matching preset
+        const m = amtsEl.querySelector(`[data-amt="${amt}"]`);
+        if(m){ m.classList.add('active'); customAmt.value=''; }
+        else { customAmt.value = amt; }
+        state.amt = amt;
+      }
+      render();
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AshaJyothi · A home for special-needs children since 1998.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── HERO (mission-led) ──────────────────────────────── */
+  .hero{padding:60px 0 0;position:relative}
+  .hero .topline{display:flex;justify-content:space-between;align-items:center;color:var(--muted);margin-bottom:48px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;flex-wrap:wrap;gap:12px}
+  .hero .topline .live{color:var(--accent);display:flex;align-items:center;gap:8px}
+  .hero .topline .live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(217,117,36,.6);animation:dot 1.8s ease-in-out infinite}
+  @keyframes dot{50%{box-shadow:0 0 0 9px rgba(217,117,36,0)}}
+
+  h1.mega{font-weight:600;font-size:clamp(60px,9.5vw,156px);line-height:.86;letter-spacing:-.045em;margin:0 0 60px;color:var(--heading)}
+  h1.mega em{font-style:normal;color:var(--accent)}
+  h1.mega .chip{display:inline-block;width:clamp(110px,12vw,180px);height:clamp(70px,8vw,114px);border-radius:999px;overflow:hidden;vertical-align:middle;transform:translateY(10%);margin:0 6px}
+  h1.mega .chip img{width:100%;height:100%;object-fit:cover}
+
+  .hero-foot{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end;margin:0 0 70px}
+  .hero-foot .lead{font-size:22px;line-height:1.45;max-width:38ch;margin:0;color:var(--ink-soft);font-weight:400}
+  .hero-foot .lead strong{color:var(--heading);font-weight:600}
+  .hero-foot .quickdo{display:flex;flex-direction:column;gap:10px}
+  .quickdo .ctaprimary{background:var(--ink);color:var(--paper);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;border-radius:14px;font-weight:600;font-size:18px;gap:30px;transition:background .25s}
+  .quickdo .ctaprimary:hover{background:var(--accent)}
+  .quickdo .ctaprimary .pill{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;background:var(--paper);color:var(--ink);padding:5px 10px;border-radius:999px;font-weight:600}
+  .quickdo .ctaprimary:hover .pill{background:var(--ink);color:var(--paper)}
+  .quickdo .ctagrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .quickdo .ctagrid a{background:var(--paper-2);padding:14px 18px;border-radius:12px;font-size:14px;font-weight:500;display:flex;justify-content:space-between;align-items:center;transition:background .2s,color .2s}
+  .quickdo .ctagrid a:hover{background:var(--ink);color:var(--paper)}
+
+  .hero-bleed{position:relative;height:64vh;min-height:520px;max-height:760px;overflow:hidden;border-radius:24px 24px 0 0;margin:0 28px}
+  .hero-bleed img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:slowzoom 22s ease-in-out infinite alternate}
+  @keyframes slowzoom{to{transform:scale(1.12)}}
+  .hero-bleed::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 50%)}
+  .hero-bleed .overlay{position:absolute;left:36px;right:36px;bottom:32px;display:flex;justify-content:space-between;align-items:end;color:#fff;z-index:2;gap:30px}
+  .hero-bleed .overlay h3{font-weight:600;font-size:clamp(22px,2.6vw,36px);max-width:18ch;margin:0;line-height:1.05;letter-spacing:-.015em}
+  .hero-bleed .overlay .meta{text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;line-height:1.8}
+
+  /* ─── REALITY ─────────────────────────────────────────── */
+  .reality{background:var(--ink);color:var(--paper)}
+  .reality .seclabel .t,.reality h2.big{color:var(--paper)}
+  .reality .seclabel .n{color:rgba(255,255,255,.45)}
+  .reality .sec-intro p{color:rgba(251,250,246,.7)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-d)}
+  .stat{padding:36px 28px 28px;border-right:1px solid var(--line-d);position:relative}
+  .stat:last-child{border-right:0}
+  .stat .pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:block}
+  .stat .num{font-weight:600;font-size:clamp(56px,7vw,110px);line-height:.9;letter-spacing:-.045em;margin-bottom:18px;display:block}
+  .stat .num em{font-style:normal;color:var(--accent)}
+  .stat p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(251,250,246,.7);max-width:30ch}
+
+  /* ─── STORIES (snapshot cards) ────────────────────────── */
+  .stories{}
+  .story-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:18px}
+  .scard{position:relative;border-radius:20px;overflow:hidden;color:#fff;cursor:pointer;background:#222;isolation:isolate;min-height:420px;display:block}
+  .scard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .scard::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.15) 55%,transparent 100%);z-index:1}
+  .scard:hover img{transform:scale(1.06)}
+  .scard .scontent{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:26px}
+  .scard .scontent .top{display:flex;justify-content:space-between;align-items:start;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .scard .scontent .top .date{background:#fff;color:var(--ink);padding:5px 10px;border-radius:999px;font-weight:600}
+  .scard h3{font-weight:600;font-size:28px;line-height:1.05;letter-spacing:-.025em;margin:0 0 10px;max-width:15ch}
+  .scard.lg{min-height:520px}
+  .scard.lg h3{font-size:38px;max-width:18ch}
+  .scard p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.85);margin:0;max-width:36ch}
+
+  /* ─── INSTAGRAM FEED ──────────────────────────────────── */
+  .ig{background:var(--paper-2)}
+  .ig .head{display:flex;justify-content:space-between;align-items:end;margin-bottom:48px;gap:30px;flex-wrap:wrap}
+  .ig .head h2{margin:0}
+  .ig .head .right{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+  .ig .head .handle{display:flex;align-items:center;gap:10px;font-weight:600;font-size:18px;color:var(--heading)}
+  .ig .head .handle .iglogo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;color:#fff}
+  .ig .head .follow{font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--paper);display:inline-flex;gap:8px;align-items:center;transition:background .25s}
+  .ig .head .follow:hover{background:var(--accent)}
+
+  /* slider stage */
+  .ig-slider{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .ig-stage{position:relative;width:100%;max-width:460px;justify-self:end;aspect-ratio:4/5;perspective:1200px}
+  .ig-stage .ig-post{position:absolute;inset:0;background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(80,40,10,.18),0 0 0 1px rgba(0,0,0,.04);display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateX(40px) scale(.97);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1),visibility .65s}
+  .ig-stage .ig-post.is-active{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
+  .ig-stage .ig-post.is-leaving{transform:translateX(-40px) scale(.97);opacity:0}
+  .ig-post header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.06)}
+  .ig-post header .avatar{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid var(--accent);padding:1px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .ig-post header .avatar img{width:100%;height:100%;object-fit:contain}
+  .ig-post header .who{flex:1;line-height:1.2;min-width:0}
+  .ig-post header .who strong{display:block;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
+  .ig-post header .who span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ig-post header .dots{font-size:18px;color:var(--ink-mute);letter-spacing:1px;padding:6px}
+  .ig-post .pic{position:relative;flex:1;overflow:hidden;background:#000}
+  .ig-post .pic img{width:100%;height:100%;object-fit:cover}
+  .ig-post .pic .badge{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.55);color:#fff;padding:4px 9px;border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;backdrop-filter:blur(8px)}
+  .ig-post .pic .ctype{position:absolute;right:10px;top:10px;width:22px;height:22px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  .ig-post footer{padding:10px 14px 14px;background:#fff}
+  .ig-post .actions{display:flex;align-items:center;gap:14px;font-size:22px;line-height:1;margin-bottom:8px}
+  .ig-post .actions svg{width:24px;height:24px;stroke-width:1.7;cursor:pointer;transition:transform .2s}
+  .ig-post .actions svg:hover{transform:scale(1.12)}
+  .ig-post .actions .heart{color:#e54e6f}
+  .ig-post .actions .save{margin-left:auto}
+  .ig-post .likes{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .ig-post .caption{font-size:13.5px;line-height:1.45;color:var(--ink);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .ig-post .caption b{font-weight:600;margin-right:6px}
+  .ig-post .ago{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+
+  /* slider side panel */
+  .ig-side{display:flex;flex-direction:column;gap:28px;max-width:480px}
+  .ig-side .panel-head{display:flex;flex-direction:column;gap:10px}
+  .ig-side .panel-head .live-pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px}
+  .ig-side .panel-head .live-pre::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(217,117,36,.5);animation:dot 1.8s ease-in-out infinite}
+  .ig-side .panel-head h3{font-weight:600;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;margin:0;color:var(--heading);max-width:20ch}
+  .ig-side .panel-head h3 em{font-style:normal;color:var(--accent)}
+  .ig-side .panel-head p{font-size:15.5px;color:var(--ink-soft);margin:0;max-width:42ch;line-height:1.55}
+  .ig-side .ticker{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1)}
+  .ig-side .ticker .count{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em}
+  .ig-side .ticker .count b{color:var(--ink);font-weight:600;font-family:var(--sans);font-size:16px;letter-spacing:-.01em}
+  .ig-side .ticker .controls{display:flex;gap:6px}
+  .ig-side .ticker .controls button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .2s;font-family:inherit;padding:0}
+  .ig-side .ticker .controls button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .ig-side .ticker .controls .play{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .ig-side .ticker .controls .play:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+  .ig-side .ticker .controls svg{width:14px;height:14px}
+  .ig-side .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .ig-side .thumbs button{aspect-ratio:1;border-radius:7px;border:0;background:#222;cursor:pointer;padding:0;overflow:hidden;position:relative;opacity:.45;transition:opacity .3s,transform .3s,outline-color .3s}
+  .ig-side .thumbs button:hover{opacity:.85;transform:translateY(-2px)}
+  .ig-side .thumbs button.active{opacity:1;outline:2px solid var(--accent);outline-offset:2px}
+  .ig-side .thumbs button img{width:100%;height:100%;object-fit:cover}
+  .ig-side .progress{height:2px;background:rgba(0,0,0,.1);border-radius:2px;overflow:hidden;position:relative}
+  .ig-side .progress::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-hi))}
+  .ig-side .progress.run::before{animation:progrun 6.5s linear forwards}
+  .ig-side .progress.paused::before{animation-play-state:paused}
+  @keyframes progrun{from{width:0}to{width:100%}}
+
+  /* ─── 3 WAYS TO HELP ─────────────────────────────────── */
+  .help{}
+  .help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .hcard{background:var(--paper-2);padding:36px;border-radius:20px;display:flex;flex-direction:column;gap:20px;transition:transform .35s,background .35s;cursor:pointer;color:inherit;text-decoration:none}
+  .hcard:hover{transform:translateY(-4px);background:var(--ink);color:var(--paper)}
+  .hcard .ico{width:48px;height:48px;border-radius:14px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;font-size:18px}
+  .hcard .pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .hcard:hover .pre{color:rgba(251,250,246,.55)}
+  .hcard h3{font-weight:600;font-size:30px;line-height:1.05;letter-spacing:-.025em;margin:0;max-width:14ch;color:var(--heading)}
+  .hcard p{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin:0;max-width:30ch}
+  .hcard:hover p{color:rgba(251,250,246,.75)}
+  .hcard .more{margin-top:auto;font-size:14px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:6px;transition:transform .25s}
+  .hcard:hover .more{color:var(--accent-hi)}
+  .hcard:hover .more span{transform:translateX(4px)}
+  .hcard .more span{display:inline-block;transition:transform .25s}
+
+  /* ─── NEWSLETTER ──────────────────────────────────────── */
+  .news{background:var(--paper-3);padding:140px 0}
+  .news .nwrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .news h3{font-weight:600;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.035em;margin:0 0 18px;max-width:14ch;color:var(--heading)}
+  .news h3 em{font-style:normal;color:var(--accent)}
+  .news p{font-size:17px;color:var(--ink-soft);max-width:42ch;margin:0}
+  .news form{display:flex;gap:8px;background:var(--paper);padding:8px;border-radius:999px;border:1px solid var(--line)}
+  .news input{flex:1;background:transparent;border:0;padding:14px 18px;font-family:inherit;font-size:16px;outline:none;color:var(--ink)}
+  .news button{background:var(--ink);color:var(--paper);border:0;padding:14px 22px;border-radius:999px;font-family:inherit;font-weight:600;cursor:pointer;transition:background .2s}
+  .news button:hover{background:var(--accent)}
+  .news .hint{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  @media (max-width:1000px){
+    .hero-foot,.story-grid,.help-grid,.news .nwrap,.ig-slider{grid-template-columns:1fr;gap:30px}
+    .stats{grid-template-columns:1fr 1fr}
+    .ig-stage{justify-self:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ────────────────────────────────────────────────── -->
+<nav class="top">
+  <div class="container row">
+    <a class="brand" href="index.html">
+      <img class="logo" src="logo-mark.png" alt="AshaJyothi" width="46" height="46"/>
+      <span class="word"><b>AshaJyothi</b><small>Light of hope · since 1998</small></span>
+    </a>
+    <div class="navline">
+      <span class="beacon"></span>
+      <a class="nl is-active" href="index.html"><span class="n">01</span><span class="l">Home</span></a>
+      <a class="nl" href="about.html"><span class="n">02</span><span class="l">About</span></a>
+      <a class="nl" href="programs.html"><span class="n">03</span><span class="l">Programs</span></a>
+      <a class="nl" href="donate.html"><span class="n">04</span><span class="l">Donate</span></a>
+      <a class="nl" href="contact.html"><span class="n">05</span><span class="l">Contact</span></a>
+    </div>
+    <div class="nav-right">
+      <a class="pill-cta solid" href="donate.html">Donate →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────────── -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="topline reveal">
+      <span>Hanuman Junction · Andhra Pradesh · est. 1998</span>
+      <span class="live">83 children at home today</span>
+    </div>
+
+    <h1 class="mega reveal" data-delay="1">
+      We are a <em>home</em>
+      <span class="chip"><img src="https://static.wixstatic.com/media/437f08_0fb69566f899453ea5ca54dacdf00004~mv2.jpg/v1/fill/w_440,h_280,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(23)_JPG.jpg" alt=""/></span>
+      for children<br/>others left behind.
+    </h1>
+
+    <div class="hero-foot reveal" data-delay="2">
+      <p class="lead">For 27 years AshaJyothi has been the family of last resort for abandoned children with cerebral palsy, autism, Down syndrome and severe physical disabilities. <strong>We feed them, treat them, school them &mdash; and we don't stop.</strong></p>
+
+      <div class="quickdo">
+        <a class="ctaprimary" href="about.html">
+          <span>Read our story</span>
+          <span class="pill">since 1998</span>
+        </a>
+        <div class="ctagrid">
+          <a href="donate.html">Donate <span>→</span></a>
+          <a href="programs.html">What we do <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bleed reveal" data-delay="3">
+    <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt=""/>
+    <div class="overlay">
+      <h3>The AshaJyothi campus &mdash; Hanuman Junction, West Godavari District.</h3>
+      <div class="meta">
+        83 children · 24/7 care<br/>
+        in-house school &amp; physio<br/>
+        founded 1998
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── REALITY ───────────────────────────────────────────── -->
+<section class="reality" id="impact">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">The reality</span><span class="n">/ 01</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">Twenty-seven years, told <em>plainly.</em></h2>
+      <p>No glossy frame, no rounded numbers &mdash; the figures behind the work, exactly as they stand.</p>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><span class="pre">/ Children</span><span class="num">83</span><p>Living on campus right now &mdash; cerebral palsy, autism, Down syndrome, blind, deaf.</p></div>
+      <div class="stat reveal" data-delay="1"><span class="pre">/ Years</span><span class="num">27<em>.</em></span><p>Of unbroken care since the first ten children arrived in 1998.</p></div>
+      <div class="stat reveal" data-delay="2"><span class="pre">/ Wheelchairs</span><span class="num">1<em>:15</em></span><p>One rusty chair shared among 15+ children. A new one costs $100.</p></div>
+      <div class="stat reveal" data-delay="3"><span class="pre">/ Per month</span><span class="num"><em>$</em>70</span><p>Sponsors a child for a month &mdash; food, hygiene, school, medicine.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STORIES SNAPSHOT ──────────────────────────────────── -->
+<section class="stories">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">From the campus</span><span class="n">/ 02</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">Recent moments from <em>the campus.</em></h2>
+      <p>Real moments, written by us. Posted when they happen — no PR voice, no schedule.</p>
+    </div>
+
+    <div class="story-grid">
+      <a class="scard lg reveal" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_900,h_700,al_c,q_85,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt=""/>
+        <div class="scontent">
+          <div class="top"><span>FIELD NOTE · Medical camp</span><span class="date">Recent</span></div>
+          <div>
+            <h3>Sixty-seven check-ups in one afternoon.</h3>
+            <p>The monthly Neurogen-supported camp. Two new hearing-aid fittings, three physio plans updated, one cataract referral.</p>
+          </div>
+        </div>
+      </a>
+      <a class="scard reveal" data-delay="1" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/437f08_d8de5227de6f4a6a81f8642180e4ed5a~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/Local%20Sponsors%20(16).jpg" alt=""/>
+        <div class="scontent">
+          <div class="top"><span>PARTNER</span><span class="date">Ongoing</span></div>
+          <h3>Chicago Andhra funds a month of meals.</h3>
+        </div>
+      </a>
+      <a class="scard reveal" data-delay="2" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt=""/>
+        <div class="scontent">
+          <div class="top"><span>VOCATIONAL</span><span class="date">Latest batch</span></div>
+          <h3>A new batch finishes tailoring training.</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INSTAGRAM SLIDESHOW ────────────────────────────────── -->
+<section class="ig" id="instagram">
+  <div class="container">
+
+    <div class="ig-slider">
+
+      <!-- Left: the IG post stage (cards crossfade) -->
+      <div class="ig-stage reveal" id="igStage">
+
+        <article class="ig-post is-active" data-i="0">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who">
+              <strong>madhavi.latha.560</strong>
+              <span>Hanuman Junction · Andhra Pradesh</span>
+            </div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt=""/>
+            <span class="badge">Medical camp</span>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>chicago_andhra</b> and <b>248 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>Sixty-seven check-ups today at the Neurogen camp. Two children fitted for hearing aids, three new physio plans, one cataract referral. Thank you Dr. Rao for showing up every month without fail. 🪔</p>
+            <span class="ago">2 days ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="1">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>Hanuman Junction · Andhra Pradesh</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt=""/>
+            <span class="badge">Vocational</span>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>save_the_child</b> and <b>412 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>A new batch finishes tailoring. Six girls graduate this month — Lakshmi will join a local boutique. Skills that travel with you.</p>
+            <span class="ago">1 week ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="2">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>AshaJyothi Campus · West Godavari</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_1544c6daab0a4be4a9d18d08e9c27cb1~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Girls.jpg" alt=""/>
+            <span class="badge">PARI · Dignity</span>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>empowerexcel</b> and <b>195 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>Monthly PARI distribution. Quiet, regular, and one of the most-needed things we do. Every girl on campus served.</p>
+            <span class="ago">2 weeks ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="3">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>Hanuman Junction · Andhra Pradesh</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_12a5c5b207ac4f7e86afdd1ef01d9a88~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(12)_JPG.jpg" alt=""/>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>volunteer_ie</b> and <b>1,247 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>The kind of evening you don't post about, until you do. Saturday yoga, then dinner together. Family.</p>
+            <span class="ago">3 weeks ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="4">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>AshaJyothi Campus · West Godavari</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_cc922aa2384645728a5cb7a2ec9f1a2a~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Rehab%201.jpg" alt=""/>
+            <span class="badge">Rehab</span>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>neurogen_in</b> and <b>754 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>Daily physio. Slow, patient work. We are grateful to our volunteers from Ireland who return every year.</p>
+            <span class="ago">1 month ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="5">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>Hanuman Junction · Andhra Pradesh</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_c37445126bf04049b3ad72d60d449baa~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(22)_JPG.jpg" alt=""/>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>care_n_share</b> and <b>332 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>Birthday on campus. Sai turns 9 today — born here, growing here, loved here. 🎂</p>
+            <span class="ago">1 month ago</span>
+          </footer>
+        </article>
+
+        <article class="ig-post" data-i="6">
+          <header>
+            <span class="avatar"><img src="logo-mark.png" alt=""/></span>
+            <div class="who"><strong>madhavi.latha.560</strong><span>AshaJyothi Campus · West Godavari</span></div>
+            <span class="dots">⋯</span>
+          </header>
+          <div class="pic">
+            <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt=""/>
+            <span class="badge">Founder's note</span>
+          </div>
+          <footer>
+            <div class="actions">
+              <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 0110-1 5 5 0 0110 1c0 5.5-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3.2-6.9L21 3v6h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+            </div>
+            <div class="likes">Liked by <b>chicago_andhra</b> and <b>891 others</b></div>
+            <p class="caption"><b>madhavi.latha.560</b>Twenty-seven years. Eighty-three children today. The campus you helped us build. Thank you, all of you.</p>
+            <span class="ago">2 months ago</span>
+          </footer>
+        </article>
+
+      </div>
+
+      <!-- Right: panel head + controls + thumbs -->
+      <aside class="ig-side reveal" data-delay="1">
+        <div class="panel-head">
+          <span class="live-pre">Live from campus · @madhavi.latha.560</span>
+          <h3>Updates straight from <em>Madhavi.</em></h3>
+          <p>The fastest way to know what's actually happening &mdash; new arrivals, recoveries, medical camps, birthdays. A slideshow of recent posts.</p>
+        </div>
+
+        <div class="progress run" id="igProgress" aria-hidden="true"></div>
+
+        <div class="ticker">
+          <span class="count"><b id="igIdx">01</b> / <span id="igTotal">07</span> <span style="margin:0 6px;color:var(--accent)">·</span> auto-advance</span>
+          <div class="controls">
+            <button id="igPrev" aria-label="Previous post"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button id="igPlay" class="play" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+            <button id="igNext" aria-label="Next post"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+
+        <div class="thumbs" id="igThumbs">
+          <button class="active" data-i="0"><img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt="Post 1"/></button>
+          <button data-i="1"><img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt="Post 2"/></button>
+          <button data-i="2"><img src="https://static.wixstatic.com/media/437f08_1544c6daab0a4be4a9d18d08e9c27cb1~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Girls.jpg" alt="Post 3"/></button>
+          <button data-i="3"><img src="https://static.wixstatic.com/media/437f08_12a5c5b207ac4f7e86afdd1ef01d9a88~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(12)_JPG.jpg" alt="Post 4"/></button>
+          <button data-i="4"><img src="https://static.wixstatic.com/media/437f08_cc922aa2384645728a5cb7a2ec9f1a2a~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Rehab%201.jpg" alt="Post 5"/></button>
+          <button data-i="5"><img src="https://static.wixstatic.com/media/437f08_c37445126bf04049b3ad72d60d449baa~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(22)_JPG.jpg" alt="Post 6"/></button>
+          <button data-i="6"><img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_120,h_120,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt="Post 7"/></button>
+        </div>
+
+        <a class="follow" href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener" style="align-self:start;font-size:14px;font-weight:600;padding:11px 20px;border-radius:999px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;display:inline-flex;gap:8px;align-items:center;transition:transform .2s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Follow @madhavi.latha.560 →
+        </a>
+      </aside>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── 3 WAYS TO HELP ───────────────────────────────────── -->
+<section class="help">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Three ways in</span><span class="n">/ 04</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">Where you fit, <em>in plain terms.</em></h2>
+      <p>You don't need to give everything &mdash; you just need to pick one.</p>
+    </div>
+    <div class="help-grid">
+      <a class="hcard reveal" href="donate.html">
+        <span class="ico">$</span>
+        <span class="pre">Monthly</span>
+        <h3>Sponsor a child for $70 a month.</h3>
+        <p>One child, every month. Food, school, medical, hygiene &mdash; everything covered, no gaps.</p>
+        <span class="more">Sponsor monthly <span>→</span></span>
+      </a>
+      <a class="hcard reveal" data-delay="1" href="donate.html#items">
+        <span class="ico">★</span>
+        <span class="pre">One-time</span>
+        <h3>Buy one specific thing.</h3>
+        <p>A wheelchair, a hearing aid, a day's food for everyone, a month of PARI pads. Pick the one that fits.</p>
+        <span class="more">Pick an item <span>→</span></span>
+      </a>
+      <a class="hcard reveal" data-delay="2" href="contact.html">
+        <span class="ico">✻</span>
+        <span class="pre">In person</span>
+        <h3>Visit, volunteer or partner.</h3>
+        <p>Come to the campus, send your skills, or bring your organisation alongside ours.</p>
+        <span class="more">Get in touch <span>→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA STRIP ────────────────────────────────────────── -->
+<section class="cta-strip">
+  <div class="container">
+    <h3>Eighty-three children are waiting at home <em>right now.</em></h3>
+    <div class="right">
+      <a href="donate.html">Sponsor a child · $70/mo <span>→</span></a>
+      <a class="alt" href="about.html">Read our story <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ────────────────────────────────────────── -->
+<section class="news" id="newsletter">
+  <div class="container">
+    <div class="nwrap">
+      <div class="reveal">
+        <div class="seclabel"><span class="dot"></span><span class="t">Stay close</span></div>
+        <h3>The <em>quiet</em> letter from campus.</h3>
+        <p>A few times a year &mdash; new arrivals, recoveries, the occasional birthday photo. Never fundraising spam.</p>
+      </div>
+      <div class="reveal" data-delay="1">
+        <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Thank you ·';this.querySelector('input').value=''">
+          <input type="email" placeholder="your@email.com" required/>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="hint">★ Unsubscribe anytime · We never share your address</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer class="foot" id="contact">
+  <div class="container">
+    <div class="foot-top">
+      <div>
+        <p class="biggie">Come and see for yourself. Or call &mdash; we pick up.</p>
+        <p>AshaJyothi Handicapped Welfare Society<br/>Hanuman Junction, West Godavari Dt<br/>Andhra Pradesh, India &mdash; 521105</p>
+        <p style="margin-top:14px;color:var(--accent-hi);font-weight:500">+91 96030 21871</p>
+      </div>
+      <div>
+        <h5>Site</h5>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="donate.html">Donate</a><a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h5>Give</h5>
+        <a href="donate.html">Sponsor monthly</a><a href="donate.html">One-time</a><a href="donate.html#items">Wheelchair</a><a href="donate.html#items">Food day</a><a href="donate.html#items">PARI pads</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#newsletter">Newsletter</a>
+      </div>
+    </div>
+
+    <dl class="foot-bank">
+      <div><dt>Account name</dt><dd>Asha Jyothi Handicapped Welfare Society</dd></div>
+      <div><dt>A/C number</dt><dd>34215204307</dd></div>
+      <div><dt>IFSC</dt><dd>SBIN0004700</dd></div>
+      <div><dt>Branch</dt><dd>SBI · Hanuman Junction</dd></div>
+    </dl>
+
+    <h2 class="foot-mega">Asha<em>Jyothi</em></h2>
+
+    <div class="foot-base">
+      <span>© 2025 · Reg. Voluntary Org · 80G &amp; 12A tax exempt</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2h-3c-3 0-5 1.8-5 5v3H6v4h3v8z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }
+  },{threshold:.1, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ─── INSTAGRAM SLIDESHOW ─────────────────────────────────
+  (function(){
+    const stage = document.getElementById('igStage');
+    if(!stage) return;
+    const posts = stage.querySelectorAll('.ig-post');
+    const thumbs = document.querySelectorAll('#igThumbs button');
+    const prog = document.getElementById('igProgress');
+    const idxLabel = document.getElementById('igIdx');
+    const totalLabel = document.getElementById('igTotal');
+    const playBtn = document.getElementById('igPlay');
+    const prevBtn = document.getElementById('igPrev');
+    const nextBtn = document.getElementById('igNext');
+
+    const total = posts.length;
+    let cur = 0;
+    let playing = true;
+    let timer = null;
+    const TICK = 6500;
+
+    if(totalLabel) totalLabel.textContent = String(total).padStart(2,'0');
+
+    function show(n){
+      const next = (n + total) % total;
+      if(next === cur) return;
+      posts[cur].classList.remove('is-active');
+      posts[cur].classList.add('is-leaving');
+      posts[next].classList.remove('is-leaving');
+      posts[next].classList.add('is-active');
+      thumbs[cur].classList.remove('active');
+      thumbs[next].classList.add('active');
+      cur = next;
+      if(idxLabel) idxLabel.textContent = String(cur + 1).padStart(2,'0');
+      // restart progress
+      if(prog){
+        prog.classList.remove('run');
+        // force reflow to restart the CSS animation
+        void prog.offsetWidth;
+        if(playing) prog.classList.add('run');
+      }
+    }
+
+    function start(){
+      stop();
+      if(!playing) return;
+      timer = setInterval(() => show(cur + 1), TICK);
+    }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+    function setPlay(p){
+      playing = p;
+      const ico = playBtn.querySelector('svg');
+      if(p){
+        // pause icon
+        ico.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+        playBtn.setAttribute('aria-label','Pause');
+        if(prog){ prog.classList.remove('paused'); prog.classList.add('run'); }
+        start();
+      } else {
+        // play icon
+        ico.innerHTML = '<path d="M5 3l14 9-14 9z"/>';
+        playBtn.setAttribute('aria-label','Play');
+        if(prog) prog.classList.add('paused');
+        stop();
+      }
+    }
+
+    thumbs.forEach(t => t.addEventListener('click', () => {
+      const n = parseInt(t.dataset.i, 10);
+      show(n);
+      if(playing) start();
+    }));
+    prevBtn.addEventListener('click', () => { show(cur - 1); if(playing) start(); });
+    nextBtn.addEventListener('click', () => { show(cur + 1); if(playing) start(); });
+    playBtn.addEventListener('click', () => setPlay(!playing));
+
+    // pause on hover over the post stage
+    stage.addEventListener('mouseenter', () => { if(playing){ stop(); if(prog) prog.classList.add('paused'); } });
+    stage.addEventListener('mouseleave', () => { if(playing){ if(prog) prog.classList.remove('paused'); start(); } });
+
+    // keyboard
+    document.addEventListener('keydown', (e) => {
+      if(!stage.closest('section').getBoundingClientRect().top < window.innerHeight) return;
+      if(e.key === 'ArrowLeft') show(cur - 1);
+      if(e.key === 'ArrowRight') show(cur + 1);
+    });
+
+    // kick off
+    if(prog) prog.classList.add('run');
+    start();
+  })();
+</script>
+</body>
+</html>

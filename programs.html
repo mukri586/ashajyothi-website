@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programs · AshaJyothi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ─── PAGE HERO ─────────────────────────────────────────── */
+  .ph{padding:60px 0 90px;border-bottom:1px solid var(--line)}
+  .ph .crumbs{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:28px;display:flex;gap:10px;align-items:center}
+  .ph .crumbs a:hover{color:var(--ink)}
+  .ph .crumbs .sep{color:var(--accent)}
+  .ph .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:end}
+  .ph h1{font-weight:600;font-size:clamp(60px,9vw,150px);line-height:.86;letter-spacing:-.045em;margin:0 0 28px;max-width:14ch;color:var(--heading)}
+  .ph h1 em{font-style:normal;color:var(--accent)}
+  .ph .lead{font-size:21px;line-height:1.5;max-width:38ch;color:var(--ink-soft);margin:0}
+  .ph .right{display:flex;flex-direction:column;gap:18px;padding-bottom:8px}
+  .ph .right .stat{display:flex;justify-content:space-between;align-items:end;padding:18px 0;border-bottom:1px solid var(--line)}
+  .ph .right .stat:first-child{border-top:1px solid var(--line)}
+  .ph .right .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ph .right .stat .n{font-weight:600;font-size:32px;line-height:1;letter-spacing:-.03em}
+  .ph .right .stat .n em{font-style:normal;color:var(--accent)}
+
+  /* ─── PROGRAM DETAIL (alternating) ─────────────────────── */
+  .pdetail{padding:130px 0}
+  .pdetail + .pdetail{padding-top:0}
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .pdetail:nth-of-type(even) .pgrid{direction:rtl}
+  .pdetail:nth-of-type(even) .pgrid > *{direction:ltr}
+  .pdetail .img{aspect-ratio:4/5;border-radius:18px;overflow:hidden;position:relative}
+  .pdetail .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+  .pdetail .img:hover img{transform:scale(1.05)}
+  .pdetail .img .badge{position:absolute;left:24px;top:24px;background:var(--paper);color:var(--ink);padding:8px 14px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  .pdetail .pretitle{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .pdetail .pretitle .num{background:var(--accent);color:#fff;padding:5px 11px;border-radius:999px;font-weight:600;letter-spacing:.04em}
+  .pdetail h2{font-weight:600;font-size:clamp(40px,5.5vw,80px);line-height:.95;letter-spacing:-.035em;margin:0 0 28px;max-width:14ch;color:var(--heading)}
+  .pdetail h2 em{font-style:normal;color:var(--accent)}
+  .pdetail .body{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:48ch;margin:0 0 30px}
+  .pdetail ul.feats{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px}
+  .pdetail ul.feats li{display:flex;gap:12px;align-items:start;font-size:15px}
+  .pdetail ul.feats li::before{content:"";flex-shrink:0;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:8px}
+  .pdetail ul.feats li strong{display:block;font-weight:600;letter-spacing:-.005em}
+  .pdetail ul.feats li span{display:block;color:var(--muted);font-size:13.5px;line-height:1.45;margin-top:2px}
+  .pdetail .since{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:32px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+  .pdetail .since b{color:var(--ink);font-family:var(--sans);text-transform:none;letter-spacing:-.01em;font-size:14.5px}
+
+  /* ─── DAY ON CAMPUS ────────────────────────────────────── */
+  .day{background:var(--ink);color:var(--paper)}
+  .day .seclabel .t,.day h2.big{color:var(--paper)}
+  .day .seclabel .n{color:rgba(255,255,255,.45)}
+  .day .sec-intro p{color:rgba(251,250,246,.7)}
+  .daygrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .daycell{background:#1a1c22;border-radius:14px;padding:28px 28px 28px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(255,255,255,.06);transition:background .25s,border-color .25s}
+  .daycell:hover{background:#23262e;border-color:rgba(217,117,36,.4)}
+  .daycell .time{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .daycell h4{font-weight:600;font-size:24px;letter-spacing:-.02em;margin:0;line-height:1.1}
+  .daycell p{margin:0;font-size:14.5px;color:rgba(251,250,246,.7);line-height:1.55;max-width:42ch}
+
+  /* ─── CONDITIONS list ─────────────────────────────────── */
+  .tlist{display:flex;flex-direction:column;gap:0}
+  .trow{display:grid;grid-template-columns:.3fr 1.4fr 1.6fr .35fr;gap:30px;padding:34px 4px;border-top:1px solid var(--line);align-items:center;transition:background .3s,padding .3s}
+  .trow:last-child{border-bottom:1px solid var(--line)}
+  .trow:hover{background:var(--paper-2);padding-left:18px}
+  .trow .n{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+  .trow h5{margin:0;font-weight:600;font-size:30px;letter-spacing:-.025em;line-height:1.05;color:var(--heading)}
+  .trow .desc{font-size:15px;color:var(--ink-soft);line-height:1.55;margin:0}
+  .trow .arr{justify-self:end;width:42px;height:42px;border-radius:50%;background:var(--paper-2);display:flex;align-items:center;justify-content:center;transition:background .3s,color .3s}
+  .trow:hover .arr{background:var(--accent);color:#fff}
+
+  @media (max-width:1000px){
+    .ph .grid,.pgrid,.daygrid{grid-template-columns:1fr;gap:30px}
+    .pdetail:nth-of-type(even) .pgrid{direction:ltr}
+    .pdetail ul.feats{grid-template-columns:1fr}
+    .trow{grid-template-columns:.4fr 1fr;gap:20px}
+    .trow .desc,.trow .arr{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <a class="brand" href="index.html">
+      <img class="logo" src="logo-mark.png" alt="AshaJyothi" width="46" height="46"/>
+      <span class="word"><b>AshaJyothi</b><small>Light of hope · since 1998</small></span>
+    </a>
+    <div class="navline">
+      <span class="beacon"></span>
+      <a class="nl" href="index.html"><span class="n">01</span><span class="l">Home</span></a>
+      <a class="nl" href="about.html"><span class="n">02</span><span class="l">About</span></a>
+      <a class="nl is-active" href="programs.html"><span class="n">03</span><span class="l">Programs</span></a>
+      <a class="nl" href="donate.html"><span class="n">04</span><span class="l">Donate</span></a>
+      <a class="nl" href="contact.html"><span class="n">05</span><span class="l">Contact</span></a>
+    </div>
+    <div class="nav-right">
+      <a class="pill-cta solid" href="donate.html">Donate →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+<header class="ph">
+  <div class="container">
+    <div class="crumbs reveal"><a href="index.html">Home</a><span class="sep">/</span><span>Programs</span></div>
+    <div class="grid">
+      <div>
+        <h1 class="reveal" data-delay="1">Three programs. <em>Twenty-seven years.</em></h1>
+        <p class="lead reveal" data-delay="2">We do a small number of things, and we have done them, without break, since 1998. Here is what actually happens on campus, every day.</p>
+      </div>
+      <div class="right reveal" data-delay="3">
+        <div class="stat"><span class="l">/ Children housed</span><span class="n">83</span></div>
+        <div class="stat"><span class="l">/ Programs</span><span class="n">03</span></div>
+        <div class="stat"><span class="l">/ Years running</span><span class="n">27<em>.</em></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── PROGRAM 01 ─────────────────────────────────────────── -->
+<section class="pdetail" id="adoption">
+  <div class="container pgrid">
+    <div class="img reveal">
+      <span class="badge">since 1998</span>
+      <img src="https://static.wixstatic.com/media/437f08_0fb69566f899453ea5ca54dacdf00004~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Kids%20(23)_JPG.jpg" alt=""/>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="pretitle"><span class="num">01</span> Adoption &amp; Home</div>
+      <h2>We take in the children <em>no one else will.</em></h2>
+      <p class="body">AshaJyothi was born to save abandoned children. Food, shelter, medical care and dignity, offered without condition to children abandoned or orphaned with severe disabilities &mdash; usually at a very young age, by parents who could not cope.</p>
+      <ul class="feats">
+        <li><div><strong>Abandoned children</strong><span>Left at orphanages or simply left.</span></div></li>
+        <li><div><strong>Orphaned children</strong><span>No surviving family to take them.</span></div></li>
+        <li><div><strong>Severe disability</strong><span>The children others turned away.</span></div></li>
+        <li><div><strong>No age cap</strong><span>From infancy to young adulthood.</span></div></li>
+      </ul>
+      <div class="since"><span>Program 01 · Adoption</span><b>83 children in care today</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROGRAM 02 ─────────────────────────────────────────── -->
+<section class="pdetail" id="rehabilitation">
+  <div class="container pgrid">
+    <div class="img reveal">
+      <span class="badge">24/7</span>
+      <img src="https://static.wixstatic.com/media/437f08_cc922aa2384645728a5cb7a2ec9f1a2a~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Rehab%201.jpg" alt=""/>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="pretitle"><span class="num">02</span> Rehabilitation</div>
+      <h2>Therapy, schooling and vocation &mdash; <em>on campus.</em></h2>
+      <p class="body">With Neurogen Mumbai we deliver advanced treatment for cerebral palsy and intellectual disability. Volunteers from Ireland and Germany return year after year with physiotherapy. We have an in-house facility for physio and 24/7 nursing support.</p>
+      <ul class="feats">
+        <li><div><strong>Medical camps</strong><span>Monthly, on campus, with specialist referrals.</span></div></li>
+        <li><div><strong>Neurogen treatment</strong><span>Advanced therapy for severe cases.</span></div></li>
+        <li><div><strong>Yoga &amp; physio</strong><span>Daily routine, in-house facility.</span></div></li>
+        <li><div><strong>Schooling</strong><span>On-site classes adapted per child.</span></div></li>
+        <li><div><strong>Vocational training</strong><span>Tailoring, embroidery, IT basics.</span></div></li>
+        <li><div><strong>Aids &amp; appliances</strong><span>Wheelchairs, hearing aids, walkers.</span></div></li>
+      </ul>
+      <div class="since"><span>Program 02 · Rehab</span><b>5 ongoing rehab streams</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROGRAM 03 ─────────────────────────────────────────── -->
+<section class="pdetail" id="pari">
+  <div class="container pgrid">
+    <div class="img reveal">
+      <span class="badge">since 2016</span>
+      <img src="https://static.wixstatic.com/media/437f08_1544c6daab0a4be4a9d18d08e9c27cb1~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Girls.jpg" alt=""/>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="pretitle"><span class="num">03</span> PARI &amp; Dignity</div>
+      <h2>Menstrual hygiene. Sanitation. <em>Dignity for girls.</em></h2>
+      <p class="body">Since 2016 the PARI unit has distributed sanitary pads, installed proper toilets and water, and provided gendered accommodation. We hold half-saree celebrations for the girls and we lead local relief work during floods and during Covid.</p>
+      <ul class="feats">
+        <li><div><strong>Pads distribution</strong><span>Monthly supply &mdash; PARI unit.</span></div></li>
+        <li><div><strong>Toilets &amp; water</strong><span>Proper, private, on-campus.</span></div></li>
+        <li><div><strong>Gendered housing</strong><span>Separate, dignified, safe.</span></div></li>
+        <li><div><strong>Half-saree celebrations</strong><span>Traditional milestones for the girls.</span></div></li>
+        <li><div><strong>Relief operations</strong><span>Flood, cyclone, Covid response.</span></div></li>
+        <li><div><strong>Health camps for women</strong><span>Local outreach beyond campus.</span></div></li>
+      </ul>
+      <div class="since"><span>Program 03 · PARI</span><b>Every girl on campus served</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DAY ON CAMPUS ─────────────────────────────────────── -->
+<section class="day">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">A day on campus</span><span class="n">/ 04</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">What <em>actually</em> happens, hour by hour.</h2>
+      <p>This is the regular weekday rhythm. Saturdays add medical camps. Sundays are quieter.</p>
+    </div>
+    <div class="daygrid">
+      <div class="daycell reveal"><span class="time">06:00 · Morning</span><h4>Wake, wash, breakfast.</h4><p>Carers help children who can't dress, wash or feed themselves. Hot breakfast for everyone in the dining hall.</p></div>
+      <div class="daycell reveal" data-delay="1"><span class="time">08:00 · School</span><h4>Adapted classroom hours.</h4><p>On-site teachers run small groups by ability. Reading, writing, basic math, art &mdash; pitched to each child.</p></div>
+      <div class="daycell reveal"><span class="time">10:30 · Physio</span><h4>Daily physiotherapy.</h4><p>Cerebral palsy and physically challenged children receive stretching, mobility and strength work in the in-house facility.</p></div>
+      <div class="daycell reveal" data-delay="1"><span class="time">12:30 · Lunch</span><h4>Hot meal · annadanam.</h4><p>Daily food often sponsored by Chicago Andhra Association. Nutritionally planned around children's medical needs.</p></div>
+      <div class="daycell reveal"><span class="time">14:00 · Vocational</span><h4>Tailoring &amp; skills training.</h4><p>Older girls learn sewing, embroidery, basic IT &mdash; skills meant to give them income beyond AshaJyothi.</p></div>
+      <div class="daycell reveal" data-delay="1"><span class="time">16:30 · Yoga &amp; play</span><h4>Movement &amp; outdoors.</h4><p>Yoga where bodies allow it. Verandah, courtyard play and group games for everyone else.</p></div>
+      <div class="daycell reveal"><span class="time">19:00 · Dinner</span><h4>Evening meal together.</h4><p>Family-style dining. Carers eat with the children. Quiet time, music sometimes.</p></div>
+      <div class="daycell reveal" data-delay="1"><span class="time">22:00 · Night</span><h4>24/7 nursing on duty.</h4><p>Children with serious conditions are checked through the night. Anyone can be moved to the medical bay at any hour.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONDITIONS ─────────────────────────────────────────── -->
+<section id="conditions">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Who lives here</span><span class="n">/ 05</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">The conditions our children <em>live with.</em></h2>
+      <p>Five conditions account for almost every child at AshaJyothi.</p>
+    </div>
+    <div class="tlist">
+      <a class="trow reveal" href="about.html"><span class="n">i.</span><h5>Cerebral Palsy</h5><p class="desc">A non-progressive disorder caused by brain damage around birth. Severity ranges from mild physical to severe with intellectual involvement and seizures.</p><span class="arr">→</span></a>
+      <a class="trow reveal" href="about.html"><span class="n">ii.</span><h5>Autism</h5><p class="desc">Impaired social interaction, verbal &amp; non-verbal communication, and restricted, repetitive behaviour.</p><span class="arr">→</span></a>
+      <a class="trow reveal" href="about.html"><span class="n">iii.</span><h5>Intellectual Disability</h5><p class="desc">Difficulty with self-care, communication, social skills, academics. Mild to profound.</p><span class="arr">→</span></a>
+      <a class="trow reveal" href="about.html"><span class="n">iv.</span><h5>Down Syndrome</h5><p class="desc">A genetic condition from an extra copy of chromosome 21. Delayed growth, affected cognitive function.</p><span class="arr">→</span></a>
+      <a class="trow reveal" href="about.html"><span class="n">v.</span><h5>Physically Challenged</h5><p class="desc">Polio, accidents, neurological conditions that limit basic movement and independence.</p><span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA STRIP ────────────────────────────────────────── -->
+<section class="cta-strip">
+  <div class="container">
+    <h3>Every child you see is here because <em>someone gave.</em></h3>
+    <div class="right">
+      <a href="donate.html">Sponsor a child · $70/mo <span>→</span></a>
+      <a class="alt" href="donate.html#items">Buy one specific thing <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-top">
+      <div>
+        <p class="biggie">Come and see for yourself. Or call &mdash; we pick up.</p>
+        <p>AshaJyothi Handicapped Welfare Society<br/>Hanuman Junction, West Godavari Dt<br/>Andhra Pradesh, India &mdash; 521105</p>
+        <p style="margin-top:14px;color:var(--accent-hi);font-weight:500">+91 96030 21871</p>
+      </div>
+      <div>
+        <h5>Site</h5>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="donate.html">Donate</a><a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h5>Give</h5>
+        <a href="donate.html">Sponsor monthly</a><a href="donate.html">One-time</a><a href="donate.html#items">Wheelchair</a><a href="donate.html#items">Food day</a><a href="donate.html#items">PARI pads</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="index.html#newsletter">Newsletter</a>
+      </div>
+    </div>
+
+    <dl class="foot-bank">
+      <div><dt>Account name</dt><dd>Asha Jyothi Handicapped Welfare Society</dd></div>
+      <div><dt>A/C number</dt><dd>34215204307</dd></div>
+      <div><dt>IFSC</dt><dd>SBIN0004700</dd></div>
+      <div><dt>Branch</dt><dd>SBI · Hanuman Junction</dd></div>
+    </dl>
+
+    <h2 class="foot-mega">Asha<em>Jyothi</em></h2>
+
+    <div class="foot-base">
+      <span>© 2025 · Reg. Voluntary Org · 80G &amp; 12A tax exempt</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2h-3c-3 0-5 1.8-5 5v3H6v4h3v8z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/madhavi.latha.560?igsh=MTZsa2R0bHF3d2RvdQ==" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }
+  },{threshold:.1, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
