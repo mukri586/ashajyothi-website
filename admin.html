@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AshaJyothi · Post News</title>
+
+<!-- PWA -->
+<link rel="manifest" href="/admin-manifest.json"/>
+<meta name="theme-color" content="#d97524"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="AJ News"/>
+<link rel="apple-touch-icon" href="/logo-mark.png"/>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --ink:#0e1014;
+  --heading:#2a1d10;
+  --ink-soft:#1a1c22;
+  --paper:#fbfaf6;
+  --paper-2:#f1ede2;
+  --line:rgba(14,16,20,.12);
+  --accent:#d97524;
+  --accent-hi:#f2a85a;
+  --accent-soft:rgba(217,117,36,.12);
+  --muted:#6a6e78;
+  --sans:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* ── Auth Gate ─────────────────────────────────────────────── */
+#auth-gate{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:40px 24px;text-align:center;
+}
+.auth-logo{width:72px;height:72px;object-fit:contain;margin-bottom:24px}
+.auth-org{font-size:13px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.auth-title{font-size:28px;font-weight:700;color:var(--heading);letter-spacing:-.02em;margin-bottom:8px}
+.auth-sub{color:var(--muted);font-size:15px;margin-bottom:40px;max-width:32ch}
+#sign-in-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--r);
+  padding:14px 28px;font-size:15px;font-weight:600;font-family:var(--sans);
+  color:var(--ink);cursor:pointer;
+  box-shadow:0 1px 4px rgba(14,16,20,.06);
+  transition:box-shadow .2s,transform .15s,border-color .2s;
+}
+#sign-in-btn:hover{box-shadow:0 4px 16px rgba(14,16,20,.1);transform:translateY(-1px);border-color:var(--accent)}
+#sign-in-btn:active{transform:translateY(0)}
+.g-icon{width:20px;height:20px;flex-shrink:0}
+
+/* ── Admin Panel ───────────────────────────────────────────── */
+#admin-panel{display:none;flex-direction:column;min-height:100vh}
+
+.adm-header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(251,250,246,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);padding:0 20px;
+}
+.adm-header .row{
+  max-width:660px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;padding:14px 0;
+}
+.adm-brand{display:flex;align-items:center;gap:10px}
+.adm-brand img{width:36px;height:36px;object-fit:contain}
+.adm-brand-text span{display:block;font-weight:700;font-size:16px;color:var(--heading);letter-spacing:-.01em;line-height:1.1}
+.adm-brand-text small{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.user-row{display:flex;align-items:center;gap:10px}
+.user-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-soft)}
+.user-name{font-size:13px;font-weight:600;color:var(--ink-soft);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#sign-out-btn{
+  font-size:11px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;cursor:pointer;color:var(--muted);
+  transition:border-color .2s,color .2s;
+}
+#sign-out-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.adm-main{flex:1;max-width:660px;margin:0 auto;width:100%;padding:36px 20px 60px}
+
+/* ── Section labels ────────────────────────────────────────── */
+.form-label{
+  font-size:11px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+}
+.form-label::after{content:"";flex:1;height:1px;background:var(--accent-soft)}
+.form-section{margin-bottom:52px}
+
+/* ── Form ──────────────────────────────────────────────────── */
+.form-group{margin-bottom:20px}
+label.field{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:7px;letter-spacing:-.005em}
+input[type="text"],textarea{
+  width:100%;padding:13px 16px;
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--r);
+  font-size:15px;font-family:var(--sans);color:var(--ink);
+  transition:border-color .2s,box-shadow .2s;resize:vertical;
+}
+input[type="text"]:focus,textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);
+}
+textarea{min-height:108px}
+.char-count{font-size:11px;font-family:var(--mono);color:var(--muted);text-align:right;margin-top:4px;letter-spacing:.04em}
+
+/* ── Media drop zone ───────────────────────────────────────── */
+.media-drop{
+  border:2px dashed var(--line);border-radius:var(--r);
+  padding:36px 24px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;background:#fff;
+}
+.media-drop:hover,.media-drop.drag-over{border-color:var(--accent);background:var(--accent-soft)}
+.media-drop input[type="file"]{display:none}
+.drop-icon{font-size:36px;margin-bottom:12px}
+.drop-label{font-weight:600;color:var(--ink-soft);font-size:15px;margin-bottom:4px}
+.drop-sub{font-size:13px;color:var(--muted)}
+
+#media-preview{margin-top:16px}
+#media-preview img,#media-preview video{
+  width:100%;border-radius:var(--r);max-height:340px;object-fit:cover;
+  border:1.5px solid var(--line);display:block;
+}
+.preview-bar{
+  margin-top:8px;font-size:12px;font-family:var(--mono);color:var(--muted);
+  letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;
+}
+.remove-media{
+  background:none;border:none;cursor:pointer;font-size:11px;font-family:var(--mono);
+  color:var(--muted);letter-spacing:.06em;text-transform:uppercase;
+  transition:color .2s;
+}
+.remove-media:hover{color:#c0392b}
+
+/* ── Upload progress ───────────────────────────────────────── */
+.upload-progress{margin-top:14px;display:none}
+.progress-track{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width .15s}
+.progress-lbl{font-size:11px;font-family:var(--mono);color:var(--muted);margin-top:6px;letter-spacing:.05em}
+
+/* ── Submit button ─────────────────────────────────────────── */
+#post-btn{
+  width:100%;padding:17px;background:var(--accent);border:none;border-radius:var(--r);
+  font-size:16px;font-weight:700;font-family:var(--sans);color:#fff;cursor:pointer;
+  letter-spacing:-.01em;transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 2px 10px rgba(217,117,36,.35);
+}
+#post-btn:hover:not(:disabled){background:#c26418;transform:translateY(-1px);box-shadow:0 4px 18px rgba(217,117,36,.45)}
+#post-btn:active{transform:translateY(0)}
+#post-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--ink);color:#fff;padding:12px 26px;border-radius:var(--r);
+  font-size:14px;font-weight:600;transition:transform .35s cubic-bezier(.2,.7,.2,1);
+  pointer-events:none;z-index:200;white-space:nowrap;
+}
+#toast.success{background:#2d7a42}
+#toast.error{background:#c0392b}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── Recent posts list ─────────────────────────────────────── */
+.posts-label{
+  font-size:11px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.posts-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.post-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:14px 16px;background:#fff;
+  border:1.5px solid var(--line);border-radius:var(--r);
+  margin-bottom:10px;transition:border-color .2s;
+}
+.post-item:hover{border-color:var(--accent-soft)}
+.post-thumb{width:68px;height:54px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--paper-2);display:block}
+.post-info{flex:1;min-width:0}
+.post-title{font-weight:700;font-size:14px;color:var(--heading);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.post-desc{font-size:13px;color:var(--muted);margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-meta{font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:.04em}
+.delete-btn{
+  background:none;border:none;cursor:pointer;font-size:11px;font-family:var(--mono);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  padding:4px 8px;border-radius:6px;flex-shrink:0;
+  transition:color .2s,background .2s;
+}
+.delete-btn:hover{color:#c0392b;background:rgba(192,57,43,.08)}
+.empty-posts{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+
+@media(max-width:520px){
+  .user-name{display:none}
+  .adm-main{padding:24px 16px 48px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Auth Gate ──────────────────────────────────────────────────────────── -->
+<div id="auth-gate">
+  <img src="/logo-mark.png" alt="AshaJyothi" class="auth-logo"/>
+  <p class="auth-org">AshaJyothi India</p>
+  <h1 class="auth-title">Post a news update</h1>
+  <p class="auth-sub">Sign in with your Google account to share photos, videos and stories from the campus.</p>
+  <button id="sign-in-btn">
+    <!-- Google G logo -->
+    <svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+    Continue with Google
+  </button>
+</div>
+
+<!-- ── Admin Panel ─────────────────────────────────────────────────────────── -->
+<div id="admin-panel">
+  <header class="adm-header">
+    <div class="row">
+      <div class="adm-brand">
+        <img src="/logo-mark.png" alt=""/>
+        <div class="adm-brand-text">
+          <span>AshaJyothi</span>
+          <small>News&nbsp;Admin</small>
+        </div>
+      </div>
+      <div class="user-row">
+        <img class="user-avatar" id="user-avatar" src="" alt=""/>
+        <span class="user-name" id="user-name"></span>
+        <button id="sign-out-btn">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="adm-main">
+
+    <!-- Post form -->
+    <div class="form-section">
+      <div class="form-label">New update</div>
+      <form id="post-form" novalidate>
+
+        <div class="form-group">
+          <label class="field" for="post-title">Title</label>
+          <input type="text" id="post-title" placeholder="e.g. New arrival — welcome Priya!" maxlength="120" required/>
+          <div class="char-count"><span id="title-count">0</span> / 120</div>
+        </div>
+
+        <div class="form-group">
+          <label class="field" for="post-desc">Description</label>
+          <textarea id="post-desc" placeholder="Share what happened — a milestone, a celebration, a moment worth remembering." maxlength="600" required></textarea>
+          <div class="char-count"><span id="desc-count">0</span> / 600</div>
+        </div>
+
+        <div class="form-group">
+          <label class="field">Photo or video <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <div class="media-drop" id="media-drop">
+            <input type="file" id="media-file" accept="image/*,video/*"/>
+            <div class="drop-icon">📷</div>
+            <div class="drop-label">Tap to add a photo or video</div>
+            <div class="drop-sub">JPG, PNG, GIF, MP4, MOV · up to 200 MB</div>
+          </div>
+          <div id="media-preview"></div>
+          <div class="upload-progress" id="upload-progress">
+            <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-lbl" id="progress-lbl">Uploading…</div>
+          </div>
+        </div>
+
+        <button type="submit" id="post-btn">Post update →</button>
+      </form>
+    </div>
+
+    <!-- Recent posts -->
+    <div>
+      <div class="posts-label">Recent posts</div>
+      <div id="posts-list"><div class="empty-posts">No posts yet.</div></div>
+    </div>
+
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<!-- ── Firebase SDK v10 + Cloudinary (free media hosting) ────────────────── -->
+<script type="module">
+import { initializeApp }    from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+                             from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, deleteDoc, doc, serverTimestamp }
+                             from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { firebaseConfig, cloudinaryConfig } from '/firebase-config.js';
+
+// ─────────────────────────────────────────────────────────────────────────────
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// ── DOM refs ──────────────────────────────────────────────────────────────────
+const authGate     = document.getElementById('auth-gate');
+const adminPanel   = document.getElementById('admin-panel');
+const signInBtn    = document.getElementById('sign-in-btn');
+const signOutBtn   = document.getElementById('sign-out-btn');
+const userAvatar   = document.getElementById('user-avatar');
+const userName     = document.getElementById('user-name');
+const postForm     = document.getElementById('post-form');
+const postTitle    = document.getElementById('post-title');
+const postDesc     = document.getElementById('post-desc');
+const titleCount   = document.getElementById('title-count');
+const descCount    = document.getElementById('desc-count');
+const mediaFile    = document.getElementById('media-file');
+const mediaDrop    = document.getElementById('media-drop');
+const mediaPreview = document.getElementById('media-preview');
+const progressWrap = document.getElementById('upload-progress');
+const progressFill = document.getElementById('progress-fill');
+const progressLbl  = document.getElementById('progress-lbl');
+const postBtn      = document.getElementById('post-btn');
+const postsList    = document.getElementById('posts-list');
+const toast        = document.getElementById('toast');
+
+let selectedFile = null;
+let unsubPosts   = null;
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+onAuthStateChanged(auth, user => {
+  if (user) {
+    authGate.style.display    = 'none';
+    adminPanel.style.display  = 'flex';
+    userAvatar.src             = user.photoURL || '';
+    userAvatar.alt             = user.displayName || '';
+    userName.textContent       = user.displayName || user.email;
+    listenPosts();
+  } else {
+    authGate.style.display    = '';
+    adminPanel.style.display  = 'none';
+    if (unsubPosts) { unsubPosts(); unsubPosts = null; }
+  }
+});
+
+signInBtn.addEventListener('click', async () => {
+  signInBtn.disabled = true;
+  signInBtn.textContent = 'Signing in…';
+  try {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+  } catch(e) {
+    showToast('Sign-in failed. Try again.', 'error');
+    signInBtn.disabled = false;
+    signInBtn.innerHTML = `<svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Continue with Google`;
+  }
+});
+
+signOutBtn.addEventListener('click', () => signOut(auth));
+
+// ── Character counters ────────────────────────────────────────────────────────
+postTitle.addEventListener('input', () => titleCount.textContent = postTitle.value.length);
+postDesc.addEventListener('input',  () => descCount.textContent  = postDesc.value.length);
+
+// ── Media picker ──────────────────────────────────────────────────────────────
+mediaDrop.addEventListener('click', () => mediaFile.click());
+mediaDrop.addEventListener('dragover', e => { e.preventDefault(); mediaDrop.classList.add('drag-over'); });
+mediaDrop.addEventListener('dragleave', ()  => mediaDrop.classList.remove('drag-over'));
+mediaDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  mediaDrop.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+});
+mediaFile.addEventListener('change', () => { if (mediaFile.files[0]) setFile(mediaFile.files[0]); });
+
+function setFile(file) {
+  selectedFile = file;
+  const url    = URL.createObjectURL(file);
+  const isVid  = file.type.startsWith('video/');
+  const elem   = isVid
+    ? `<video src="${url}" controls muted playsinline style="max-height:340px;width:100%;border-radius:12px;object-fit:cover;border:1.5px solid var(--line)"></video>`
+    : `<img src="${url}" alt="preview" style="max-height:340px;width:100%;border-radius:12px;object-fit:cover;border:1.5px solid var(--line)"/>`;
+  mediaPreview.innerHTML = elem + `
+    <div class="preview-bar">
+      <span>${esc(file.name)}</span>
+      <button class="remove-media" type="button">Remove ✕</button>
+    </div>`;
+  mediaPreview.querySelector('.remove-media').onclick = clearMedia;
+  mediaDrop.style.display = 'none';
+}
+
+function clearMedia() {
+  selectedFile = null;
+  mediaPreview.innerHTML = '';
+  mediaFile.value = '';
+  mediaDrop.style.display = '';
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+postForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const title = postTitle.value.trim();
+  const desc  = postDesc.value.trim();
+  if (!title || !desc) { showToast('Please fill in title and description.', 'error'); return; }
+
+  postBtn.disabled    = true;
+  postBtn.textContent = 'Posting…';
+
+  try {
+    let mediaUrl  = null;
+    let mediaType = null;
+
+    if (selectedFile) {
+      progressWrap.style.display = 'block';
+      progressFill.style.width   = '0%';
+      progressLbl.textContent    = 'Uploading…';
+
+      const isVid      = selectedFile.type.startsWith('video/');
+      const resource   = isVid ? 'video' : 'image';
+      const endpoint   = `https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/${resource}/upload`;
+      const formData   = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('upload_preset', cloudinaryConfig.uploadPreset);
+
+      // Use XHR so we can show upload progress
+      const result = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', endpoint);
+        xhr.upload.onprogress = e => {
+          if (e.lengthComputable) {
+            const pct = Math.round((e.loaded / e.total) * 100);
+            progressFill.style.width = pct + '%';
+            progressLbl.textContent  = `Uploading… ${pct}%`;
+          }
+        };
+        xhr.onload = () => {
+          const data = JSON.parse(xhr.responseText);
+          if (xhr.status === 200) resolve(data);
+          else reject(new Error(data.error?.message || 'Upload failed'));
+        };
+        xhr.onerror = () => reject(new Error('Network error during upload'));
+        xhr.send(formData);
+      });
+
+      mediaUrl  = result.secure_url;
+      mediaType = isVid ? 'video' : 'image';
+      progressWrap.style.display = 'none';
+    }
+
+    await addDoc(collection(db, 'news'), {
+      title,
+      description: desc,
+      mediaUrl,
+      mediaType,
+      createdAt: serverTimestamp(),
+      postedBy:  auth.currentUser.email,
+    });
+
+    postForm.reset();
+    titleCount.textContent = '0';
+    descCount.textContent  = '0';
+    clearMedia();
+    showToast('Posted! ✓', 'success');
+
+  } catch(err) {
+    console.error(err);
+    showToast('Error: ' + err.message, 'error');
+  } finally {
+    postBtn.disabled    = false;
+    postBtn.textContent = 'Post update →';
+  }
+});
+
+// ── Recent posts listener ─────────────────────────────────────────────────────
+function listenPosts() {
+  const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'), limit(20));
+  unsubPosts = onSnapshot(q, snap => {
+    if (snap.empty) {
+      postsList.innerHTML = '<div class="empty-posts">No posts yet — be the first!</div>';
+      return;
+    }
+    postsList.innerHTML = snap.docs.map(d => {
+      const p    = d.data();
+      const date = p.createdAt ? fmtDate(p.createdAt.toDate()) : 'just now';
+      const thumb = p.mediaType === 'image'
+        ? `<img class="post-thumb" src="${p.mediaUrl}" alt=""/>`
+        : p.mediaType === 'video'
+          ? `<video class="post-thumb" src="${p.mediaUrl}" muted></video>`
+          : `<div class="post-thumb" style="display:flex;align-items:center;justify-content:center;font-size:20px">📝</div>`;
+      return `
+        <div class="post-item">
+          ${thumb}
+          <div class="post-info">
+            <div class="post-title">${esc(p.title)}</div>
+            <div class="post-desc">${esc(p.description)}</div>
+            <div class="post-meta">${date} · ${esc(p.postedBy || '')}</div>
+          </div>
+          <button class="delete-btn" data-id="${d.id}">Delete</button>
+        </div>`;
+    }).join('');
+
+    postsList.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => deletePost(btn.dataset.id));
+    });
+  });
+}
+
+async function deletePost(id) {
+  if (!confirm('Delete this post? This cannot be undone.')) return;
+  try {
+    await deleteDoc(doc(db, 'news', id));
+    showToast('Deleted.', 'success');
+  } catch(err) {
+    showToast('Delete failed: ' + err.message, 'error');
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtDate(d) {
+  return d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+let toastTimer = null;
+function showToast(msg, type='') {
+  toast.textContent = msg;
+  toast.className   = type;
+  void toast.offsetWidth;
+  toast.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+// ── Register PWA service worker ───────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/admin-sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

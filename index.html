@@ -504,6 +504,20 @@
   </div>
 </section>
 
+<!-- ─── LATEST NEWS ──────────────────────────────────────── -->
+<section class="campus-news" id="latest-news">
+  <div class="container">
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Latest news</span><span class="n">/ 03</span></div>
+    <div class="sec-intro reveal">
+      <h2 class="big">Live from <em>the campus.</em></h2>
+      <p>Photos and videos posted straight from our team &mdash; as they happen.</p>
+    </div>
+    <div class="cn-grid" id="cn-grid">
+      <div class="cn-loading"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── 3 WAYS TO HELP ───────────────────────────────────── -->
 <section class="help">
   <div class="container">
@@ -617,6 +631,61 @@
     </div>
   </div>
 </footer>
+
+<!-- ─── LATEST NEWS — Firebase listener ──────────────────── -->
+<script type="module">
+import { initializeApp }  from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getFirestore, collection, query, orderBy, limit, onSnapshot }
+                           from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { firebaseConfig }  from '/firebase-config.js';
+
+const app  = initializeApp(firebaseConfig, 'news-reader');
+const db   = getFirestore(app);
+const grid = document.getElementById('cn-grid');
+
+const revealObs = new IntersectionObserver(
+  entries => { entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); revealObs.unobserve(e.target); } }); },
+  { threshold: .1, rootMargin: '0px 0px -8% 0px' }
+);
+
+const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'), limit(6));
+
+onSnapshot(q, snap => {
+  if (snap.empty) {
+    grid.innerHTML = '<p class="cn-empty">No updates yet &mdash; check back soon.</p>';
+    return;
+  }
+  grid.innerHTML = snap.docs.map(d => {
+    const p    = d.data();
+    const date = p.createdAt
+      ? new Date(p.createdAt.seconds * 1000).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
+      : '';
+    const media = p.mediaType === 'video'
+      ? `<div class="cn-media-wrap"><video class="cn-media" src="${p.mediaUrl}" autoplay muted loop playsinline></video></div>`
+      : p.mediaType === 'image'
+        ? `<div class="cn-media-wrap"><img class="cn-media" src="${p.mediaUrl}" alt="${esc(p.title)}" loading="lazy"/></div>`
+        : '';
+    return `
+      <article class="cn-card reveal">
+        ${media}
+        <div class="cn-body">
+          ${date ? `<time class="cn-date">${date}</time>` : ''}
+          <h3 class="cn-title">${esc(p.title)}</h3>
+          <p class="cn-desc">${esc(p.description)}</p>
+        </div>
+      </article>`;
+  }).join('');
+
+  grid.querySelectorAll('.cn-card.reveal').forEach(el => revealObs.observe(el));
+
+}, () => {
+  grid.innerHTML = '<p class="cn-empty">Could not load updates.</p>';
+});
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
 
 <script src="nav.js"></script>
 <script>

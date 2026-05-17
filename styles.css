@@ -175,3 +175,90 @@ footer.foot{background:var(--ink);color:var(--paper);padding:110px 0 40px}
   section{padding:80px 0}
   .page-intro{padding:50px 0 40px}
 }
+
+/* ─── LATEST NEWS (Campus Updates) ──────────────────────────
+   Real-time Firebase feed — images & auto-playing videos
+   ────────────────────────────────────────────────────────── */
+.campus-news{padding:100px 0 80px}
+.campus-news .sec-intro{margin-bottom:52px}
+
+.cn-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  min-height:200px;
+  align-items:start;
+}
+
+.cn-card{
+  background:#fff;
+  border:1.5px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .25s,transform .25s,border-color .25s;
+}
+.cn-card:hover{
+  box-shadow:0 8px 32px rgba(14,16,20,.08);
+  transform:translateY(-3px);
+  border-color:var(--accent-soft);
+}
+
+.cn-media-wrap{
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:var(--paper-2);
+  flex-shrink:0;
+}
+.cn-media{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.cn-card:hover .cn-media{transform:scale(1.04)}
+
+.cn-body{
+  padding:20px 22px 24px;
+  display:flex;flex-direction:column;flex:1;
+}
+.cn-date{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;display:block;
+}
+.cn-title{
+  font-size:17px;font-weight:700;color:var(--heading);
+  letter-spacing:-.018em;line-height:1.25;margin-bottom:8px;
+}
+.cn-desc{
+  font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;flex:1;
+}
+
+/* Loading animation */
+.cn-loading{
+  grid-column:1/-1;display:flex;
+  align-items:center;justify-content:center;gap:8px;padding:80px 0;
+}
+.cn-loading span{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);opacity:.25;
+  animation:cn-pulse 1.2s ease-in-out infinite;
+}
+.cn-loading span:nth-child(2){animation-delay:.2s}
+.cn-loading span:nth-child(3){animation-delay:.4s}
+@keyframes cn-pulse{0%,80%,100%{opacity:.25}40%{opacity:1;transform:scale(1.2)}}
+
+.cn-empty{
+  grid-column:1/-1;text-align:center;
+  padding:60px 0;color:var(--muted);font-size:15px;
+}
+
+@media(max-width:920px){
+  .cn-grid{grid-template-columns:repeat(2,1fr)}
+  .campus-news{padding:70px 0 60px}
+}
+@media(max-width:580px){
+  .cn-grid{grid-template-columns:1fr}
+  .campus-news{padding:60px 0 50px}
+}

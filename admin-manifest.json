@@ -1,0 +1,19 @@
+{
+  "name": "AshaJyothi News Admin",
+  "short_name": "AJ News",
+  "description": "Post campus updates to ashajyothiindia.org",
+  "start_url": "/admin.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbfaf6",
+  "theme_color": "#d97524",
+  "icons": [
+    {
+      "src": "/logo-mark.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
