@@ -235,6 +235,34 @@ footer.foot{background:var(--ink);color:var(--paper);padding:110px 0 40px}
   font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;flex:1;
 }
 
+/* ── Multi-image grid on news cards ─────────────────────── */
+.cn-media-grid{
+  display:grid;gap:2px;
+  aspect-ratio:16/10;overflow:hidden;
+  background:var(--paper-2);
+}
+.cn-media-grid.n1{ grid-template-columns:1fr }
+.cn-media-grid.n2{ grid-template-columns:1fr 1fr }
+.cn-media-grid.n3{ grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr }
+.cn-media-grid.n3 .cn-tile:first-child{ grid-row:1/3 }
+.cn-media-grid.n4{ grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr }
+
+.cn-tile{
+  position:relative;overflow:hidden;background:var(--paper-2);
+  transition:transform .35s ease;
+}
+.cn-card:hover .cn-tile{ transform:scale(1.03) }
+.cn-tile img,.cn-tile video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.cn-tile-more{
+  position:absolute;inset:0;
+  background:rgba(14,16,20,.55);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:#fff;
+  font-family:var(--sans);letter-spacing:-.02em;
+}
+
 /* Loading animation */
 .cn-loading{
   grid-column:1/-1;display:flex;

@@ -660,14 +660,9 @@ onSnapshot(q, snap => {
     const date = p.createdAt
       ? new Date(p.createdAt.seconds * 1000).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
       : '';
-    const media = p.mediaType === 'video'
-      ? `<div class="cn-media-wrap"><video class="cn-media" src="${p.mediaUrl}" autoplay muted loop playsinline></video></div>`
-      : p.mediaType === 'image'
-        ? `<div class="cn-media-wrap"><img class="cn-media" src="${p.mediaUrl}" alt="${esc(p.title)}" loading="lazy"/></div>`
-        : '';
     return `
       <article class="cn-card reveal">
-        ${media}
+        ${renderMediaGrid(p)}
         <div class="cn-body">
           ${date ? `<time class="cn-date">${date}</time>` : ''}
           <h3 class="cn-title">${esc(p.title)}</h3>
@@ -681,6 +676,30 @@ onSnapshot(q, snap => {
 }, () => {
   grid.innerHTML = '<p class="cn-empty">Could not load updates.</p>';
 });
+
+function renderMediaGrid(p) {
+  // Supports new format (media array) and old single-media format
+  const items = p.media?.length
+    ? p.media
+    : p.mediaUrl ? [{ url: p.mediaUrl, type: p.mediaType }] : [];
+  if (!items.length) return '';
+
+  const shown = items.slice(0, 4);
+  const extra = items.length - 4;
+  const cls   = shown.length === 1 ? 'n1'
+              : shown.length === 2 ? 'n2'
+              : shown.length === 3 ? 'n3' : 'n4';
+
+  const tiles = shown.map((item, i) => {
+    const isLast = i === 3 && extra > 0;
+    const el = item.type === 'video'
+      ? `<video src="${item.url}" autoplay muted loop playsinline></video>`
+      : `<img src="${item.url}" alt="${esc(p.title)}" loading="lazy"/>`;
+    return `<div class="cn-tile">${el}${isLast ? `<div class="cn-tile-more">+${extra}</div>` : ''}</div>`;
+  }).join('');
+
+  return `<div class="cn-media-grid ${cls}">${tiles}</div>`;
+}
 
 function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');

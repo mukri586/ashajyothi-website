@@ -194,6 +194,37 @@ textarea{min-height:108px}
 .delete-btn:hover{color:#c0392b;background:rgba(192,57,43,.08)}
 .empty-posts{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
 
+/* ── Multi-file preview grid ───────────────────────────────── */
+.preview-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:8px;margin-bottom:10px;
+}
+.preview-tile{
+  position:relative;aspect-ratio:1;
+  border-radius:8px;overflow:hidden;
+  background:var(--paper-2);border:1.5px solid var(--line);
+}
+.preview-tile img,.preview-tile video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.tile-remove{
+  position:absolute;top:4px;right:4px;
+  background:rgba(14,16,20,.6);color:#fff;
+  border:none;border-radius:50%;width:22px;height:22px;
+  font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.tile-remove:hover{background:rgba(192,57,43,.85)}
+
+/* ── +N badge on post thumbnail ────────────────────────────── */
+.post-extra{
+  position:absolute;bottom:4px;right:4px;
+  background:rgba(14,16,20,.72);color:#fff;
+  font-size:10px;font-family:var(--mono);font-weight:600;
+  padding:2px 5px;border-radius:4px;letter-spacing:.04em;
+}
+
 @media(max-width:520px){
   .user-name{display:none}
   .adm-main{padding:24px 16px 48px}
@@ -259,12 +290,12 @@ textarea{min-height:108px}
         </div>
 
         <div class="form-group">
-          <label class="field">Photo or video <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <label class="field">Photos or videos <span style="font-weight:400;color:var(--muted)">(optional · multiple allowed)</span></label>
           <div class="media-drop" id="media-drop">
-            <input type="file" id="media-file" accept="image/*,video/*"/>
+            <input type="file" id="media-file" accept="image/*,video/*" multiple/>
             <div class="drop-icon">📷</div>
-            <div class="drop-label">Tap to add a photo or video</div>
-            <div class="drop-sub">JPG, PNG, GIF, MP4, MOV · up to 200 MB</div>
+            <div class="drop-label">Tap to add photos or videos</div>
+            <div class="drop-sub">JPG, PNG, GIF, MP4, MOV · select as many as you like</div>
           </div>
           <div id="media-preview"></div>
           <div class="upload-progress" id="upload-progress">
@@ -324,8 +355,8 @@ const postBtn      = document.getElementById('post-btn');
 const postsList    = document.getElementById('posts-list');
 const toast        = document.getElementById('toast');
 
-let selectedFile = null;
-let unsubPosts   = null;
+let selectedFiles = [];   // array of File objects
+let unsubPosts    = null;
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 onAuthStateChanged(auth, user => {
@@ -368,28 +399,49 @@ mediaDrop.addEventListener('dragleave', ()  => mediaDrop.classList.remove('drag-
 mediaDrop.addEventListener('drop', e => {
   e.preventDefault();
   mediaDrop.classList.remove('drag-over');
-  if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+  if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
 });
-mediaFile.addEventListener('change', () => { if (mediaFile.files[0]) setFile(mediaFile.files[0]); });
+mediaFile.addEventListener('change', () => { if (mediaFile.files.length) addFiles(mediaFile.files); });
 
-function setFile(file) {
-  selectedFile = file;
-  const url    = URL.createObjectURL(file);
-  const isVid  = file.type.startsWith('video/');
-  const elem   = isVid
-    ? `<video src="${url}" controls muted playsinline style="max-height:340px;width:100%;border-radius:12px;object-fit:cover;border:1.5px solid var(--line)"></video>`
-    : `<img src="${url}" alt="preview" style="max-height:340px;width:100%;border-radius:12px;object-fit:cover;border:1.5px solid var(--line)"/>`;
-  mediaPreview.innerHTML = elem + `
-    <div class="preview-bar">
-      <span>${esc(file.name)}</span>
-      <button class="remove-media" type="button">Remove ✕</button>
-    </div>`;
-  mediaPreview.querySelector('.remove-media').onclick = clearMedia;
+function addFiles(fileList) {
+  for (const f of fileList) selectedFiles.push(f);
+  renderPreviews();
   mediaDrop.style.display = 'none';
 }
 
+function renderPreviews() {
+  if (!selectedFiles.length) { clearMedia(); return; }
+  mediaPreview.innerHTML = `
+    <div class="preview-grid" id="preview-grid"></div>
+    <div class="preview-bar">
+      <span>${selectedFiles.length} file${selectedFiles.length > 1 ? 's' : ''} selected</span>
+      <button class="remove-media" type="button" id="clear-all-btn">Clear all ✕</button>
+    </div>`;
+  const grid = document.getElementById('preview-grid');
+  selectedFiles.forEach((file, i) => {
+    const url   = URL.createObjectURL(file);
+    const isVid = file.type.startsWith('video/');
+    const tile  = document.createElement('div');
+    tile.className = 'preview-tile';
+    tile.innerHTML = isVid
+      ? `<video src="${url}" muted playsinline></video>`
+      : `<img src="${url}" alt=""/>`;
+    tile.innerHTML += `<button class="tile-remove" data-i="${i}" type="button">✕</button>`;
+    grid.appendChild(tile);
+  });
+  grid.querySelectorAll('.tile-remove').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      selectedFiles.splice(Number(btn.dataset.i), 1);
+      mediaFile.value = '';
+      renderPreviews();
+    });
+  });
+  document.getElementById('clear-all-btn').onclick = clearMedia;
+}
+
 function clearMedia() {
-  selectedFile = null;
+  selectedFiles = [];
   mediaPreview.innerHTML = '';
   mediaFile.value = '';
   mediaDrop.style.display = '';
@@ -406,51 +458,49 @@ postForm.addEventListener('submit', async e => {
   postBtn.textContent = 'Posting…';
 
   try {
-    let mediaUrl  = null;
-    let mediaType = null;
+    const media = [];
 
-    if (selectedFile) {
+    if (selectedFiles.length) {
       progressWrap.style.display = 'block';
-      progressFill.style.width   = '0%';
-      progressLbl.textContent    = 'Uploading…';
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file   = selectedFiles[i];
+        const isVid  = file.type.startsWith('video/');
+        const res    = isVid ? 'video' : 'image';
+        const fd     = new FormData();
+        fd.append('file', file);
+        fd.append('upload_preset', cloudinaryConfig.uploadPreset);
 
-      const isVid      = selectedFile.type.startsWith('video/');
-      const resource   = isVid ? 'video' : 'image';
-      const endpoint   = `https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/${resource}/upload`;
-      const formData   = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('upload_preset', cloudinaryConfig.uploadPreset);
+        progressFill.style.width = '0%';
+        progressLbl.textContent  = `Uploading file ${i + 1} of ${selectedFiles.length}…`;
 
-      // Use XHR so we can show upload progress
-      const result = await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', endpoint);
-        xhr.upload.onprogress = e => {
-          if (e.lengthComputable) {
-            const pct = Math.round((e.loaded / e.total) * 100);
-            progressFill.style.width = pct + '%';
-            progressLbl.textContent  = `Uploading… ${pct}%`;
-          }
-        };
-        xhr.onload = () => {
-          const data = JSON.parse(xhr.responseText);
-          if (xhr.status === 200) resolve(data);
-          else reject(new Error(data.error?.message || 'Upload failed'));
-        };
-        xhr.onerror = () => reject(new Error('Network error during upload'));
-        xhr.send(formData);
-      });
+        const result = await new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', `https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/${res}/upload`);
+          xhr.upload.onprogress = e => {
+            if (e.lengthComputable) {
+              const pct = Math.round((e.loaded / e.total) * 100);
+              progressFill.style.width = pct + '%';
+              progressLbl.textContent  = `Uploading file ${i + 1} of ${selectedFiles.length}… ${pct}%`;
+            }
+          };
+          xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) resolve(data);
+            else reject(new Error(data.error?.message || 'Upload failed'));
+          };
+          xhr.onerror = () => reject(new Error('Network error during upload'));
+          xhr.send(fd);
+        });
 
-      mediaUrl  = result.secure_url;
-      mediaType = isVid ? 'video' : 'image';
+        media.push({ url: result.secure_url, type: isVid ? 'video' : 'image' });
+      }
       progressWrap.style.display = 'none';
     }
 
     await addDoc(collection(db, 'news'), {
       title,
       description: desc,
-      mediaUrl,
-      mediaType,
+      media,
       createdAt: serverTimestamp(),
       postedBy:  auth.currentUser.email,
     });
@@ -459,7 +509,7 @@ postForm.addEventListener('submit', async e => {
     titleCount.textContent = '0';
     descCount.textContent  = '0';
     clearMedia();
-    showToast('Posted! ✓', 'success');
+    showToast(`Posted! ${media.length ? `${media.length} file${media.length > 1 ? 's' : ''} uploaded.` : ''}`, 'success');
 
   } catch(err) {
     console.error(err);
@@ -481,14 +531,16 @@ function listenPosts() {
     postsList.innerHTML = snap.docs.map(d => {
       const p    = d.data();
       const date = p.createdAt ? fmtDate(p.createdAt.toDate()) : 'just now';
-      const thumb = p.mediaType === 'image'
-        ? `<img class="post-thumb" src="${p.mediaUrl}" alt=""/>`
-        : p.mediaType === 'video'
-          ? `<video class="post-thumb" src="${p.mediaUrl}" muted></video>`
+      const first = p.media?.[0];
+      const thumb = first?.type === 'image'
+        ? `<img class="post-thumb" src="${first.url}" alt=""/>`
+        : first?.type === 'video'
+          ? `<video class="post-thumb" src="${first.url}" muted></video>`
           : `<div class="post-thumb" style="display:flex;align-items:center;justify-content:center;font-size:20px">📝</div>`;
+      const extraCount = (p.media?.length || 0) > 1 ? `<span class="post-extra">+${p.media.length - 1}</span>` : '';
       return `
         <div class="post-item">
-          ${thumb}
+          <div style="position:relative;flex-shrink:0">${thumb}${extraCount}</div>
           <div class="post-info">
             <div class="post-title">${esc(p.title)}</div>
             <div class="post-desc">${esc(p.description)}</div>
