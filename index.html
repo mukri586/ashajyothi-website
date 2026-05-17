@@ -291,7 +291,8 @@
   </div>
 </section>
 
-<!-- ─── INSTAGRAM SLIDESHOW ────────────────────────────────── -->
+<!-- ─── INSTAGRAM SLIDESHOW (removed) ──────────────────────── -->
+<!--
 <section class="ig" id="instagram">
   <div class="container">
 
@@ -503,6 +504,7 @@
 
   </div>
 </section>
+-->
 
 <!-- ─── LATEST NEWS ──────────────────────────────────────── -->
 <section class="campus-news" id="latest-news">
@@ -684,22 +686,68 @@ function renderMediaGrid(p) {
     : p.mediaUrl ? [{ url: p.mediaUrl, type: p.mediaType }] : [];
   if (!items.length) return '';
 
-  const shown = items.slice(0, 4);
-  const extra = items.length - 4;
-  const cls   = shown.length === 1 ? 'n1'
-              : shown.length === 2 ? 'n2'
-              : shown.length === 3 ? 'n3' : 'n4';
+  const makeEl = (item, title) => item.type === 'video'
+    ? `<video src="${item.url}" autoplay muted loop playsinline></video>`
+    : `<img src="${item.url}" alt="${esc(title)}" loading="lazy"/>`;
 
-  const tiles = shown.map((item, i) => {
-    const isLast = i === 3 && extra > 0;
-    const el = item.type === 'video'
-      ? `<video src="${item.url}" autoplay muted loop playsinline></video>`
-      : `<img src="${item.url}" alt="${esc(p.title)}" loading="lazy"/>`;
-    return `<div class="cn-tile">${el}${isLast ? `<div class="cn-tile-more">+${extra}</div>` : ''}</div>`;
-  }).join('');
+  // Single item — simple wrap, no carousel chrome
+  if (items.length === 1) {
+    return `<div class="cn-media-wrap">${makeEl(items[0], p.title)}</div>`;
+  }
 
-  return `<div class="cn-media-grid ${cls}">${tiles}</div>`;
+  // Multiple items — carousel
+  const slides = items.map(item =>
+    `<div class="cn-slide">${makeEl(item, p.title)}</div>`
+  ).join('');
+  const dots = items.map((_, i) =>
+    `<button class="cn-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Slide ${i+1}"></button>`
+  ).join('');
+
+  return `
+    <div class="cn-carousel" data-cur="0">
+      <div class="cn-track">${slides}</div>
+      <button class="cn-arr cn-prev" aria-label="Previous">&#8249;</button>
+      <button class="cn-arr cn-next" aria-label="Next">&#8250;</button>
+      <div class="cn-dots">${dots}</div>
+    </div>`;
 }
+
+// ── Carousel navigation (event delegation — works for all cards) ──────────────
+grid.addEventListener('click', e => {
+  const carousel = e.target.closest('.cn-carousel');
+  if (!carousel) return;
+  const track = carousel.querySelector('.cn-track');
+  const total = track.children.length;
+  let cur = parseInt(carousel.dataset.cur, 10);
+
+  if      (e.target.closest('.cn-next')) cur = (cur + 1) % total;
+  else if (e.target.closest('.cn-prev')) cur = (cur - 1 + total) % total;
+  else if (e.target.closest('.cn-dot'))  cur = parseInt(e.target.closest('.cn-dot').dataset.i, 10);
+  else return;
+
+  carousel.dataset.cur = cur;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  carousel.querySelectorAll('.cn-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+});
+
+// ── Touch / swipe support ─────────────────────────────────────────────────────
+grid.addEventListener('touchstart', e => {
+  const c = e.target.closest('.cn-carousel');
+  if (c) c._tx = e.touches[0].clientX;
+}, { passive: true });
+grid.addEventListener('touchend', e => {
+  const c = e.target.closest('.cn-carousel');
+  if (!c || c._tx == null) return;
+  const dx = e.changedTouches[0].clientX - c._tx;
+  if (Math.abs(dx) < 40) return;
+  const track = c.querySelector('.cn-track');
+  const total = track.children.length;
+  let cur = parseInt(c.dataset.cur, 10);
+  cur = dx < 0 ? (cur + 1) % total : (cur - 1 + total) % total;
+  c.dataset.cur = cur;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  c.querySelectorAll('.cn-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+}, { passive: true });
 
 function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -713,96 +761,6 @@ function esc(s) {
   },{threshold:.1, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // ─── INSTAGRAM SLIDESHOW ─────────────────────────────────
-  (function(){
-    const stage = document.getElementById('igStage');
-    if(!stage) return;
-    const posts = stage.querySelectorAll('.ig-post');
-    const thumbs = document.querySelectorAll('#igThumbs button');
-    const prog = document.getElementById('igProgress');
-    const idxLabel = document.getElementById('igIdx');
-    const totalLabel = document.getElementById('igTotal');
-    const playBtn = document.getElementById('igPlay');
-    const prevBtn = document.getElementById('igPrev');
-    const nextBtn = document.getElementById('igNext');
-
-    const total = posts.length;
-    let cur = 0;
-    let playing = true;
-    let timer = null;
-    const TICK = 6500;
-
-    if(totalLabel) totalLabel.textContent = String(total).padStart(2,'0');
-
-    function show(n){
-      const next = (n + total) % total;
-      if(next === cur) return;
-      posts[cur].classList.remove('is-active');
-      posts[cur].classList.add('is-leaving');
-      posts[next].classList.remove('is-leaving');
-      posts[next].classList.add('is-active');
-      thumbs[cur].classList.remove('active');
-      thumbs[next].classList.add('active');
-      cur = next;
-      if(idxLabel) idxLabel.textContent = String(cur + 1).padStart(2,'0');
-      // restart progress
-      if(prog){
-        prog.classList.remove('run');
-        // force reflow to restart the CSS animation
-        void prog.offsetWidth;
-        if(playing) prog.classList.add('run');
-      }
-    }
-
-    function start(){
-      stop();
-      if(!playing) return;
-      timer = setInterval(() => show(cur + 1), TICK);
-    }
-    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-
-    function setPlay(p){
-      playing = p;
-      const ico = playBtn.querySelector('svg');
-      if(p){
-        // pause icon
-        ico.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
-        playBtn.setAttribute('aria-label','Pause');
-        if(prog){ prog.classList.remove('paused'); prog.classList.add('run'); }
-        start();
-      } else {
-        // play icon
-        ico.innerHTML = '<path d="M5 3l14 9-14 9z"/>';
-        playBtn.setAttribute('aria-label','Play');
-        if(prog) prog.classList.add('paused');
-        stop();
-      }
-    }
-
-    thumbs.forEach(t => t.addEventListener('click', () => {
-      const n = parseInt(t.dataset.i, 10);
-      show(n);
-      if(playing) start();
-    }));
-    prevBtn.addEventListener('click', () => { show(cur - 1); if(playing) start(); });
-    nextBtn.addEventListener('click', () => { show(cur + 1); if(playing) start(); });
-    playBtn.addEventListener('click', () => setPlay(!playing));
-
-    // pause on hover over the post stage
-    stage.addEventListener('mouseenter', () => { if(playing){ stop(); if(prog) prog.classList.add('paused'); } });
-    stage.addEventListener('mouseleave', () => { if(playing){ if(prog) prog.classList.remove('paused'); start(); } });
-
-    // keyboard
-    document.addEventListener('keydown', (e) => {
-      if(!stage.closest('section').getBoundingClientRect().top < window.innerHeight) return;
-      if(e.key === 'ArrowLeft') show(cur - 1);
-      if(e.key === 'ArrowRight') show(cur + 1);
-    });
-
-    // kick off
-    if(prog) prog.classList.add('run');
-    start();
-  })();
 </script>
 </body>
 </html>
