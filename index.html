@@ -69,72 +69,6 @@
   .scard.lg h3{font-size:38px;max-width:18ch}
   .scard p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.85);margin:0;max-width:36ch}
 
-  /* ─── INSTAGRAM FEED ──────────────────────────────────── */
-  .ig{background:var(--paper-2)}
-  .ig .head{display:flex;justify-content:space-between;align-items:end;margin-bottom:48px;gap:30px;flex-wrap:wrap}
-  .ig .head h2{margin:0}
-  .ig .head .right{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
-  .ig .head .handle{display:flex;align-items:center;gap:10px;font-weight:600;font-size:18px;color:var(--heading)}
-  .ig .head .handle .iglogo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;color:#fff}
-  .ig .head .follow{font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--paper);display:inline-flex;gap:8px;align-items:center;transition:background .25s}
-  .ig .head .follow:hover{background:var(--accent)}
-
-  /* slider stage */
-  .ig-slider{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .ig-stage{position:relative;width:100%;max-width:460px;justify-self:end;aspect-ratio:4/5;perspective:1200px}
-  .ig-stage .ig-post{position:absolute;inset:0;background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(80,40,10,.18),0 0 0 1px rgba(0,0,0,.04);display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateX(40px) scale(.97);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1),visibility .65s}
-  .ig-stage .ig-post.is-active{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
-  .ig-stage .ig-post.is-leaving{transform:translateX(-40px) scale(.97);opacity:0}
-  .ig-post header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.06)}
-  .ig-post header .avatar{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid var(--accent);padding:1px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .ig-post header .avatar img{width:100%;height:100%;object-fit:contain}
-  .ig-post header .who{flex:1;line-height:1.2;min-width:0}
-  .ig-post header .who strong{display:block;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
-  .ig-post header .who span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ig-post header .dots{font-size:18px;color:var(--ink-mute);letter-spacing:1px;padding:6px}
-  .ig-post .pic{position:relative;flex:1;overflow:hidden;background:#000}
-  .ig-post .pic img{width:100%;height:100%;object-fit:cover}
-  .ig-post .pic .badge{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.55);color:#fff;padding:4px 9px;border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;backdrop-filter:blur(8px)}
-  .ig-post .pic .ctype{position:absolute;right:10px;top:10px;width:22px;height:22px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
-  .ig-post footer{padding:10px 14px 14px;background:#fff}
-  .ig-post .actions{display:flex;align-items:center;gap:14px;font-size:22px;line-height:1;margin-bottom:8px}
-  .ig-post .actions svg{width:24px;height:24px;stroke-width:1.7;cursor:pointer;transition:transform .2s}
-  .ig-post .actions svg:hover{transform:scale(1.12)}
-  .ig-post .actions .heart{color:#e54e6f}
-  .ig-post .actions .save{margin-left:auto}
-  .ig-post .likes{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
-  .ig-post .caption{font-size:13.5px;line-height:1.45;color:var(--ink);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .ig-post .caption b{font-weight:600;margin-right:6px}
-  .ig-post .ago{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
-
-  /* slider side panel */
-  .ig-side{display:flex;flex-direction:column;gap:28px;max-width:480px}
-  .ig-side .panel-head{display:flex;flex-direction:column;gap:10px}
-  .ig-side .panel-head .live-pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px}
-  .ig-side .panel-head .live-pre::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(217,117,36,.5);animation:dot 1.8s ease-in-out infinite}
-  .ig-side .panel-head h3{font-weight:600;font-size:clamp(28px,3vw,40px);letter-spacing:-.025em;line-height:1.1;margin:0;color:var(--heading);max-width:20ch}
-  .ig-side .panel-head h3 em{font-style:normal;color:var(--accent)}
-  .ig-side .panel-head p{font-size:15.5px;color:var(--ink-soft);margin:0;max-width:42ch;line-height:1.55}
-  .ig-side .ticker{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1)}
-  .ig-side .ticker .count{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em}
-  .ig-side .ticker .count b{color:var(--ink);font-weight:600;font-family:var(--sans);font-size:16px;letter-spacing:-.01em}
-  .ig-side .ticker .controls{display:flex;gap:6px}
-  .ig-side .ticker .controls button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .2s;font-family:inherit;padding:0}
-  .ig-side .ticker .controls button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .ig-side .ticker .controls .play{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .ig-side .ticker .controls .play:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
-  .ig-side .ticker .controls svg{width:14px;height:14px}
-  .ig-side .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-  .ig-side .thumbs button{aspect-ratio:1;border-radius:7px;border:0;background:#222;cursor:pointer;padding:0;overflow:hidden;position:relative;opacity:.45;transition:opacity .3s,transform .3s,outline-color .3s}
-  .ig-side .thumbs button:hover{opacity:.85;transform:translateY(-2px)}
-  .ig-side .thumbs button.active{opacity:1;outline:2px solid var(--accent);outline-offset:2px}
-  .ig-side .thumbs button img{width:100%;height:100%;object-fit:cover}
-  .ig-side .progress{height:2px;background:rgba(0,0,0,.1);border-radius:2px;overflow:hidden;position:relative}
-  .ig-side .progress::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-hi))}
-  .ig-side .progress.run::before{animation:progrun 6.5s linear forwards}
-  .ig-side .progress.paused::before{animation-play-state:paused}
-  @keyframes progrun{from{width:0}to{width:100%}}
-
   /* ─── 3 WAYS TO HELP ─────────────────────────────────── */
   .help{}
   .help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -264,7 +198,7 @@
 
     <div class="story-grid">
       <a class="scard lg reveal" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
-        <img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_900,h_700,al_c,q_85,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt=""/>
+        <img src="https://static.wixstatic.com/media/437f08_4eac094f810646b797ef918f7a832e14~mv2.jpg/v1/fill/w_900,h_700,al_c,q_85,enc_avif,quality_auto/IMG_20160907_115554.jpg" alt="" loading="lazy"/>
         <div class="scontent">
           <div class="top"><span>FIELD NOTE · Medical camp</span><span class="date">Recent</span></div>
           <div>
@@ -274,14 +208,14 @@
         </div>
       </a>
       <a class="scard reveal" data-delay="1" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
-        <img src="https://static.wixstatic.com/media/437f08_d8de5227de6f4a6a81f8642180e4ed5a~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/Local%20Sponsors%20(16).jpg" alt=""/>
+        <img src="https://static.wixstatic.com/media/437f08_d8de5227de6f4a6a81f8642180e4ed5a~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/Local%20Sponsors%20(16).jpg" alt="" loading="lazy"/>
         <div class="scontent">
           <div class="top"><span>PARTNER</span><span class="date">Ongoing</span></div>
           <h3>Chicago Andhra funds a month of meals.</h3>
         </div>
       </a>
       <a class="scard reveal" data-delay="2" href="https://www.facebook.com/madhavi.latha.560" target="_blank" rel="noopener">
-        <img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt=""/>
+        <img src="https://static.wixstatic.com/media/437f08_8dca7b2d49d64202878d25bb91a7dc03~mv2.jpg/v1/fill/w_700,h_700,al_c,q_85,enc_avif,quality_auto/AshaJyothi%20Activities%20(21)_JPG.jpg" alt="" loading="lazy"/>
         <div class="scontent">
           <div class="top"><span>VOCATIONAL</span><span class="date">Latest batch</span></div>
           <h3>A new batch finishes tailoring training.</h3>
