@@ -33,13 +33,21 @@
   .quickdo .ctagrid a{background:var(--paper-2);padding:14px 18px;border-radius:12px;font-size:14px;font-weight:500;display:flex;justify-content:space-between;align-items:center;transition:background .2s,color .2s}
   .quickdo .ctagrid a:hover{background:var(--ink);color:var(--paper)}
 
-  .hero-bleed{position:relative;height:64vh;min-height:520px;max-height:760px;overflow:hidden;border-radius:24px 24px 0 0;margin:0 28px}
-  .hero-bleed img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:slowzoom 22s ease-in-out infinite alternate}
-  @keyframes slowzoom{to{transform:scale(1.12)}}
-  .hero-bleed::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 50%)}
-  .hero-bleed .overlay{position:absolute;left:36px;right:36px;bottom:32px;display:flex;justify-content:space-between;align-items:end;color:#fff;z-index:2;gap:30px}
-  .hero-bleed .overlay h3{font-weight:600;font-size:clamp(22px,2.6vw,36px);max-width:18ch;margin:0;line-height:1.05;letter-spacing:-.015em}
-  .hero-bleed .overlay .meta{text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;line-height:1.8}
+  .hero-bleed{position:relative;height:80vh;min-height:560px;max-height:920px;overflow:hidden;border-radius:24px 24px 0 0;margin:0 28px;animation:hero-fadein 1.8s ease-out both}
+  @keyframes hero-fadein{from{opacity:0}to{opacity:1}}
+  /* colour-grade the video for a warm filmic tone */
+  .hero-bleed video{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:slowzoom 28s ease-in-out infinite alternate;filter:brightness(.88) contrast(1.12) saturate(1.3)}
+  @keyframes slowzoom{to{transform:scale(1.14)}}
+  /* warm amber colour wash */
+  .hero-bleed::before{content:"";position:absolute;inset:0;background:rgba(160,70,10,.1);z-index:1;pointer-events:none;mix-blend-mode:multiply}
+  /* layered cinematic gradient: heavy bottom, soft top, side vignette */
+  .hero-bleed::after{content:"";position:absolute;inset:0;z-index:2;background:
+    linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.35) 38%,transparent 62%),
+    linear-gradient(to bottom,rgba(0,0,0,.4) 0%,transparent 22%),
+    radial-gradient(ellipse 120% 100% at 50% 50%,transparent 45%,rgba(0,0,0,.3) 100%)}
+  .hero-bleed .overlay{position:absolute;left:44px;right:44px;bottom:44px;display:flex;justify-content:space-between;align-items:end;color:#fff;z-index:3;gap:30px}
+  .hero-bleed .overlay h3{font-weight:600;font-size:clamp(26px,3vw,44px);max-width:20ch;margin:0;line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+  .hero-bleed .overlay .meta{text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.75;line-height:2;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 
   /* ─── REALITY ─────────────────────────────────────────── */
   .reality{background:var(--ink);color:var(--paper)}
