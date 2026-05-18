@@ -9,147 +9,126 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ─── PAGE INTRO ─────────────────────────────────────────── */
+  /* ─── CRUMBS ─────────────────────────────────────────────── */
   .ch-intro{padding:70px 0 0}
-  .ch-intro .crumbs{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:28px;display:flex;gap:10px;align-items:center}
-  .ch-intro .crumbs a:hover{color:var(--ink)}
-  .ch-intro .crumbs .sep{color:var(--accent)}
+  .crumbs{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:28px;display:flex;gap:10px;align-items:center}
+  .crumbs a:hover{color:var(--ink)}
+  .crumbs .sep{color:var(--accent)}
 
   /* ─── PROFILE HERO ───────────────────────────────────────── */
-  .profile-hero{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:start;padding:40px 0 100px}
+  .profile-hero{display:grid;grid-template-columns:420px 1fr;gap:72px;align-items:start;padding:40px 0 100px}
   .profile-photo{position:sticky;top:100px}
   .profile-photo-wrap{border-radius:20px;overflow:hidden;aspect-ratio:3/4}
   .profile-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
-  .profile-award{margin-top:16px;background:var(--accent);color:#fff;padding:18px 22px;border-radius:14px;font-size:13px;line-height:1.5}
-  .profile-award strong{display:block;font-weight:700;font-size:15px;margin-bottom:4px}
+  .profile-caption{margin-top:14px;background:var(--accent);color:#fff;padding:16px 20px;border-radius:12px;font-size:13px;line-height:1.45}
+  .profile-caption strong{display:block;font-weight:700;font-size:14px;margin-bottom:3px}
 
   .profile-text .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
   .profile-text .eyebrow::before{content:"";width:28px;height:1.5px;background:var(--accent)}
-  .profile-text h1{font-weight:600;font-size:clamp(42px,5.5vw,80px);line-height:.9;letter-spacing:-.04em;margin:0 0 10px;color:var(--heading)}
+  .profile-text h1{font-weight:600;font-size:clamp(44px,5.5vw,82px);line-height:.88;letter-spacing:-.04em;margin:0 0 12px;color:var(--heading)}
   .profile-text h1 em{font-style:normal;color:var(--accent)}
-  .profile-text .role{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--line)}
-  .profile-text .pull{font-weight:500;font-size:clamp(20px,2.2vw,28px);line-height:1.3;letter-spacing:-.015em;color:var(--heading);margin:0 0 28px;max-width:46ch}
-  .profile-text .pull em{font-style:italic;color:var(--accent);font-weight:400}
-  .profile-text .body{font-size:16.5px;line-height:1.75;color:var(--ink-soft);margin:0 0 20px;max-width:56ch}
+  .profile-text .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+  .profile-text .bio{font-size:17px;line-height:1.7;color:var(--ink-soft);margin:0 0 32px;max-width:52ch;padding-bottom:32px;border-bottom:1px solid var(--line)}
+
+  /* credential pills */
+  .cred-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .cred-pill{font-family:var(--mono);font-size:11px;letter-spacing:.06em;background:var(--paper-2);border:1px solid var(--line);color:var(--ink-soft);padding:6px 13px;border-radius:999px}
+
+  /* committee tags */
+  .committee-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .ctag{font-size:12.5px;font-weight:500;color:var(--ink);background:var(--accent-soft);padding:7px 14px;border-radius:8px}
 
   /* ─── IMPACT NUMBERS ─────────────────────────────────────── */
   .ch-impact{background:var(--ink);color:var(--paper);padding:80px 0}
-  .ch-impact .seclabel .t,.ch-impact h2.big{color:var(--paper)}
-  .ch-impact .seclabel .n{color:rgba(255,255,255,.4)}
+  .ch-impact h2.big{color:var(--paper)}
   .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.1);margin-top:48px}
   .impact-stat{padding:36px 28px;border-right:1px solid rgba(255,255,255,.1)}
   .impact-stat:last-child{border-right:0}
-  .impact-stat .pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
-  .impact-stat .num{font-weight:600;font-size:clamp(48px,6vw,90px);line-height:.9;letter-spacing:-.045em;display:block;margin-bottom:16px}
+  .impact-stat .pre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
+  .impact-stat .num{font-weight:600;font-size:clamp(48px,5.5vw,86px);line-height:.9;letter-spacing:-.045em;display:block;margin-bottom:12px}
   .impact-stat .num em{font-style:normal;color:var(--accent)}
-  .impact-stat p{font-size:14px;color:rgba(251,250,246,.65);line-height:1.55;margin:0;max-width:28ch}
-
-  /* ─── CORE COMPETENCIES ──────────────────────────────────── */
-  .ch-competencies{background:var(--paper-2);padding:120px 0}
-  .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-  .comp-card{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:36px 30px;transition:transform .3s,box-shadow .3s,border-color .3s}
-  .comp-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(14,16,20,.08);border-color:var(--accent-soft)}
-  .comp-card h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 20px;font-weight:600}
-  .comp-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-  .comp-card ul li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
-  .comp-card ul li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent-soft);border:1.5px solid var(--accent)}
-  .comp-card ul li strong{color:var(--ink);font-weight:600}
-
-  /* ─── PROFESSIONAL EXPERIENCE ────────────────────────────── */
-  .ch-experience{padding:120px 0}
-  .exp-block{margin-top:60px;border:1.5px solid var(--line);border-radius:20px;overflow:hidden}
-  .exp-header{background:var(--paper-2);padding:28px 36px;border-bottom:1px solid var(--line)}
-  .exp-header .org{font-weight:700;font-size:18px;color:var(--heading);letter-spacing:-.012em;margin:0 0 6px}
-  .exp-header .tenure{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-  .exp-sections{padding:36px}
-  .exp-subsection{margin-bottom:36px}
-  .exp-subsection:last-child{margin-bottom:0}
-  .exp-subsection h5{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
-  .exp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-  .exp-list li{font-size:15px;color:var(--ink-soft);line-height:1.6;padding-left:22px;position:relative}
-  .exp-list li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.5}
-  .exp-list li strong{color:var(--ink);font-weight:600}
-  .exp-list li em{color:var(--accent);font-style:normal;font-weight:600}
-
-  /* ─── SOCIAL IMPACT ──────────────────────────────────────── */
-  .ch-social{background:var(--paper-2);padding:120px 0}
-  .impact-section{margin-top:60px;display:flex;flex-direction:column;gap:48px}
-  .impact-pillar{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;padding:40px;background:var(--paper);border-radius:20px;border:1.5px solid var(--line)}
-  .pillar-label{position:relative}
-  .pillar-label .num-big{font-weight:600;font-size:80px;line-height:.85;letter-spacing:-.06em;color:var(--accent);opacity:.12;display:block;margin-bottom:-20px}
-  .pillar-label h4{font-weight:700;font-size:20px;color:var(--heading);letter-spacing:-.015em;line-height:1.2;margin:0 0 10px;position:relative;z-index:1}
-  .pillar-label p{font-size:13.5px;color:var(--muted);line-height:1.5;margin:0}
+  .impact-stat p{font-size:13.5px;color:rgba(251,250,246,.6);line-height:1.5;margin:0;max-width:26ch}
 
   /* ─── QUOTE ──────────────────────────────────────────────── */
-  .ch-quote{background:var(--accent);color:#fff;padding:100px 0;position:relative;overflow:hidden}
-  .ch-quote::before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--accent-hi) 0%,transparent 65%);top:-150px;right:-80px;opacity:.4}
-  .ch-quote .container{position:relative;z-index:2;max-width:900px}
-  .ch-quote blockquote{font-weight:500;font-size:clamp(26px,3.5vw,46px);line-height:1.18;letter-spacing:-.02em;margin:0 0 32px}
+  .ch-quote{background:var(--accent);color:#fff;padding:80px 0;position:relative;overflow:hidden}
+  .ch-quote::before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--accent-hi) 0%,transparent 65%);top:-150px;right:-80px;opacity:.35}
+  .ch-quote .container{position:relative;z-index:2;max-width:860px}
+  .ch-quote blockquote{font-weight:500;font-size:clamp(24px,3vw,42px);line-height:1.2;letter-spacing:-.02em;margin:0 0 24px}
   .ch-quote blockquote em{font-style:italic;color:var(--ink);font-weight:400}
-  .ch-quote cite{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;font-style:normal}
+  .ch-quote cite{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;font-style:normal}
 
-  /* ─── TIMELINE ───────────────────────────────────────────── */
-  .ch-timeline{padding:120px 0}
-  .timeline-grid{display:grid;grid-template-columns:1fr 2px 1fr;gap:0 40px;margin-top:64px}
-  .tl-line{background:var(--line);position:relative;align-self:stretch}
-  .tl-left,.tl-right{display:flex;flex-direction:column;gap:0}
-  .tl-item{padding-bottom:48px}
-  .tl-left .tl-item{text-align:right}
-  .tl-year{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px;font-weight:500}
-  .tl-title{font-weight:600;font-size:17px;color:var(--heading);letter-spacing:-.012em;margin-bottom:5px;line-height:1.2}
-  .tl-desc{font-size:14px;color:var(--muted);line-height:1.55}
+  /* ─── PHOTO BANNER ───────────────────────────────────────── */
+  .photo-banner{position:relative;height:460px;overflow:hidden;margin:0 28px;border-radius:20px}
+  .photo-banner img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(.75) saturate(1.1)}
+  .photo-banner .banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.6) 0%,transparent 55%);display:flex;align-items:center;padding:0 60px}
+  .photo-banner .banner-text{color:#fff;max-width:38ch}
+  .photo-banner .banner-text .bl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:14px;display:block}
+  .photo-banner .banner-text h3{font-weight:600;font-size:clamp(28px,3.5vw,48px);line-height:1.05;letter-spacing:-.025em;margin:0;text-shadow:0 2px 16px rgba(0,0,0,.3)}
 
-  /* ─── AWARDS ─────────────────────────────────────────────── */
-  .ch-awards{background:var(--paper-2);padding:120px 0}
-  .award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
-  .award-card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:28px;transition:transform .3s,box-shadow .3s,border-color .3s}
-  .award-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(14,16,20,.08);border-color:var(--accent-soft)}
-  .award-card .award-icon{width:44px;height:44px;background:var(--accent-soft);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
-  .award-card .award-year{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
-  .award-card h4{font-weight:700;font-size:16px;color:var(--heading);letter-spacing:-.012em;margin:0 0 6px;line-height:1.2}
-  .award-card p{font-size:13.5px;color:var(--muted);margin:0;line-height:1.5}
+  /* ─── WORK TABS ──────────────────────────────────────────── */
+  .ch-work{padding:120px 0}
+  .tab-nav{display:flex;gap:4px;background:var(--paper-2);border-radius:14px;padding:5px;margin-top:52px;margin-bottom:0;width:fit-content}
+  .tab-btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:12px 22px;border-radius:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;display:flex;align-items:center;gap:8px}
+  .tab-btn.active{background:var(--paper);color:var(--ink);box-shadow:0 2px 8px rgba(14,16,20,.08)}
+  .tab-btn .ticon{font-size:15px}
+  .tab-panels{margin-top:36px}
+  .tab-panel{display:none}
+  .tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .tab-panel .panel-intro h4{font-weight:600;font-size:clamp(22px,2.5vw,34px);letter-spacing:-.02em;line-height:1.15;color:var(--heading);margin:0 0 14px}
+  .tab-panel .panel-intro p{font-size:15px;color:var(--ink-soft);line-height:1.65;margin:0}
+  .tab-items{display:flex;flex-direction:column;gap:0}
+  .tab-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+  .tab-item:last-child{border-bottom:0}
+  .tab-item .ti-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px}
+  .tab-item .ti-text strong{display:block;font-weight:600;font-size:15px;color:var(--heading);margin-bottom:3px;letter-spacing:-.01em}
+  .tab-item .ti-text span{font-size:13.5px;color:var(--muted);line-height:1.5}
 
-  /* ─── CREDENTIALS ────────────────────────────────────────── */
-  .ch-creds{padding:120px 0}
-  .creds-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:56px}
-  .creds-block h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 24px}
-  .cred-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
-  .cred-item:last-child{border-bottom:0}
-  .cred-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px}
-  .cred-item .cred-text strong{display:block;font-weight:600;font-size:15px;color:var(--heading);margin-bottom:3px}
-  .cred-item .cred-text span{font-size:13.5px;color:var(--muted)}
+  /* ─── CAREER & RECOGNITION ───────────────────────────────── */
+  .ch-career{background:var(--paper-2);padding:120px 0}
+  .career-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:56px;align-items:start}
+
+  /* timeline */
+  .mini-tl{display:flex;flex-direction:column;gap:0}
+  .mini-tl-item{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start}
+  .mini-tl-item:last-child{border-bottom:0}
+  .mini-tl-item .yr{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em;line-height:1.4}
+  .mini-tl-item .ev strong{display:block;font-weight:600;font-size:15px;color:var(--heading);margin-bottom:2px;line-height:1.2}
+  .mini-tl-item .ev span{font-size:13px;color:var(--muted);line-height:1.45}
+
+  /* awards list */
+  .award-list{display:flex;flex-direction:column;gap:0}
+  .award-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .award-row:last-child{border-bottom:0}
+  .award-row .aw-yr{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--accent);min-width:38px;font-weight:600}
+  .award-row .aw-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.4;flex-shrink:0}
+  .award-row .aw-name{font-weight:600;font-size:14.5px;color:var(--heading);flex:1;line-height:1.2}
+  .award-row .aw-body{font-size:12.5px;color:var(--muted);margin-top:2px}
 
   /* ─── FUTURE VISION ──────────────────────────────────────── */
-  .ch-vision{background:var(--ink);color:var(--paper);padding:120px 0}
-  .ch-vision .seclabel .t,.ch-vision h2.big{color:var(--paper)}
-  .ch-vision .seclabel .n{color:rgba(255,255,255,.4)}
-  .vision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden}
-  .vision-item{background:var(--ink);padding:40px 32px;transition:background .3s}
-  .vision-item:hover{background:rgba(255,255,255,.04)}
-  .vision-item .vi-num{font-weight:600;font-size:56px;letter-spacing:-.05em;line-height:.85;color:var(--accent);opacity:.35;display:block;margin-bottom:16px}
-  .vision-item h4{font-weight:600;font-size:19px;letter-spacing:-.015em;color:var(--paper);margin:0 0 12px;line-height:1.2}
-  .vision-item p{font-size:14px;color:rgba(251,250,246,.6);line-height:1.6;margin:0}
+  .ch-vision{background:var(--ink);color:var(--paper);padding:100px 0}
+  .ch-vision h2.big{color:var(--paper)}
+  .vision-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;background:rgba(255,255,255,.07);border-radius:18px;overflow:hidden}
+  .vi{background:var(--ink);padding:36px 28px;transition:background .3s}
+  .vi:hover{background:rgba(255,255,255,.04)}
+  .vi .vi-num{font-weight:700;font-size:52px;letter-spacing:-.05em;line-height:.85;color:var(--accent);opacity:.25;display:block;margin-bottom:14px}
+  .vi h4{font-weight:600;font-size:18px;color:var(--paper);margin:0 0 10px;line-height:1.2;letter-spacing:-.012em}
+  .vi p{font-size:13.5px;color:rgba(251,250,246,.55);line-height:1.6;margin:0}
 
   /* ─── RESPONSIVE ─────────────────────────────────────────── */
   @media(max-width:1000px){
     .profile-hero{grid-template-columns:1fr;gap:40px}
     .profile-photo{position:static}
     .impact-grid{grid-template-columns:1fr 1fr}
-    .comp-grid{grid-template-columns:1fr}
-    .award-grid{grid-template-columns:1fr 1fr}
-    .creds-grid{grid-template-columns:1fr}
-    .timeline-grid{grid-template-columns:1fr;gap:0}
-    .tl-line{display:none}
-    .tl-left .tl-item{text-align:left;padding-left:20px;border-left:2px solid var(--line)}
-    .tl-right .tl-item{padding-left:20px;border-left:2px solid var(--line)}
-    .impact-pillar{grid-template-columns:1fr;gap:24px}
-    .vision-grid{grid-template-columns:1fr}
+    .tab-panel.active{grid-template-columns:1fr}
+    .career-grid{grid-template-columns:1fr}
+    .vision-row{grid-template-columns:1fr}
+    .tab-nav{flex-wrap:wrap}
+    .photo-banner{margin:0;border-radius:0}
   }
   @media(max-width:580px){
     .impact-grid{grid-template-columns:1fr}
-    .award-grid{grid-template-columns:1fr}
-    .exp-sections{padding:24px}
-    .exp-header{padding:20px 24px}
+    .photo-banner{height:300px}
+    .photo-banner .banner-overlay{padding:0 28px}
   }
 </style>
 </head>
@@ -187,10 +166,8 @@
 <div class="ch-intro">
   <div class="container">
     <div class="crumbs reveal">
-      <a href="index.html">Home</a>
-      <span class="sep">/</span>
-      <a href="about.html">About</a>
-      <span class="sep">/</span>
+      <a href="index.html">Home</a><span class="sep">/</span>
+      <a href="about.html">About</a><span class="sep">/</span>
       <span>Our Chairman</span>
     </div>
   </div>
@@ -205,9 +182,9 @@
         <div class="profile-photo-wrap">
           <img src="https://res.cloudinary.com/dshrpij9a/image/upload/v1779077605/Mother_Theresa_Award_iglq1b.jpg" alt="Madhavi Latha Mareedu receiving the Mother Teresa Award, 2018"/>
         </div>
-        <div class="profile-award">
+        <div class="profile-caption">
           <strong>Mother Teresa Award · 2018</strong>
-          Health Care International, Hyderabad — recognition for 20 years of service to children with disabilities.
+          Health Care International, Hyderabad — for 20 years of service to children with disabilities.
         </div>
       </div>
 
@@ -216,14 +193,29 @@
         <h1 class="reveal" data-delay="1">Madhavi<br/><em>Latha</em><br/>Mareedu</h1>
         <p class="role reveal" data-delay="2">Chief Functionary · Secretary · Correspondent · Since 1998</p>
 
-        <p class="pull reveal" data-delay="3">"She started with two children and a borrowed room. <em>Twenty-seven years later, she hasn't stopped.</em>"</p>
+        <p class="bio reveal" data-delay="2">Founder of AshaJyothi since 1998. Started with two abandoned children and a borrowed room — built a permanent campus of 70+ children with severe disabilities. Twenty-seven years of unbroken care, still on campus every day. Her work spans medical rehabilitation, inclusive education, women's empowerment, disaster relief, and judicial child welfare across Andhra Pradesh.</p>
 
-        <p class="body reveal" data-delay="3">Madhavi Latha Mareedu is the founder and driving force behind AshaJyothi Handicapped Welfare Society. A visionary social impact executive with 25+ years of distinguished service dedicated to advancing the welfare of women and children — particularly those with disabilities — she has built from nothing a permanent campus that is home to 70+ children who had nowhere else to go.</p>
+        <div class="reveal" data-delay="3" style="margin-bottom:18px">
+          <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px">Education</p>
+          <div class="cred-pills">
+            <span class="cred-pill">MSW · Acharya Nagarjuna University</span>
+            <span class="cred-pill">M.Sc. Psychology</span>
+            <span class="cred-pill">Diploma in Hearing, Language &amp; Speech</span>
+          </div>
+        </div>
 
-        <p class="body reveal" data-delay="3">Her work has been instrumental in impacting 4,100+ women and children across Krishna and West Godavari Districts: rehabilitating over 1,000 children, educating 25,000+ girls on menstrual hygiene, distributing over a million sanitary pads through the PARI unit, and securing Stem Cell and surgical treatment for hundreds of children through international partnerships.</p>
-
-        <p class="body reveal" data-delay="3">She holds an MSW and M.Sc. in Psychology, has served as a quasi-judicial Chairperson of the Child Welfare Committee under the JJ Act 2015, and has been recognised by the Chief Minister of Andhra Pradesh, international humanitarian organisations, and the Government of India. She is still at the campus every day.</p>
+        <div class="reveal" data-delay="3">
+          <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px">Current Appointments</p>
+          <div class="committee-tags">
+            <span class="ctag">Forum for Child Rights</span>
+            <span class="ctag">National Trust · WG Dist.</span>
+            <span class="ctag">ASRAM Hospital ICC</span>
+            <span class="ctag">PN &amp; PNDT ACT Committee</span>
+            <span class="ctag">SC/ST Vigilance Committee</span>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -231,183 +223,12 @@
 <!-- ─── IMPACT NUMBERS ────────────────────────────────────── -->
 <section class="ch-impact">
   <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">The numbers</span><span class="n">/ 01</span></div>
-    <div class="sec-intro reveal">
-      <h2 class="big">Twenty-seven years, <em>in plain figures.</em></h2>
-      <p>Every number below is a life that changed because one person refused to look away.</p>
-    </div>
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">27 years in numbers</span><span class="n">/ 01</span></div>
     <div class="impact-grid">
-      <div class="impact-stat reveal"><span class="pre">/ People impacted</span><span class="num">4,100<em>+</em></span><p>Women and children with disabilities across Krishna and West Godavari Districts.</p></div>
-      <div class="impact-stat reveal" data-delay="1"><span class="pre">/ Children rehabilitated</span><span class="num">1,000<em>+</em></span><p>Children brought back to health, mobility, and education through sustained care.</p></div>
-      <div class="impact-stat reveal" data-delay="2"><span class="pre">/ Sanitary pads distributed</span><span class="num">1<em>M+</em></span><p>Through the PARI Manufacturing Unit — creating employment and restoring dignity.</p></div>
-      <div class="impact-stat reveal" data-delay="3"><span class="pre">/ Girls educated</span><span class="num">25<em>K+</em></span><p>On menstrual hygiene across Andhra Pradesh and Telangana — breaking a generation of silence.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CORE COMPETENCIES ─────────────────────────────────── -->
-<section class="ch-competencies">
-  <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Core competencies</span><span class="n">/ 02</span></div>
-    <div class="sec-intro reveal">
-      <h2 class="big">What she does — <em>and how.</em></h2>
-      <p>Three areas of expertise that have shaped AshaJyothi's reach over 27 years.</p>
-    </div>
-    <div class="comp-grid">
-      <div class="comp-card reveal">
-        <h4>Strategic Leadership &amp; Governance</h4>
-        <ul>
-          <li><strong>Vision &amp; Scale:</strong> Grew the organisation from 2 children to 100+ residential beneficiaries, securing permanent multi-facility infrastructure.</li>
-          <li><strong>Statutory Oversight:</strong> Functioned as a Bench of First Class Judicial Magistrates as Chairperson of the CWC under JJ Act 2015.</li>
-          <li><strong>Advisory Role:</strong> Thought leader and advisor for international NGOs focused on child welfare — including SDWH Holland and UCDVO.</li>
-        </ul>
-      </div>
-      <div class="comp-card reveal" data-delay="1">
-        <h4>Program Execution &amp; Scale</h4>
-        <ul>
-          <li><strong>Healthcare:</strong> Orchestrated 100+ major surgeries (Polio, Cochlear Implants, Cleft Lip) and coordinated advanced Stem Cell Therapy for 50 cases.</li>
-          <li><strong>Sustainable Development:</strong> Distributed 1 million+ sanitary pads through the PARI Manufacturing Unit, generating direct employment for local women.</li>
-          <li><strong>Inclusion:</strong> Achieved 100% school enrollment for 145 children with disabilities through door-to-door IED campaigns.</li>
-        </ul>
-      </div>
-      <div class="comp-card reveal" data-delay="2">
-        <h4>Stakeholder &amp; Crisis Management</h4>
-        <ul>
-          <li><strong>Community Outreach:</strong> Counseled 1,000+ women with disabilities; facilitated five Self-Help Groups for economic independence.</li>
-          <li><strong>Disaster Relief:</strong> Led critical relief after Hudhud Cyclone, Covid-19, and major Andhra floods — rebuilding 50 homes and distributing 20,000+ meals.</li>
-          <li><strong>Fundraising:</strong> Cultivated international trusts (SDWH Holland, UCDVO) and the US-based non-profit AshaJyothi USA for sustained funding.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PROFESSIONAL EXPERIENCE ───────────────────────────── -->
-<section class="ch-experience">
-  <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Professional experience</span><span class="n">/ 03</span></div>
-    <div class="sec-intro reveal">
-      <h2 class="big">A career built in <em>service.</em></h2>
-      <p>Every role has been in service of children and women who needed someone to fight for them.</p>
-    </div>
-
-    <!-- Role 1: AshaJyothi -->
-    <div class="exp-block reveal">
-      <div class="exp-header">
-        <p class="org">Chief Functionary / Secretary / Correspondent — AshaJyothi Handicapped Welfare Society</p>
-        <span class="tenure">Hanuman Junction, Andhra Pradesh · June 1998 – Present (27+ Years)</span>
-      </div>
-      <div class="exp-sections">
-
-        <div class="exp-subsection">
-          <h5>I. Institutional Growth &amp; Infrastructure Development</h5>
-          <ul class="exp-list">
-            <li><strong>Pioneering Growth &amp; Scale:</strong> Founded and scaled the organisation from 2 children to a comprehensive welfare society serving <em>100+ residential beneficiaries</em> with special education, paramedical care, and 24/7 nursing.</li>
-            <li><strong>Land Acquisition &amp; Permanent Campus:</strong> Secured land and oversaw construction of a permanent, multi-facility campus with separate hostels, specialized therapy units, kitchen, and school — supported by international partner SDWH, Holland.</li>
-            <li><strong>Operational Resilience:</strong> Developed critical infrastructure including specialized <strong>Hydrotherapy and Physio-rehabilitation rooms</strong> for in-house treatment, and ensured self-sufficiency via <strong>solar power installation and borewell systems</strong> for agriculture and water security.</li>
-          </ul>
-        </div>
-
-        <div class="exp-subsection">
-          <h5>II. Critical Healthcare &amp; Rehabilitation Programs</h5>
-          <ul class="exp-list">
-            <li><strong>Stem Cell Therapy Programme:</strong> Launched a pioneering partnership with Neurogen Brain and Spine Institute, successfully securing <em>CM Relief Fund for 40 cases</em> and facilitating Stem Cell Therapy for <em>50 children</em> with severe neurological conditions.</li>
-            <li><strong>Surgical Impact:</strong> Organised numerous medical camps resulting in over <em>100 major corrective surgeries</em> — Polio, Achilles Tendon, Cleft Lip &amp; Palate, and Cochlear Implants — with long-term post-operative care provided on campus.</li>
-            <li><strong>ASRAM Hospital MOU:</strong> Established a formal MOU with ASRAM Hospital, Eluru, securing an exclusive ward and subsidised healthcare for orphan and semi-orphan children across the district.</li>
-            <li><strong>Community Based Rehabilitation (CBR):</strong> Created a mobile CBR programme to extend active physiotherapy and support to <em>more than 100 girl children</em> in neighbouring villages who could not travel to campus.</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Role 2: CWC Chairperson -->
-    <div class="exp-block reveal" style="margin-top:28px">
-      <div class="exp-header">
-        <p class="org">Chairperson — Child Welfare Committee (CWC)</p>
-        <span class="tenure">West Godavari District, Govt. of Andhra Pradesh · 2015 – 2019</span>
-      </div>
-      <div class="exp-sections">
-        <div class="exp-subsection" style="margin-bottom:0">
-          <ul class="exp-list">
-            <li><strong>Judicial Authority:</strong> Appointed to function as a Bench of First Class Judicial Magistrates under Section 27(9) of the JJ Act 2015, providing statutory care and protection for children in need (CNCP) across the district.</li>
-            <li><strong>Child Care Institution Oversight:</strong> Mandated the monitoring and inspection of all Child Care Institutions (CCIs) in West Godavari District, ensuring adherence to constitutional standards of safety and welfare.</li>
-            <li><strong>Welfare Initiatives:</strong> Orchestrated Half Saree functions for adolescent orphan girls as a dignified coming-of-age rite, and provided essential supplies including sweaters and sports kits to Government Children Homes.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Role 3: Mandal Rehabilitation Supervisor -->
-    <div class="exp-block reveal" style="margin-top:28px">
-      <div class="exp-header">
-        <p class="org">Mandal Rehabilitation Supervisor</p>
-        <span class="tenure">West Godavari District · 2002 – 2004</span>
-      </div>
-      <div class="exp-sections">
-        <div class="exp-subsection" style="margin-bottom:0">
-          <ul class="exp-list">
-            <li>Mobilised <em>1,000+ women with disabilities</em> to access government disability certificates, pensions, and welfare benefits — many of whom had never previously received any state support.</li>
-            <li>Recognised by the District Collector with the <strong>District Best Social Worker Award</strong> (2003) for the scale and quality of community outreach achieved during this tenure.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ─── SOCIAL IMPACT ─────────────────────────────────────── -->
-<section class="ch-social">
-  <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Social impact &amp; advocacy</span><span class="n">/ 04</span></div>
-    <div class="sec-intro reveal">
-      <h2 class="big">Beyond the campus <em>gates.</em></h2>
-      <p>AshaJyothi's work reaches far beyond the 70+ children who live there — into schools, villages, government offices, and disaster zones.</p>
-    </div>
-
-    <div class="impact-section">
-
-      <div class="impact-pillar reveal">
-        <div class="pillar-label">
-          <span class="num-big">I</span>
-          <h4>Women's Health &amp; Economic Empowerment</h4>
-          <p>Dignity for girls. Independence for women. Built at scale.</p>
-        </div>
-        <ul class="exp-list">
-          <li><strong>PARI Sanitary Pads Initiative:</strong> Conceptualized and executed the PARI Manufacturing Unit as a Women Empowerment and "Save the Girl Child" project. The unit has distributed <em>over one million sanitary pads</em>, generating self-employment for local women and making hygiene accessible across the region.</li>
-          <li><strong>Menstrual Hygiene Advocacy:</strong> Personally addressed hundreds of girls' schools and colleges, educating <em>25,000+ girls</em> across Andhra Pradesh and Telangana to dismantle the cultural taboo around menstruation — one classroom at a time.</li>
-          <li><strong>Self-Help Groups (SHGs):</strong> Directly facilitated the formation of <em>five Self-Help Groups</em> for 50 women with disabilities, successfully connecting them with micro-loans, skill training, and sustainable livelihood pathways.</li>
-        </ul>
-      </div>
-
-      <div class="impact-pillar reveal">
-        <div class="pillar-label">
-          <span class="num-big">II</span>
-          <h4>Inclusive Education &amp; Rehabilitation Reform</h4>
-          <p>Every child in school. No exceptions.</p>
-        </div>
-        <ul class="exp-list">
-          <li><strong>100% Enrollment Campaign:</strong> As an IED Teacher, led intensive door-to-door campaigns that achieved <em>100% school enrollment</em> and directly mainstreamed <em>145 children with disabilities</em> into regular schools — recognised nationally by Sarva Shiksha Abhiyan.</li>
-          <li><strong>Chinnari Choopu Programme:</strong> Managed this large-scale early identification initiative where <em>5,000 children</em> were screened for developmental conditions, resulting in <em>100 referrals</em> for specialised treatment and surgical care.</li>
-          <li><strong>Dropout Prevention:</strong> Secured sponsorships and targeted assistance for <em>5,000+ underprivileged children</em> across the district to prevent school dropout — ensuring education was not surrendered to poverty.</li>
-          <li><strong>Home-Based Therapy:</strong> Pioneered low-cost, family-centred rehabilitation by motivating and training parents to install <em>15 parallel bars and special comprehension boards</em> at home, enabling continuous therapeutic practice between campus visits.</li>
-        </ul>
-      </div>
-
-      <div class="impact-pillar reveal">
-        <div class="pillar-label">
-          <span class="num-big">III</span>
-          <h4>Disaster &amp; Crisis Management</h4>
-          <p>When the state was overwhelmed, AshaJyothi showed up.</p>
-        </div>
-        <ul class="exp-list">
-          <li><strong>Hudhud Cyclone Relief (2014):</strong> Led critical relief operations in the aftermath of Cyclone Hudhud — coordinating the rebuilding of <em>50 homes</em> and the distribution of <em>20,000+ meals</em> to displaced and affected communities.</li>
-          <li><strong>Covid-19 Response (2020–21):</strong> Provided dry ration kits to thousands of migrating workers stranded during lockdown, and supplied cots, beds, and <em>Oxygen Concentrators to 4 Isolation Centres</em> established by the Andhra Pradesh Health Department.</li>
-          <li><strong>Flood Relief:</strong> Actively participated in flash flood relief across Eluru, NTR District, and the Kolleru Lake area — distributing essential goods, clothing, and medical supplies to stranded families and those rendered homeless.</li>
-        </ul>
-      </div>
-
+      <div class="impact-stat reveal"><span class="pre">/ People impacted</span><span class="num">4,100<em>+</em></span><p>Women &amp; children with disabilities across Krishna and West Godavari.</p></div>
+      <div class="impact-stat reveal" data-delay="1"><span class="pre">/ Children rehabilitated</span><span class="num">1,000<em>+</em></span><p>Brought back to health, mobility, and education through sustained care.</p></div>
+      <div class="impact-stat reveal" data-delay="2"><span class="pre">/ Sanitary pads</span><span class="num">1<em>M+</em></span><p>Distributed via PARI — generating employment and restoring dignity.</p></div>
+      <div class="impact-stat reveal" data-delay="3"><span class="pre">/ Girls educated</span><span class="num">25<em>K+</em></span><p>On menstrual hygiene across AP and Telangana.</p></div>
     </div>
   </div>
 </section>
@@ -420,247 +241,179 @@
   </div>
 </section>
 
-<!-- ─── MILESTONE TIMELINE ────────────────────────────────── -->
-<section class="ch-timeline">
+<!-- ─── PHOTO BANNER ──────────────────────────────────────── -->
+<div class="photo-banner reveal" style="margin-top:0">
+  <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt="AshaJyothi campus"/>
+  <div class="banner-overlay">
+    <div class="banner-text">
+      <span class="bl">The campus she built</span>
+      <h3>A permanent home for children who had none.</h3>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WORK TABS ─────────────────────────────────────────── -->
+<section class="ch-work">
   <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Career milestones</span><span class="n">/ 05</span></div>
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">What she built</span><span class="n">/ 02</span></div>
     <div class="sec-intro reveal">
-      <h2 class="big">A life in <em>service.</em></h2>
-      <p>From a borrowed room with two children to a campus that never closes.</p>
+      <h2 class="big">27 years of <em>work.</em></h2>
+      <p>Four areas — one sustained commitment.</p>
     </div>
 
-    <div class="timeline-grid">
-      <div class="tl-left">
-        <div class="tl-item reveal">
-          <span class="tl-year">1998</span>
-          <div class="tl-title">Co-founded AshaJyothi</div>
-          <p class="tl-desc">Started with two abandoned children and a small house at Hanuman Junction — a family's grief turned into protection.</p>
+    <div class="tab-nav reveal" role="tablist">
+      <button class="tab-btn active" data-tab="institution" role="tab"><span class="ticon">🏛️</span> Institution</button>
+      <button class="tab-btn" data-tab="healthcare" role="tab"><span class="ticon">🏥</span> Healthcare</button>
+      <button class="tab-btn" data-tab="education" role="tab"><span class="ticon">📚</span> Education &amp; Women</button>
+      <button class="tab-btn" data-tab="crisis" role="tab"><span class="ticon">🚨</span> Crisis Relief</button>
+    </div>
+
+    <div class="tab-panels">
+
+      <div class="tab-panel active" id="tab-institution">
+        <div class="panel-intro">
+          <h4>Building from nothing — permanently.</h4>
+          <p>Scaled AshaJyothi from 2 children in a borrowed room to a fully self-sufficient campus of 100+ residents. Every brick was fought for.</p>
         </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2003</span>
-          <div class="tl-title">District Best Social Worker Award</div>
-          <p class="tl-desc">Recognised by the District Collector for helping 1,000+ women with disabilities obtain certificates and pensions.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2008</span>
-          <div class="tl-title">Permanent Campus</div>
-          <p class="tl-desc">Chief Minister laid the foundation stone for AshaJyothi's permanent multi-facility infrastructure at Hanuman Junction.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2014</span>
-          <div class="tl-title">Hudhud Cyclone Relief</div>
-          <p class="tl-desc">Led relief operations rebuilding 50 homes and distributing 20,000+ meals across affected communities.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2015</span>
-          <div class="tl-title">Chairperson, Child Welfare Committee</div>
-          <p class="tl-desc">Appointed to function as a Bench of First Class Judicial Magistrates, West Godavari District — Govt. of Andhra Pradesh.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2019</span>
-          <div class="tl-title">Rashtriya Samman Award</div>
-          <p class="tl-desc">PARI Sanitary Pads Unit distributes its one-millionth pad. Rashtriya Samman Award from Govt. of AP.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2023</span>
-          <div class="tl-title">ASRAM Hospital MOU</div>
-          <p class="tl-desc">Exclusive ward and free healthcare secured for orphan and semi-orphan children across the district.</p>
+        <div class="tab-items">
+          <div class="tab-item">
+            <div class="ti-icon">🌱</div>
+            <div class="ti-text"><strong>Founded 1998</strong><span>Started with 2 abandoned children at Hanuman Junction — a family's grief turned outward.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🏗️</div>
+            <div class="ti-text"><strong>Permanent Campus</strong><span>Secured land, construction, and multi-facility infrastructure with international partner SDWH, Holland.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">⚡</div>
+            <div class="ti-text"><strong>Self-Sufficiency</strong><span>Solar power, borewell systems, hydrotherapy rooms — campus runs independently, 365 days a year.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">⚖️</div>
+            <div class="ti-text"><strong>CWC Chairperson · 2015–2019</strong><span>Appointed to function as a Bench of First Class Judicial Magistrates, West Godavari District.</span></div>
+          </div>
         </div>
       </div>
 
-      <div class="tl-line"></div>
-
-      <div class="tl-right">
-        <div class="tl-item reveal" style="padding-top:60px">
-          <span class="tl-year">2002–2004</span>
-          <div class="tl-title">Mandal Rehabilitation Supervisor</div>
-          <p class="tl-desc">Mobilised 1,000+ women with disabilities to access government certificates, pensions, and welfare benefits.</p>
+      <div class="tab-panel" id="tab-healthcare">
+        <div class="panel-intro">
+          <h4>Advanced medicine, brought to children who couldn't access it.</h4>
+          <p>From cochlear implants to Stem Cell Therapy — healthcare that would otherwise have been out of reach for every child here.</p>
         </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2006</span>
-          <div class="tl-title">First Cochlear Implant Surgery</div>
-          <p class="tl-desc">Coordinated AshaJyothi's first cochlear implant and full post-operative speech therapy programme.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2012</span>
-          <div class="tl-title">District Best IED Teacher Award</div>
-          <p class="tl-desc">Sarva Shiksha Abhiyan award for achieving 100% school enrolment for 145 children with disabilities.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2016</span>
-          <div class="tl-title">CM Award + World HRD Congress</div>
-          <p class="tl-desc">Honoured by CM Nara Chandra Babu Naidu on International Women's Day. World HRD Congress Award, Mumbai.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2018</span>
-          <div class="tl-title">Mother Teresa Award</div>
-          <p class="tl-desc">State Best Women Entrepreneur Award from the AP Chief Minister, and Mother Teresa Award from Health Care International, Hyderabad.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="tl-year">2021</span>
-          <div class="tl-title">REX Karmaveer Chakra — Platinum</div>
-          <p class="tl-desc">ICONGO New Delhi's highest humanitarian category. Launched Stem Cell Therapy programme securing CM Relief for 40 children.</p>
+        <div class="tab-items">
+          <div class="tab-item">
+            <div class="ti-icon">💉</div>
+            <div class="ti-text"><strong>Stem Cell Therapy</strong><span>Partnered with Neurogen Institute; secured CM Relief Fund for 40 cases, treated 50 children total.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🔬</div>
+            <div class="ti-text"><strong>100+ Major Surgeries</strong><span>Polio, Achilles Tendon, Cleft Lip &amp; Palate, Cochlear Implants — with full post-operative care on campus.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🤝</div>
+            <div class="ti-text"><strong>ASRAM Hospital MOU</strong><span>Secured exclusive ward and subsidised healthcare for all orphan and semi-orphan children in the district.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🚐</div>
+            <div class="ti-text"><strong>Mobile CBR Programme</strong><span>Extended active physiotherapy to 100+ girl children in surrounding villages who could not travel to campus.</span></div>
+          </div>
         </div>
       </div>
+
+      <div class="tab-panel" id="tab-education">
+        <div class="panel-intro">
+          <h4>Education for the excluded. Dignity for girls.</h4>
+          <p>100% school enrollment for children with disabilities. One million sanitary pads. Five self-help groups. The numbers are real.</p>
+        </div>
+        <div class="tab-items">
+          <div class="tab-item">
+            <div class="ti-icon">🏫</div>
+            <div class="ti-text"><strong>100% Enrollment</strong><span>Door-to-door campaign mainstreaming 145 children with disabilities into regular schools — national SSA recognition.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🔍</div>
+            <div class="ti-text"><strong>Chinnari Choopu</strong><span>Screened 5,000 children for developmental conditions; 100 referred for specialist treatment and surgery.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🩸</div>
+            <div class="ti-text"><strong>PARI Unit &amp; 25,000+ Girls</strong><span>Manufactured &amp; distributed 1M+ sanitary pads; personally educated 25,000+ girls on menstrual hygiene.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">💪</div>
+            <div class="ti-text"><strong>5 Self-Help Groups</strong><span>Formed SHGs for 50 women with disabilities — connecting them to micro-loans and livelihood training.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-crisis">
+        <div class="panel-intro">
+          <h4>When the state was overwhelmed, AshaJyothi showed up.</h4>
+          <p>Three major crises. Each time, Madhavi Latha was on the ground before most organisations had filed their reports.</p>
+        </div>
+        <div class="tab-items">
+          <div class="tab-item">
+            <div class="ti-icon">🌀</div>
+            <div class="ti-text"><strong>Hudhud Cyclone · 2014</strong><span>Rebuilt 50 homes; distributed 20,000+ meals to displaced communities across affected districts.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">😷</div>
+            <div class="ti-text"><strong>Covid-19 · 2020–21</strong><span>Ration kits to thousands of migrant workers; Oxygen Concentrators to 4 AP Health Dept isolation centres.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">🌊</div>
+            <div class="ti-text"><strong>Flood Relief</strong><span>Flash flood response across Eluru, NTR District and Kolleru Lake area — essential goods and medical supplies.</span></div>
+          </div>
+          <div class="tab-item">
+            <div class="ti-icon">♿</div>
+            <div class="ti-text"><strong>Mandal Rehab Supervisor · 2002–04</strong><span>Mobilised 1,000+ women with disabilities to access government certificates, pensions, and benefits.</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ─── AWARDS ─────────────────────────────────────────────── -->
-<section class="ch-awards">
+<!-- ─── CAREER & RECOGNITION ──────────────────────────────── -->
+<section class="ch-career">
   <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Awards &amp; recognition</span><span class="n">/ 06</span></div>
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">Career &amp; recognition</span><span class="n">/ 03</span></div>
     <div class="sec-intro reveal">
-      <h2 class="big">Recognised at every <em>level.</em></h2>
-      <p>District, state, national, and international recognition spanning 27 years of service.</p>
+      <h2 class="big">Milestones &amp; <em>honours.</em></h2>
     </div>
-    <div class="award-grid">
-      <div class="award-card reveal">
-        <div class="award-icon">🏆</div>
-        <span class="award-year">2021</span>
-        <h4>REX Karmaveer Chakra — Platinum</h4>
-        <p>ICONGO, New Delhi — highest humanitarian category awarded nationally.</p>
-      </div>
-      <div class="award-card reveal" data-delay="1">
-        <div class="award-icon">🕊️</div>
-        <span class="award-year">2018</span>
-        <h4>Mother Teresa Award</h4>
-        <p>Health Care International, Hyderabad — for outstanding service to children with disabilities.</p>
-      </div>
-      <div class="award-card reveal" data-delay="2">
-        <div class="award-icon">🌟</div>
-        <span class="award-year">2018</span>
-        <h4>State Best Women Entrepreneur</h4>
-        <p>Received from the Chief Minister of Andhra Pradesh on International Women's Day.</p>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">🇮🇳</div>
-        <span class="award-year">2019</span>
-        <h4>Rashtriya Samman Award</h4>
-        <p>Government of Andhra Pradesh — for the PARI sanitary pads initiative and women's empowerment work.</p>
-      </div>
-      <div class="award-card reveal" data-delay="1">
-        <div class="award-icon">🌐</div>
-        <span class="award-year">2016</span>
-        <h4>World HRD Congress Award</h4>
-        <p>Mumbai — recognising leadership in human resource development through social impact.</p>
-      </div>
-      <div class="award-card reveal" data-delay="2">
-        <div class="award-icon">🌏</div>
-        <span class="award-year">Ongoing</span>
-        <h4>NATA Public Service Award</h4>
-        <p>North American Telugu Association, USA — for international impact across the Telugu diaspora community.</p>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">📚</div>
-        <span class="award-year">2012</span>
-        <h4>District Best IED Teacher</h4>
-        <p>Sarva Shiksha Abhiyan — for achieving 100% school enrolment for children with disabilities.</p>
-      </div>
-      <div class="award-card reveal" data-delay="1">
-        <div class="award-icon">⚖️</div>
-        <span class="award-year">2003</span>
-        <h4>District Best Social Worker</h4>
-        <p>Presented by the District Collector for disability welfare and rehabilitation work across the district.</p>
-      </div>
-      <div class="award-card reveal" data-delay="2">
-        <div class="award-icon">💛</div>
-        <span class="award-year">2019</span>
-        <h4>Kalamandir Foundation Award</h4>
-        <p>For services to adolescent girls — including a cash award of ₹5 lakh.</p>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">🏅</div>
-        <span class="award-year">2019</span>
-        <h4>X Ray Prathiba Seva Puraskar</h4>
-        <p>Recognising exceptional service and outstanding contribution to community welfare.</p>
-      </div>
-      <div class="award-card reveal" data-delay="1">
-        <div class="award-icon">🎖️</div>
-        <span class="award-year">Ongoing</span>
-        <h4>Best NGO Award</h4>
-        <p>Sri Karthikeya Misra IAS — presented on Independence Day, Eluru, for exemplary non-profit work.</p>
-      </div>
-      <div class="award-card reveal" data-delay="2">
-        <div class="award-icon">🌸</div>
-        <span class="award-year">Ongoing</span>
-        <h4>Sri Padma Medha Award</h4>
-        <p>Sri Padmavathi Mahila Vidyalayam, Tirupathi — for contributions to women's welfare.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="career-grid">
 
-<!-- ─── CREDENTIALS & APPOINTMENTS ───────────────────────── -->
-<section class="ch-creds">
-  <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Credentials &amp; appointments</span><span class="n">/ 07</span></div>
-    <div class="sec-intro reveal">
-      <h2 class="big">Education &amp; <em>committee roles.</em></h2>
-    </div>
-    <div class="creds-grid">
-      <div class="creds-block reveal">
-        <h4>Education</h4>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Masters in Social Work (MSW)</strong>
-            <span>Acharya Nagarjuna University · 2009</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>M.Sc. Psychology</strong>
-            <span>Acharya Nagarjuna University</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Diploma in Hearing, Language &amp; Speech</strong>
-            <span>AYJNIHH, Southern Regional Centre</span>
-          </div>
+      <div class="reveal">
+        <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 4px">Timeline</p>
+        <div class="mini-tl">
+          <div class="mini-tl-item"><span class="yr">1998</span><div class="ev"><strong>Co-founded AshaJyothi</strong><span>Two children, one small house at Hanuman Junction.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2002</span><div class="ev"><strong>Mandal Rehabilitation Supervisor</strong><span>Helped 1,000+ women access disability pensions &amp; certificates.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2006</span><div class="ev"><strong>First Cochlear Implant</strong><span>Coordinated surgery &amp; full post-operative speech therapy.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2008</span><div class="ev"><strong>Permanent Campus</strong><span>Chief Minister lays the foundation stone.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2012</span><div class="ev"><strong>District Best IED Teacher</strong><span>Sarva Shiksha Abhiyan — 100% enrollment for 145 children.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2015</span><div class="ev"><strong>CWC Chairperson</strong><span>Judicial Magistrate powers, West Godavari District.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2021</span><div class="ev"><strong>Stem Cell Therapy Launch</strong><span>50 children treated; CM Relief Fund secured for 40.</span></div></div>
+          <div class="mini-tl-item"><span class="yr">2023</span><div class="ev"><strong>ASRAM Hospital MOU</strong><span>Free exclusive ward for all orphan children in the district.</span></div></div>
         </div>
       </div>
-      <div class="creds-block reveal" data-delay="1">
-        <h4>Current Appointments</h4>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Core Committee Member</strong>
-            <span>Forum for Child Rights</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Member, National Trust</strong>
-            <span>West Godavari District</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Internal Complaints Committee Member</strong>
-            <span>ASRAM Hospital, Eluru</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>Member, PN &amp; PNDT ACT Committee</strong>
-            <span>Eluru District</span>
-          </div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-dot"></div>
-          <div class="cred-text">
-            <strong>SC/ST/Minority Vigilance Committee</strong>
-            <span>Committee Member</span>
-          </div>
+
+      <div class="reveal" data-delay="1">
+        <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 4px">Awards &amp; Honours</p>
+        <div class="award-list">
+          <div class="award-row"><span class="aw-yr">2021</span><div class="aw-dot"></div><div><div class="aw-name">REX Karmaveer Chakra — Platinum</div><div class="aw-body">ICONGO, New Delhi — highest humanitarian category.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2019</span><div class="aw-dot"></div><div><div class="aw-name">Rashtriya Samman Award</div><div class="aw-body">Govt. of Andhra Pradesh — PARI initiative.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2019</span><div class="aw-dot"></div><div><div class="aw-name">Kalamandir Foundation Award</div><div class="aw-body">Services to adolescent girls · ₹5 lakh cash award.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2018</span><div class="aw-dot"></div><div><div class="aw-name">Mother Teresa Award</div><div class="aw-body">Health Care International, Hyderabad.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2018</span><div class="aw-dot"></div><div><div class="aw-name">State Best Women Entrepreneur</div><div class="aw-body">Received from the AP Chief Minister.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2016</span><div class="aw-dot"></div><div><div class="aw-name">CM Award + World HRD Congress</div><div class="aw-body">International Women's Day · Mumbai.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2012</span><div class="aw-dot"></div><div><div class="aw-name">District Best IED Teacher</div><div class="aw-body">Sarva Shiksha Abhiyan.</div></div></div>
+          <div class="award-row"><span class="aw-yr">2003</span><div class="aw-dot"></div><div><div class="aw-name">District Best Social Worker</div><div class="aw-body">Presented by the District Collector.</div></div></div>
+          <div class="award-row"><span class="aw-yr">——</span><div class="aw-dot"></div><div><div class="aw-name">NATA Public Service Award</div><div class="aw-body">North American Telugu Association, USA.</div></div></div>
+          <div class="award-row"><span class="aw-yr">——</span><div class="aw-dot"></div><div><div class="aw-name">Sri Padma Medha Award</div><div class="aw-body">Sri Padmavathi Mahila Vidyalayam, Tirupathi.</div></div></div>
+          <div class="award-row"><span class="aw-yr">——</span><div class="aw-dot"></div><div><div class="aw-name">Best NGO Award</div><div class="aw-body">Sri Karthikeya Misra IAS · Independence Day, Eluru.</div></div></div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -668,26 +421,25 @@
 <!-- ─── FUTURE VISION ─────────────────────────────────────── -->
 <section class="ch-vision">
   <div class="container">
-    <div class="seclabel reveal"><span class="dot"></span><span class="t">Future vision</span><span class="n">/ 08</span></div>
+    <div class="seclabel reveal"><span class="dot"></span><span class="t">What's next</span><span class="n">/ 04</span></div>
     <div class="sec-intro reveal">
       <h2 class="big">The work <em>ahead.</em></h2>
-      <p>The next chapter is already being written.</p>
     </div>
-    <div class="vision-grid">
-      <div class="vision-item reveal">
+    <div class="vision-row">
+      <div class="vi reveal">
         <span class="vi-num">01</span>
         <h4>Vocational Training for Girls</h4>
-        <p>Establishing market-aligned vocational training centres specifically for girls with disabilities — ensuring economic independence, not just shelter.</p>
+        <p>Market-aligned training centres for girls with disabilities — economic independence, not just shelter.</p>
       </div>
-      <div class="vision-item reveal" data-delay="1">
+      <div class="vi reveal" data-delay="1">
         <span class="vi-num">02</span>
         <h4>10,000 Girls in Three Years</h4>
-        <p>Strategic partnerships to directly support and educate more than 10,000 girl children over the next three years through scaled outreach programmes.</p>
+        <p>Strategic partnerships to support and educate 10,000+ girl children through scaled outreach.</p>
       </div>
-      <div class="vision-item reveal" data-delay="2">
+      <div class="vi reveal" data-delay="2">
         <span class="vi-num">03</span>
         <h4>Enhanced Therapy Facilities</h4>
-        <p>Continuing to deepen specialised hydrotherapy and physio-rehabilitation infrastructure on campus — ensuring every resident's physical and psychological development.</p>
+        <p>Deeper hydrotherapy and physio-rehabilitation infrastructure for every resident's development.</p>
       </div>
     </div>
   </div>
@@ -752,6 +504,17 @@
 
 <script src="nav.js"></script>
 <script>
+  /* ── Tab switcher ── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ── Reveal on scroll ── */
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }
   }, { threshold: .1, rootMargin: '0px 0px -8% 0px' });
