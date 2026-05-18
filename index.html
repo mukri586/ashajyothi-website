@@ -102,6 +102,19 @@
     .stats{grid-template-columns:1fr 1fr}
     .ig-stage{justify-self:center}
   }
+
+  /* ─── HERO VIDEO ─────────────────────────────────────────── */
+  .hero-bleed video{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:slowzoom 22s ease-in-out infinite alternate}
+
+  /* ─── IMPACT TICKER ──────────────────────────────────────── */
+  .impact-ticker{background:var(--ink);overflow:hidden;border-top:1px solid rgba(255,255,255,.06)}
+  .ticker-track{display:flex;width:max-content;animation:ticker-scroll 40s linear infinite}
+  .impact-ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-item{display:flex;align-items:center;gap:14px;padding:18px 52px;border-right:1px solid rgba(255,255,255,.07);white-space:nowrap}
+  .ticker-num{font-weight:700;font-size:20px;color:var(--accent);letter-spacing:-.02em}
+  .ticker-sep{width:4px;height:4px;background:var(--accent-hi);border-radius:50%;flex-shrink:0;opacity:.6}
+  .ticker-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,250,246,.5)}
+  @keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -158,7 +171,12 @@
   </div>
 
   <div class="hero-bleed reveal" data-delay="3">
-    <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt=""/>
+    <video autoplay muted loop playsinline
+      poster="https://drive.google.com/uc?export=view&id=1F35_jP2OcgB5N-cky8AAmMtShtL0JHF7">
+      <source src="https://drive.google.com/uc?export=download&id=1zr4FhC1Bj9jNrQunomEr1RMTFgS9kOBk" type="video/mp4">
+      <source src="https://drive.google.com/uc?export=download&id=1kW0npKobRPQs79YQWByDevDkHv4hvLv1" type="video/mp4">
+      <img src="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg" alt=""/>
+    </video>
     <div class="overlay">
       <h3>The AshaJyothi campus &mdash; Hanuman Junction, West Godavari District.</h3>
       <div class="meta">
@@ -169,6 +187,27 @@
     </div>
   </div>
 </header>
+
+<!-- ─── IMPACT TICKER ────────────────────────────────────── -->
+<div class="impact-ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-num">83</span><span class="ticker-sep"></span><span class="ticker-label">children on campus today</span></div>
+    <div class="ticker-item"><span class="ticker-num">27</span><span class="ticker-sep"></span><span class="ticker-label">years of unbroken care</span></div>
+    <div class="ticker-item"><span class="ticker-num">$70</span><span class="ticker-sep"></span><span class="ticker-label">sponsors a child for a month</span></div>
+    <div class="ticker-item"><span class="ticker-num">24/7</span><span class="ticker-sep"></span><span class="ticker-label">care, 365 days a year</span></div>
+    <div class="ticker-item"><span class="ticker-num">0</span><span class="ticker-sep"></span><span class="ticker-label">children ever turned away</span></div>
+    <div class="ticker-item"><span class="ticker-num">$100</span><span class="ticker-sep"></span><span class="ticker-label">buys a new wheelchair</span></div>
+    <div class="ticker-item"><span class="ticker-num">1998</span><span class="ticker-sep"></span><span class="ticker-label">when it all began</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ticker-num">83</span><span class="ticker-sep"></span><span class="ticker-label">children on campus today</span></div>
+    <div class="ticker-item"><span class="ticker-num">27</span><span class="ticker-sep"></span><span class="ticker-label">years of unbroken care</span></div>
+    <div class="ticker-item"><span class="ticker-num">$70</span><span class="ticker-sep"></span><span class="ticker-label">sponsors a child for a month</span></div>
+    <div class="ticker-item"><span class="ticker-num">24/7</span><span class="ticker-sep"></span><span class="ticker-label">care, 365 days a year</span></div>
+    <div class="ticker-item"><span class="ticker-num">0</span><span class="ticker-sep"></span><span class="ticker-label">children ever turned away</span></div>
+    <div class="ticker-item"><span class="ticker-num">$100</span><span class="ticker-sep"></span><span class="ticker-label">buys a new wheelchair</span></div>
+    <div class="ticker-item"><span class="ticker-num">1998</span><span class="ticker-sep"></span><span class="ticker-label">when it all began</span></div>
+  </div>
+</div>
 
 <!-- ─── REALITY ───────────────────────────────────────────── -->
 <section class="reality" id="impact">
