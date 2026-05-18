@@ -310,3 +310,34 @@ footer.foot{background:var(--ink);color:var(--paper);padding:120px 0 40px}
   .cn-grid{grid-template-columns:1fr}
   .campus-news{padding:60px 0 50px}
 }
+
+/* ─── NAV DROPDOWN ────────────────────────────────────────── */
+.nl-group{position:relative}
+.nl-drop{
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) translateY(6px);
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:8px;min-width:210px;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 10px 32px rgba(14,16,20,.1);z-index:200;
+}
+.nl-group:hover .nl-drop,
+.nl-group:focus-within .nl-drop{
+  opacity:1;pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.nl-drop a{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:9px;
+  font-size:14px;font-weight:500;color:var(--ink);
+  transition:background .15s,color .15s;
+}
+.nl-drop a:hover{background:var(--paper-2);color:var(--accent)}
+.nl-drop .drop-icon{
+  width:30px;height:30px;border-radius:8px;
+  background:var(--accent-soft);display:flex;
+  align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.nl-drop hr{border:0;border-top:1px solid var(--line);margin:6px 0}
