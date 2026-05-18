@@ -35,9 +35,9 @@
 
   .hero-bleed{position:relative;height:80vh;min-height:560px;max-height:920px;overflow:hidden;border-radius:24px 24px 0 0;margin:0 28px;animation:hero-fadein 1.8s ease-out both}
   @keyframes hero-fadein{from{opacity:0}to{opacity:1}}
-  /* colour-grade the video for a warm filmic tone */
-  .hero-bleed video{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:slowzoom 28s ease-in-out infinite alternate;filter:brightness(.88) contrast(1.12) saturate(1.3)}
-  @keyframes slowzoom{to{transform:scale(1.14)}}
+  /* YouTube background fill */
+  .yt-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .yt-wrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.04);width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;filter:brightness(.88) contrast(1.12) saturate(1.3)}
   /* warm amber colour wash */
   .hero-bleed::before{content:"";position:absolute;inset:0;background:rgba(160,70,10,.1);z-index:1;pointer-events:none;mix-blend-mode:multiply}
   /* layered cinematic gradient: heavy bottom, soft top, side vignette */
@@ -186,10 +186,9 @@
   </div>
 
   <div class="hero-bleed reveal" data-delay="3">
-    <video autoplay muted loop playsinline
-      poster="https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg">
-      <source src="https://res.cloudinary.com/dshrpij9a/video/upload/v1779072715/Asha_Jyothi_Hero_Video_rsdehz.mp4" type="video/mp4">
-    </video>
+    <div class="yt-wrap">
+      <iframe src="https://www.youtube.com/embed/xrmAAJg-1nw?autoplay=1&mute=1&loop=1&playlist=xrmAAJg-1nw&controls=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
     <div class="overlay">
       <h3>The AshaJyothi campus &mdash; Hanuman Junction, West Godavari District.</h3>
       <div class="meta">
