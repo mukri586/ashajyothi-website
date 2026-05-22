@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 
@@ -11,6 +11,31 @@ export default function NewsFeed() {
 
   // Track active slide index for each post card (indexed by post ID)
   const [carouselStates, setCarouselStates] = useState({});
+  const cardsRef = useRef([]);
+
+  // Set up intersection observer for dynamic news cards
+  useEffect(() => {
+    if (posts.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '0px 0px -5% 0px' }
+    );
+
+    const currentCards = cardsRef.current.filter(Boolean);
+    currentCards.forEach((el) => io.observe(el));
+
+    return () => {
+      io.disconnect();
+    };
+  }, [posts]);
 
   useEffect(() => {
     const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'), limit(6));
@@ -89,7 +114,7 @@ export default function NewsFeed() {
 
   return (
     <div className="cn-grid">
-      {posts.map((post) => {
+      {posts.map((post, idx) => {
         const mediaItems = post.media?.length 
           ? post.media 
           : post.mediaUrl 
@@ -100,7 +125,11 @@ export default function NewsFeed() {
         const hasCarousel = mediaItems.length > 1;
 
         return (
-          <article className="cn-card reveal" key={post.id}>
+          <article 
+            className="cn-card reveal" 
+            key={post.id}
+            ref={el => { cardsRef.current[idx] = el; }}
+          >
             {/* Media rendering */}
             {mediaItems.length > 0 && (
               hasCarousel ? (
