@@ -115,6 +115,47 @@ const impactCopy = (amt, freq) => {
   }
 };
 
+const getDeliverableIcons = (amt, freq) => {
+  if (freq === 'monthly') {
+    if (amt >= 150) return [
+      { char: '🥣', label: 'Nutrition' },
+      { char: '🎒', label: 'Education' },
+      { char: '🩺', label: 'Physio' },
+      { char: '🧼', label: 'Hygiene' },
+      { char: '🛏️', label: '24/7 Home' }
+    ];
+    if (amt >= 75) return [
+      { char: '🥣', label: 'Nutrition' },
+      { char: '👥', label: 'Co-sponsor' },
+      { char: '🛏️', label: 'Care' }
+    ];
+    return [{ char: '❤️', label: 'Care Pool' }];
+  } else {
+    if (amt >= 350) return [
+      { char: '🩺', label: 'Neurogen' },
+      { char: '🧠', label: 'CP Rehab' },
+      { char: '✨', label: 'Therapy' }
+    ];
+    if (amt >= 200) return [
+      { char: '👂', label: 'Hearing Aid' },
+      { char: '🔊', label: 'Fitting' }
+    ];
+    if (amt >= 100) return [
+      { char: '♿', label: 'Wheelchair' },
+      { char: '⚙️', label: 'Mobility' }
+    ];
+    if (amt >= 45) return [
+      { char: '🥣', label: 'Daily Meals' },
+      { char: '🌾', label: 'Annadanam' }
+    ];
+    if (amt >= 25) return [
+      { char: '🧼', label: 'Sanitary Pads' },
+      { char: '🎀', label: 'PARI' }
+    ];
+    return [{ char: '🤝', label: 'AshaJyothi' }];
+  }
+};
+
 export default function DonatePage() {
   const [freq, setFreq] = useState('monthly');
   const [amt, setAmt] = useState(150);
@@ -174,7 +215,7 @@ export default function DonatePage() {
           </div>
           <div className="grid">
             <div>
-              <h1 className="reveal" data-delay="1">
+              <h1 className="reveal reveal-split" data-delay="1">
                 Pick something <em>specific.</em>
               </h1>
               <p className="lead reveal" data-delay="2">
@@ -378,6 +419,17 @@ export default function DonatePage() {
                   {freq === 'monthly' ? 'per month · ' : ''}approximately ₹{formattedInr} INR
                 </span>
               </div>
+              
+              {/* Dynamic Deliverables Showcase Icons */}
+              <div className="delivers-icons">
+                {getDeliverableIcons(amt, freq).map((icon, idx) => (
+                  <div className="deliver-icon-item" key={idx} title={icon.label}>
+                    <span className="deliver-icon-char">{icon.char}</span>
+                    <span className="deliver-icon-label">{icon.label}</span>
+                  </div>
+                ))}
+              </div>
+
               <ul className="delivers" id="delivers">
                 {items.map((itemText, idx) => (
                   <li key={idx}>{itemText}</li>

@@ -10,10 +10,16 @@ export default function HomePage() {
         <div className="container">
           <div className="topline reveal">
             <span>Hanuman Junction · Andhra Pradesh · est. 1998</span>
-            <span className="live">70+ children at home today</span>
+            <span className="live">
+              <span className="pulse-ring"></span>
+              <span className="pulse-ring delay-1"></span>
+              <span className="pulse-ring delay-2"></span>
+              <span className="pulse-dot"></span>
+              70+ children at home today
+            </span>
           </div>
 
-          <h1 className="mega reveal" data-delay="1">
+          <h1 className="mega reveal reveal-split" data-delay="1">
             We are a <em>home</em>
             <span className="chip">
               <img 
