@@ -1,6 +1,6 @@
 // Minimal service worker — enables PWA "Add to Home Screen" on iOS & Android
 const CACHE   = 'aj-admin-v1';
-const OFFLINE = ['/admin.html', '/admin-manifest.json', '/logo-mark.png'];
+const OFFLINE = ['/admin', '/admin-manifest.json', '/logo-mark.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(

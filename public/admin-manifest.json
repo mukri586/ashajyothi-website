@@ -2,7 +2,7 @@
   "name": "AshaJyothi News Admin",
   "short_name": "AJ News",
   "description": "Post campus updates to ashajyothiindia.org",
-  "start_url": "/admin.html",
+  "start_url": "/admin",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
