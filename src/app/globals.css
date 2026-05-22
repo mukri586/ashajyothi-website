@@ -897,7 +897,7 @@ h1.mega .chip img { width: 100%; height: 100%; object-fit: cover; }
 .quickdo .ctagrid a { background: var(--paper-2); padding: 14px 18px; border-radius: 12px; font-size: 14px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; transition: background .2s, color .2s; }
 .quickdo .ctagrid a:hover { background: var(--ink); color: var(--paper); }
 
-.hero-bleed { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 24px 24px 0 0; margin: 0 28px; animation: hero-fadein 1.8s ease-out both; }
+.hero-bleed { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 24px 24px 0 0; margin: 0 28px; animation: hero-fadein 1.8s ease-out both; background-image: url('https://static.wixstatic.com/media/437f08_36971083bb934aa69a028399d805308c~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_85,enc_avif,quality_auto/ashajyothi.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
 @keyframes hero-fadein { from { opacity: 0; } to { opacity: 1; } }
 .yt-wrap { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .yt-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; filter: brightness(.88) contrast(1.12) saturate(1.3); }

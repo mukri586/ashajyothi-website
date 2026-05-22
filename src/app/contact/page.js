@@ -7,6 +7,7 @@ export default function ContactPage() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [topic, setTopic] = useState('Donation');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
@@ -14,11 +15,24 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('sending');
+
+    const subject = encodeURIComponent(`AshaJyothi Contact Form: ${topic}`);
+    const body = encodeURIComponent(
+      `Name: ${firstName} ${lastName}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone}\n` +
+      `Topic: ${topic}\n\n` +
+      `Message:\n${message}`
+    );
+
+    window.location.href = `mailto:mallavalli79@gmail.com?subject=${subject}&body=${body}`;
+
     setTimeout(() => {
       setStatus('sent');
       setFirstName('');
       setLastName('');
       setEmail('');
+      setPhone('');
       setMessage('');
     }, 800);
   };
@@ -105,15 +119,27 @@ export default function ContactPage() {
                 />
               </div>
             </div>
-            <div className="field">
-              <label>/ Email</label>
-              <input
-                type="email"
-                placeholder="you@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+            <div className="row">
+              <div className="field">
+                <label>/ Email</label>
+                <input
+                  type="email"
+                  placeholder="you@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="field">
+                <label>/ Phone number</label>
+                <input
+                  type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+              </div>
             </div>
 
             <div className="field">
