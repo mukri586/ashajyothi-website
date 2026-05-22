@@ -1186,6 +1186,105 @@ h1.mega .chip img { width: 100%; height: 100%; object-fit: cover; }
 .faq-item .faq-body p { margin-bottom: 14px; }
 .faq-item .faq-body p:last-child { margin-bottom: 0; }
 
+/* ─── CAMPUS NEWS (LATEST NEWS) ─── */
+.cn-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  min-height:200px;
+  align-items:start;
+}
+.cn-card{
+  background:#fff;
+  border:1.5px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .25s,transform .25s,border-color .25s;
+}
+.cn-card:hover{
+  box-shadow:0 12px 40px rgba(14,16,20,.12),0 2px 8px rgba(14,16,20,.06);
+  transform:translateY(-4px);
+  border-color:var(--accent-soft);
+}
+.cn-body{
+  padding:20px 22px 24px;
+  display:flex;flex-direction:column;flex:1;
+}
+.cn-date{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;display:block;
+}
+.cn-title{
+  font-size:17px;font-weight:700;color:var(--heading);
+  letter-spacing:-.018em;line-height:1.25;margin-bottom:8px;
+}
+.cn-desc{
+  font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;flex:1;
+}
+.cn-media-wrap{
+  aspect-ratio:16/10;overflow:hidden;background:var(--paper-2);
+}
+.cn-media-wrap img,.cn-media-wrap video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.cn-card:hover .cn-media-wrap img,
+.cn-card:hover .cn-media-wrap video{ transform:scale(1.03) }
+.cn-carousel{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  background:var(--paper-2);
+}
+.cn-track{
+  display:flex;height:100%;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.cn-slide{
+  flex:0 0 100%;height:100%;overflow:hidden;
+}
+.cn-slide img,.cn-slide video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.cn-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(251,250,246,.9);border:none;border-radius:50%;
+  width:34px;height:34px;font-size:22px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--heading);box-shadow:0 2px 8px rgba(14,16,20,.15);
+  opacity:0;transition:opacity .2s,transform .15s;z-index:2;
+}
+.cn-carousel:hover .cn-arr{ opacity:1 }
+.cn-arr:hover{ transform:translateY(-50%) scale(1.08) }
+.cn-prev{ left:10px }
+.cn-next{ right:10px }
+.cn-dots{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:2;
+}
+.cn-dot{
+  width:6px;height:6px;border-radius:50%;border:none;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.5);transition:background .2s,transform .2s;
+}
+.cn-dot.active{ background:#fff;transform:scale(1.4) }
+.cn-loading{
+  grid-column:1/-1;display:flex;
+  align-items:center;justify-content:center;gap:8px;padding:80px 0;
+}
+.cn-loading span{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);opacity:.25;
+  animation:cn-pulse 1.2s ease-in-out infinite;
+}
+.cn-loading span:nth-child(2){animation-delay:.2s}
+.cn-loading span:nth-child(3){animation-delay:.4s}
+@keyframes cn-pulse{0%,80%,100%{opacity:.25}40%{opacity:1;transform:scale(1.2)}}
+.cn-empty{
+  grid-column:1/-1;text-align:center;
+  padding:60px 0;color:var(--muted);font-size:15px;
+}
+
 /* ─── SCOPED ADMIN PORTAL STYLES ─── */
 .admin-page {
   --admin-ink: #fbfaf6;
@@ -1365,6 +1464,9 @@ h1.mega .chip img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ─── RESPONSIVE ADJUSTMENTS ─── */
 @media (max-width: 1000px) {
+  .cn-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .hero-foot, .story-grid, .help-grid, .ch-home-grid {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -1421,6 +1523,9 @@ h1.mega .chip img { width: 100%; height: 100%; object-fit: cover; }
 }
 
 @media (max-width: 580px) {
+  .cn-grid {
+    grid-template-columns: 1fr;
+  }
   .impact-grid {
     grid-template-columns: 1fr;
   }
