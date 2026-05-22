@@ -47,9 +47,10 @@ export default function Navbar() {
     if (!beaconRef.current || !navlineRef.current || !el) return;
     const elRect = el.getBoundingClientRect();
     const parentRect = navlineRef.current.getBoundingClientRect();
+    const scrollLeft = navlineRef.current.scrollLeft;
     
     beaconRef.current.style.width = `${elRect.width}px`;
-    beaconRef.current.style.transform = `translateX(${elRect.left - parentRect.left}px)`;
+    beaconRef.current.style.transform = `translateX(${elRect.left - parentRect.left + scrollLeft}px)`;
   };
 
   // Run on mount, path changes, resize, or when shrunk state changes (changing paddings)
